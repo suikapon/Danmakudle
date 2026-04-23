@@ -29,7 +29,7 @@ $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h2>Personajes prueba conexión con la BD</h2>
     <ul>
        <?php foreach($personajes as $p): ?>
-            <li>id: <?= %p['id_personaje']?> nombre: <?= $p['nombre'] ?> videojuego: <?= $p['videojuego'] ?></li>
+            <li>id: <?=$p['id_personaje']?> nombre: <?= $p['nombre'] ?> videojuego: <?= $p['videojuego'] ?></li>
         <?php endforeach; ?>
     </ul>
 </body>
