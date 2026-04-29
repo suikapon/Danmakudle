@@ -25,21 +25,21 @@ $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <h1>DANMAKUDLE</h1>
-    <!-- por ahora está en php puro, sin laravel -->
-    <h2>Personajes prueba conexión con la BD</h2>
-    <ul>
-       <?php foreach($personajes as $p): ?>
-            <li>
-                <br>
-                id: <?=$p['id_personaje']?><br>
-                nombre: <?= $p['nombre'] ?><br>
-                <!--imagen: <img src="<?=// $p['imagen'] ?>" height="100" width="100"><br>-->
-                videojuego: <?= $p['videojuego'] ?><br>
-                ubicación: <?= $p['ubicacion'] ?><br>
-                ocupación: <?= $p['ocupacion'] ?><br>
-                especie: <?= $p['especie'] ?><br>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+
+    <!-- index básico de placeholder -->
+    <div class="modos">
+        <div class="modo">
+            <h2>Listado de personajes</h2>
+            <p><a href="#listapersonajes.php">Lista</a></p>
+        </div>
+        <div class="modo">
+            <h2>Modo 2</h2>
+            <p>Descripción</p>
+        </div>
+        <div class="modo">
+            <h2>Modo 3</h2>
+            <p>Descripción</p>
+        </div>
+    </div>
 </body>
 </html>
