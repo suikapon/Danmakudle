@@ -11,7 +11,7 @@ try {
     die("Falló: " . $e->getMessage());
 }
 
-$stmt = $conn->query('SELECT * FROM personajes');
+$stmt = $conn->query('SELECT * FROM personajes LIMIT 10'); // limite prueba
 $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
@@ -33,8 +33,8 @@ $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <br>
                 id: <?=$p['id_personaje']?><br>
                 nombre: <?= $p['nombre'] ?><br>
-                imagen: <img src="<?=p['imagen']?>">
-                videojuego: <?= $p['videojuego'] ?><br>
+                imagen: <img src="<?= $p['imagen'] ?>" height="100" width="100">
+                videojuego: <?= $p['videojuego']?><br>
                 ubicación: <?= $p['ubicacion'] ?><br>
                 ocupación: <?= $p['ocupacion'] ?><br>
             </li>
