@@ -33,6 +33,7 @@ $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <br>
                 id: <?=$p['id_personaje']?><br>
                 nombre: <?= $p['nombre'] ?><br>
+                imagen: <img src="<?=p['imagen']?>">
                 videojuego: <?= $p['videojuego'] ?><br>
                 ubicación: <?= $p['ubicacion'] ?><br>
                 ocupación: <?= $p['ocupacion'] ?><br>
