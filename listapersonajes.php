@@ -25,7 +25,6 @@ $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <h1>DANMAKUDLE</h1>
-    <!-- por ahora está en php puro, sin laravel -->
     <h2>Personajes prueba conexión con la BD</h2>
     <ul>
        <?php foreach($personajes as $p): ?>
@@ -37,6 +36,7 @@ $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 ubicación: <?= $p['ubicacion'] ?><br>
                 ocupación: <?= $p['ocupacion'] ?><br>
                 especie: <?= $p['especie'] ?><br>
+                especie normalizada: <?= $p['especie_normalizada'] ?><br>
             </li>
         <?php endforeach; ?>
     </ul>
