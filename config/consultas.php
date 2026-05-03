@@ -7,10 +7,9 @@ function getPersonajes($conexion)
 
 function getPersonajeXID($conexion, $id)
 {
-    $stmt = $conexion->prepare("SELECT * FROM personajes WHERE id_personaje=?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
+    $stmt = $conexion->prepare("SELECT * FROM personajes WHERE id_personaje = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 function getPersonajeAleatorio($conexion)
