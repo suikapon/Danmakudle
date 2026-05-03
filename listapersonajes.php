@@ -1,8 +1,8 @@
 <?php
 require_once 'config/config.php';
+require_once 'config/consultas.php';
 
-$stmt = $conn->query('SELECT * FROM personajes');
-$personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$personajes = getPersonajes($conn)
 
 ?>
 
@@ -23,7 +23,7 @@ $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php include 'header.php';?>
 
     <h1>DANMAKUDLE</h1>
-    
+
     <h2>Personajes prueba conexión con la BD</h2>
     <ul>
        <?php foreach($personajes as $p): ?>
