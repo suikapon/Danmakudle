@@ -3,8 +3,17 @@ session_start();
 require_once 'config/config.php';
 require_once 'config/consultas.php';
 
+// cargamos todos los personajes de la base de datos
 $personajes = getPersonajes($conn);
-$pjAdivinar = getPersonajeAleatorio($conn);
+
+// guardamos en la sesión el personaje a adivinar para que no se resetee
+if (!isset($_SESSION['pjAdivinar']))
+{
+    $pjAdivinar = getPersonajeAleatorio(($conn));
+    $_SESSION['pjAdivinar'] = $pjAdivinar;
+    $_SESSION['intentos'] = [];
+}
+
 ?>
 
 <!DOCTYPE html>
