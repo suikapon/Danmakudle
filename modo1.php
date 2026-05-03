@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+    <?php include 'header.php';?>
 
+    <h1>Adivina el personaje</h1>
 </body>
 </html>

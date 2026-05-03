@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+    <?php include 'header.php';?>
+    
     <h1>DANMAKUDLE</h1>
-
     <div class="modos">
         <div class="modo">
             <h2>Adivina el personaje</h2>

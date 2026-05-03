@@ -19,8 +19,11 @@ $personajes = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
+    <?php include 'header.php';?>
+
     <h1>DANMAKUDLE</h1>
+    
     <h2>Personajes prueba conexión con la BD</h2>
     <ul>
        <?php foreach($personajes as $p): ?>
