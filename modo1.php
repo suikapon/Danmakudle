@@ -3,7 +3,8 @@ session_start();
 require_once 'config/config.php';
 require_once 'config/consultas.php';
 
-$personajes = getPersonajes($conn)
+$personajes = getPersonajes($conn);
+$pjAdivinar = getPersonajeAleatorio($conn);
 ?>
 
 <!DOCTYPE html>
@@ -23,5 +24,7 @@ $personajes = getPersonajes($conn)
     <?php include 'header.php';?>
 
     <h1>Adivina el personaje</h1>
+
+    <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
 </body>
 </html>

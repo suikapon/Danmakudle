@@ -13,4 +13,11 @@ function getPersonajeXID($conexion, $id)
     return $stmt->get_result()->fetch_assoc();
 }
 
+function getPersonajeAleatorio($conexion)
+{
+    $stmt = $conexion->prepare("SELECT * FROM personajes ORDER BY RAND() LIMIT 1");
+    $stmt->execute();
+    return $stmt->get_result()->fetch_assoc();
+}
+
 ?>
