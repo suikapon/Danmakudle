@@ -15,9 +15,7 @@ function getPersonajeXID($conexion, $id)
 
 function getPersonajeAleatorio($conexion)
 {
-    $stmt = $conexion->prepare("SELECT * FROM personajes ORDER BY RANDOM() LIMIT 1");
-    $stmt->execute();
-    return $stmt->get_result()->fetch_assoc();
+    return $conexion->query("SELECT * FROM personajes ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 }
 
 ?>
