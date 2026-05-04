@@ -14,6 +14,13 @@ if (!isset($_SESSION['pjAdivinar']))
     $_SESSION['intentos'] = [];
 }
 $pjAdivinar = $_SESSION['pjAdivinar'];
+
+// preparar nombres y la imagen de cada personaje para pasárselo al javascript
+$datos = [];
+foreach ($personajes as $p)
+{
+    $datos[] = ['nombre' => $p['nombre'], 'imagen' => $p['imagen']];
+}
 ?>
 
 <!DOCTYPE html>
@@ -35,5 +42,20 @@ $pjAdivinar = $_SESSION['pjAdivinar'];
     <h1>Adivina el personaje</h1>
 
     <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
+
+    <form method="POST">
+        <div style="position:relative; display:inline-block">
+            <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
+            <div id="dropdown" style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999"></div>
+            <!-- se manda el hidden para que no se envíen datos erroneos -->
+            <input type="hidden" name="personaje_elegido" id="personajeElegido">
+        </div>
+        <button type="submit">Adivinar</button>
+    </form>
+    <!-- pasarle los datos al archivo javascript -->
+    <script>
+        const datos = <?= json_encode($datos,JSON_UNESCAPED_UNICODE) ?>;
+    </script>
+    <script src="js/buscador.js"></script>
 </body>
 </html>

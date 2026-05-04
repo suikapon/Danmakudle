@@ -2,7 +2,7 @@
 
 function getPersonajes($conexion) 
 {
-    return $conexion->query("SELECT * FROM personajes");
+    return $conexion->query("SELECT * FROM personajes")->fetchAll(PDO::FETCH_ASSOC);
 }
 
 function getPersonajeXID($conexion, $id)
