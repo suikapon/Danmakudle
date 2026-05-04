@@ -13,7 +13,7 @@ if (!isset($_SESSION['pjAdivinar']))
     $_SESSION['pjAdivinar'] = $pjAdivinar;
     $_SESSION['intentos'] = [];
 }
-
+$pjAdivinar = $_SESSION['pjAdivinar'];
 ?>
 
 <!DOCTYPE html>
