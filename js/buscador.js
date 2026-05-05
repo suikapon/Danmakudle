@@ -25,6 +25,7 @@ input.addEventListener('input', function()
             // contenedor
             const div = document.createElement('div');
 
+            
             // imagen
             const img = document.createElement('img');
             img.src = datos[i].imagen;

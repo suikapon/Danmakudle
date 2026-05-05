@@ -1,5 +1,6 @@
 <?php
 session_start();
+//unset($_SESSION['intentos']); // para limpiar los intentos
 require_once 'config/config.php';
 require_once 'config/consultas.php';
 
@@ -21,6 +22,21 @@ foreach ($personajes as $p)
 {
     $datos[] = ['nombre' => $p['nombre'], 'imagen' => $p['imagen']];
 }
+
+// procesamor el intento enviado
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
+{
+    foreach($personajes as $p)
+    {
+        if ($p['nombre'] == $_POST['personaje_elegido'])
+        {
+            $_SESSION['intentos'][] =$p;
+            break;
+        }
+    }
+}
+// recuperar los intentos de la sesión para recorrerlos
+$intentos = $_SESSION['intentos'];
 ?>
 
 <!DOCTYPE html>
@@ -46,12 +62,19 @@ foreach ($personajes as $p)
     <form method="POST">
         <div style="position:relative; display:inline-block">
             <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
-            <div id="dropdown" style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999"></div>
+            <div id="dropdown" style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;"></div>
             <!-- se manda el hidden para que no se envíen datos erroneos -->
             <input type="hidden" name="personaje_elegido" id="personajeElegido">
         </div>
         <button type="submit">Adivinar</button>
     </form>
+
+    <?php foreach($intentos as $i):?>
+    <div>
+        <span>Nombre: <?=$i['nombre']; ?> - Especie: <?=$i['especie_normalizada'];?></span>
+    </div>
+    <?php endforeach ?>
+
     <!-- pasarle los datos al archivo javascript -->
     <script>
         const datos = <?= json_encode($datos,JSON_UNESCAPED_UNICODE) ?>;
