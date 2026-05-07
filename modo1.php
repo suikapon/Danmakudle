@@ -1,7 +1,8 @@
 <?php
 session_start();
+// descomentar estos cuando hagan falta
 //unset($_SESSION['intentos']); // para limpiar los intentos
-//unset($_SESSION['pjAdivinar']);
+//unset($_SESSION['pjAdivinar']); // reiniciar el personaje para adivinar para probar por ahora
 require_once 'config/config.php';
 require_once 'config/consultas.php';
 
@@ -31,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
     $pjYaIntentado = false;
     foreach ($_SESSION['intentos'] as $i)
     {
-        if ($intento['nombre'] == $_POST['personaje_elegido'])
+        if ($i['nombre'] == $_POST['personaje_elegido'])
         {
             $pjYaIntentado = true;
             break;
