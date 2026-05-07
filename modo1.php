@@ -95,7 +95,8 @@ $intentos = $_SESSION['intentos'];
     </form>
     
     <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
-    <?php foreach($intentos as $i):
+    <!--array invertido porque se más cómodo que el último intento salga arriba del todo-->
+    <?php foreach(array_reverse($intentos) as $i):
 
         $idIntento = $i['id_personaje'];
         $idSecreto = $pjAdivinar['id_personaje'];
