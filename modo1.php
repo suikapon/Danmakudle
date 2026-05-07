@@ -24,15 +24,29 @@ foreach ($personajes as $p)
     $datos[] = ['nombre' => $p['nombre'], 'imagen' => $p['imagen']];
 }
 
-// procesamor el intento enviado
+// procesar el intento enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 {
-    foreach($personajes as $p)
+    // comprobar si ya ha sido intentado el personaje
+    $pjYaIntentado = false;
+    foreach ($_SESSION['intentos'] as $i)
     {
-        if ($p['nombre'] == $_POST['personaje_elegido'])
+        if ($intento['nombre'] == $_POST['personaje_elegido'])
         {
-            $_SESSION['intentos'][] =$p;
+            $pjYaIntentado = true;
             break;
+        }
+    }
+    // agregarlo a los intentos si no está ya intentado
+    if (!$pjYaIntentado)
+    {
+        foreach($personajes as $p)
+        {
+            if ($p['nombre'] == $_POST['personaje_elegido'])
+            {
+                $_SESSION['intentos'][] =$p;
+                break;
+            }
         }
     }
 }
@@ -97,7 +111,10 @@ $intentos = $_SESSION['intentos'];
         $estadoEspecie = ($i['especie_normalizada']==$pjAdivinar['especie_normalizada'])?'verde':'rojo';
 
         // ocupacion
-        $estadoOcupacion = ($i['ocupacion']==$a); // poner el resto
+        $estadoOcupacion = ($i['ocupacion']==$pjAdivinar['ocupacion'])?'verde':'rojo';
+
+        // ubicacion
+        $estadoUbicacion = ($i['ubicacion']==$pjAdivinar['ubicacion'])?'verde':'rojo';
     ?>
 
 <div class="fila-intento">
@@ -119,6 +136,13 @@ $intentos = $_SESSION['intentos'];
         <?= $i['especie_normalizada'] ?>
     </div>
 
+    <div class="caja <?= $estadoOcupacion ?>">
+        <?= $i['ocupacion'] ?>
+    </div>
+    
+    <div class="caja <?= $estadoUbicacion ?>">
+        <?= $i['ubicacion'] ?>
+    </div>
 </div>
 
 <?php endforeach; ?>
