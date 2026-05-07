@@ -1,6 +1,7 @@
 <?php
 session_start();
 //unset($_SESSION['intentos']); // para limpiar los intentos
+//unset($_SESSION['pjAdivinar']);
 require_once 'config/config.php';
 require_once 'config/consultas.php';
 
@@ -68,12 +69,59 @@ $intentos = $_SESSION['intentos'];
         </div>
         <button type="submit">Adivinar</button>
     </form>
+    
+    <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
+    <?php foreach($intentos as $i):
 
-    <?php foreach($intentos as $i):?>
-    <div>
-        <span>Nombre: <?=$i['nombre']; ?> - Especie: <?=$i['especie_normalizada'];?></span>
+        $idIntento = $i['id_personaje'];
+        $idSecreto = $pjAdivinar['id_personaje'];
+
+        // nombre
+        $estadoNombre=($idIntento==$idSecreto)? 'verde':'rojo';
+
+        // apariciones
+        if (mismasApariciones($conn,$idIntento,$idSecreto))
+        {
+            $estadoApariciones='verde';
+        }
+        elseif (coincidenApariciones($conn,$idIntento,$idSecreto))
+        {
+            $estadoApariciones='naranja';
+        }
+        else
+        {
+            $estadoApariciones='rojo';
+        }
+
+        // especie
+        $estadoEspecie = ($i['especie_normalizada']==$pjAdivinar['especie_normalizada'])?'verde':'rojo';
+
+        // ocupacion
+        $estadoOcupacion = ($i['ocupacion']==$a); // poner el resto
+    ?>
+
+<div class="fila-intento">
+    <!-- reutilizado el estado del nombre porque no veo necesario comparara la imagen-->
+    <div class="caja" <?=$estadoNombre?>>
+        <img src="<?=$i['imagen']?>" width=100 height=100>
     </div>
-    <?php endforeach ?>
+    <div class="caja <?= $estadoNombre ?>">
+        <?= $i['nombre'] ?>
+    </div>
+
+    <div class="caja <?= $estadoApariciones ?>">
+        <?php foreach (getApariciones($conn,$idIntento) as $j): ?>
+            <span><?=$j?></span><br>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="caja <?= $estadoEspecie ?>">
+        <?= $i['especie_normalizada'] ?>
+    </div>
+
+</div>
+
+<?php endforeach; ?>
 
     <!-- pasarle los datos al archivo javascript -->
     <script>
