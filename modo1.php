@@ -1,8 +1,14 @@
 <?php
 session_start();
-// descomentar estos cuando hagan falta
-//unset($_SESSION['intentos']); // para limpiar los intentos
-//unset($_SESSION['pjAdivinar']); // reiniciar el personaje para adivinar para probar por ahora
+// reiniciar los intentos y el personaje para pruebas por ahora
+if (isset($_GET['reset']))
+{
+    unset($_SESSION['intentos']);
+    unset($_SESSION['pjAdivinar']);
+    header('Location: modo1.php');
+    exit();
+}
+
 require_once 'config/config.php';
 require_once 'config/consultas.php';
 
@@ -71,6 +77,9 @@ $intentos = $_SESSION['intentos'];
 <body class="d-flex flex-column min-vh-100">
     <?php include 'header.php';?>
 
+    <!--botones para reiniciar intentos y el personaje-->
+    <a href="?reset=todo">cambiar personaje</a>
+
     <h1>Adivina el personaje</h1>
 
     <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
@@ -120,7 +129,7 @@ $intentos = $_SESSION['intentos'];
 
 <div class="fila-intento">
     <!-- reutilizado el estado del nombre porque no veo necesario comparara la imagen-->
-    <div class="caja" <?=$estadoNombre?>>
+    <div class="caja <?=$estadoNombre?>">
         <img src="<?=$i['imagen']?>" width=100 height=100>
     </div>
     <div class="caja <?= $estadoNombre ?>">
