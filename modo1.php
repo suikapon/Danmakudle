@@ -1,6 +1,14 @@
 <?php
 session_start();
-//unset($_SESSION['intentos']); // para limpiar los intentos
+// reiniciar los intentos y el personaje para pruebas por ahora
+if (isset($_GET['reset']))
+{
+    unset($_SESSION['intentos']);
+    unset($_SESSION['pjAdivinar']);
+    header('Location: modo1.php');
+    exit();
+}
+
 require_once 'config/config.php';
 require_once 'config/consultas.php';
 
@@ -23,15 +31,29 @@ foreach ($personajes as $p)
     $datos[] = ['nombre' => $p['nombre'], 'imagen' => $p['imagen']];
 }
 
-// procesamor el intento enviado
+// procesar el intento enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 {
-    foreach($personajes as $p)
+    // comprobar si ya ha sido intentado el personaje
+    $pjYaIntentado = false;
+    foreach ($_SESSION['intentos'] as $i)
     {
-        if ($p['nombre'] == $_POST['personaje_elegido'])
+        if ($i['nombre'] == $_POST['personaje_elegido'])
         {
-            $_SESSION['intentos'][] =$p;
+            $pjYaIntentado = true;
             break;
+        }
+    }
+    // agregarlo a los intentos si no está ya intentado
+    if (!$pjYaIntentado)
+    {
+        foreach($personajes as $p)
+        {
+            if ($p['nombre'] == $_POST['personaje_elegido'])
+            {
+                $_SESSION['intentos'][] =$p;
+                break;
+            }
         }
     }
 }
@@ -55,6 +77,9 @@ $intentos = $_SESSION['intentos'];
 <body class="d-flex flex-column min-vh-100">
     <?php include 'header.php';?>
 
+    <!--botones para reiniciar intentos y el personaje-->
+    <a href="?reset=todo">cambiar personaje</a>
+
     <h1>Adivina el personaje</h1>
 
     <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
@@ -68,12 +93,69 @@ $intentos = $_SESSION['intentos'];
         </div>
         <button type="submit">Adivinar</button>
     </form>
+    
+    <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
+    <?php foreach($intentos as $i):
 
-    <?php foreach($intentos as $i):?>
-    <div>
-        <span>Nombre: <?=$i['nombre']; ?> - Especie: <?=$i['especie_normalizada'];?></span>
+        $idIntento = $i['id_personaje'];
+        $idSecreto = $pjAdivinar['id_personaje'];
+
+        // nombre
+        $estadoNombre=($idIntento==$idSecreto)? 'verde':'rojo';
+
+        // apariciones
+        if (mismasApariciones($conn,$idIntento,$idSecreto))
+        {
+            $estadoApariciones='verde';
+        }
+        elseif (coincidenApariciones($conn,$idIntento,$idSecreto))
+        {
+            $estadoApariciones='naranja';
+        }
+        else
+        {
+            $estadoApariciones='rojo';
+        }
+
+        // especie
+        $estadoEspecie = ($i['especie_normalizada']==$pjAdivinar['especie_normalizada'])?'verde':'rojo';
+
+        // ocupacion
+        $estadoOcupacion = ($i['ocupacion']==$pjAdivinar['ocupacion'])?'verde':'rojo';
+
+        // ubicacion
+        $estadoUbicacion = ($i['ubicacion']==$pjAdivinar['ubicacion'])?'verde':'rojo';
+    ?>
+
+<div class="fila-intento">
+    <!-- reutilizado el estado del nombre porque no veo necesario comparara la imagen-->
+    <div class="caja <?=$estadoNombre?>">
+        <img src="<?=$i['imagen']?>" width=100 height=100>
     </div>
-    <?php endforeach ?>
+    <div class="caja <?= $estadoNombre ?>">
+        <?= $i['nombre'] ?>
+    </div>
+
+    <div class="caja <?= $estadoApariciones ?>">
+        <?php foreach (getApariciones($conn,$idIntento) as $j): ?>
+            <span><?=$j?></span><br>
+        <?php endforeach; ?>
+    </div>
+
+    <div class="caja <?= $estadoEspecie ?>">
+        <?= $i['especie_normalizada'] ?>
+    </div>
+
+    <div class="caja <?= $estadoOcupacion ?>">
+        <?= $i['ocupacion'] ?>
+    </div>
+    
+    <div class="caja <?= $estadoUbicacion ?>">
+        <?= $i['ubicacion'] ?>
+    </div>
+</div>
+
+<?php endforeach; ?>
 
     <!-- pasarle los datos al archivo javascript -->
     <script>

@@ -1,8 +1,0 @@
-@font-face {
-    font-family: 'Danmakudle';
-    src: url('../font/danmakudle.woff2') format('woff2');
-}
-
-* {
-    font-family: 'Danmakudle', monospace;
-}
