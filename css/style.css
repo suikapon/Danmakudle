@@ -37,3 +37,20 @@
 {
     background:red;
 }
+
+/* animaciones */
+.card {
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+/* para que la imagen se vea igual en todas las tarjetas, margen abajo porque el texto estaba muy pegado */
+.card-body img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
