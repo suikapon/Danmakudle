@@ -38,7 +38,7 @@
             <div class="col-md-4 mt-4">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
-                        <img src="img/reimu.png" class="card-img-top mx-auto mt-6">
+                        <img src="img/eosd.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina el videojuego</h2>
                         <p class="text-secondary">Adivina el nombre del videojuego</p>
                         <a href="modo2.php" class="boton stretched-link"></a>
@@ -49,7 +49,7 @@
             <div class="col-md-4 mt-4">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
-                        <img src="img/reimu.png" class="card-img-top mx-auto mt-6">
+                        <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
                         <h2>Lista de personajes</h2>
                         <p class="text-secondary">¡Información acerca de todos los personajes!</p>
                         <a href="listapersonajes.php" class="boton stretched-link"></a>
