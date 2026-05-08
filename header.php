@@ -12,15 +12,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/index.php">Modos</a>
+                    <a class="nav-link" href="/modos.php">Modos</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/index.php">Rankings</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/index.php">Inicio</a>
+                    <a class="nav-link" href="/rankings.php">Rankings</a>
                 </li>
             </ul>
         </div>
