@@ -123,9 +123,6 @@ $intentos = $_SESSION['intentos'];
                 // especie
                 $estadoEspecie = ($i['especie_normalizada'] == $pjAdivinar['especie_normalizada']) ? 'verde' : 'rojo';
 
-                // ocupacion
-                $estadoOcupacion = ($i['ocupacion'] == $pjAdivinar['ocupacion']) ? 'verde' : 'rojo';
-
                 // ubicacion
                 $estadoUbicacion = ($i['ubicacion'] == $pjAdivinar['ubicacion']) ? 'verde' : 'rojo';
                 ?>
@@ -150,11 +147,7 @@ $intentos = $_SESSION['intentos'];
                     <td class="<?= $estadoEspecie ?>">
                         <?= $i['especie_normalizada'] ?>
                     </td>
-
-                    <td class="<?= $estadoOcupacion ?>">
-                        <?= $i['ocupacion'] ?>
-                    </td>
-
+                    
                     <td class="<?= $estadoUbicacion ?>">
                         <?= $i['ubicacion'] ?>
                     </td>
