@@ -29,7 +29,7 @@ $personajes = getPersonajes($conn)
        <?php foreach($personajes as $p): ?>
             <li>
                 <br>
-                <img src="img/pj/<?=$p['imagen']?>" width=50 height=50>
+                <img src="img/pj/<?=$p['imagen']?>" width=150 height=150><br>
                 id: <?=$p['id_personaje']?><br>
                 nombre: <?= $p['nombre'] ?><br>
                 debut: <?= $p['debut'] ?><br>
