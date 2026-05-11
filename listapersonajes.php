@@ -29,13 +29,14 @@ $personajes = getPersonajes($conn)
        <?php foreach($personajes as $p): ?>
             <li>
                 <br>
+                <img src="<?=$p['imagen']?>" width=50 height=50>
                 id: <?=$p['id_personaje']?><br>
                 nombre: <?= $p['nombre'] ?><br>
-                videojuego: <?= $p['videojuego'] ?><br>
+                debut: <?= $p['debut'] ?><br>
+                stage: <?= $p['stage'] ?><br>
                 ubicación: <?= $p['ubicacion'] ?><br>
-                ocupación: <?= $p['ocupacion'] ?><br>
                 especie: <?= $p['especie'] ?><br>
-                especie normalizada: <?= $p['especie_normalizada'] ?><br>
+                jugable: <?= $p['jugable'] ?><br>
             </li>
         <?php endforeach; ?>
     </ul>
