@@ -1,8 +1,7 @@
 <?php
 session_start();
 // reiniciar los intentos y el personaje para pruebas por ahora
-if (isset($_GET['reset']))
-{
+if (isset($_GET['reset'])) {
     unset($_SESSION['intentos']);
     unset($_SESSION['pjAdivinar']);
     header('Location: modo1.php');
@@ -16,8 +15,7 @@ require_once 'config/consultas.php';
 $personajes = getPersonajes($conn);
 
 // guardamos en la sesión el personaje a adivinar para que no se resetee
-if (!isset($_SESSION['pjAdivinar']))
-{
+if (!isset($_SESSION['pjAdivinar'])) {
     $pjAdivinar = getPersonajeAleatorio(($conn));
     $_SESSION['pjAdivinar'] = $pjAdivinar;
     $_SESSION['intentos'] = [];
@@ -26,32 +24,25 @@ $pjAdivinar = $_SESSION['pjAdivinar'];
 
 // preparar nombres y la imagen de cada personaje para pasárselo al javascript
 $datos = [];
-foreach ($personajes as $p)
-{
+foreach ($personajes as $p) {
     $datos[] = ['nombre' => $p['nombre'], 'imagen' => $p['imagen']];
 }
 
 // procesar el intento enviado
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
-{
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido'])) {
     // comprobar si ya ha sido intentado el personaje
     $pjYaIntentado = false;
-    foreach ($_SESSION['intentos'] as $i)
-    {
-        if ($i['nombre'] == $_POST['personaje_elegido'])
-        {
+    foreach ($_SESSION['intentos'] as $i) {
+        if ($i['nombre'] == $_POST['personaje_elegido']) {
             $pjYaIntentado = true;
             break;
         }
     }
     // agregarlo a los intentos si no está ya intentado
-    if (!$pjYaIntentado)
-    {
-        foreach($personajes as $p)
-        {
-            if ($p['nombre'] == $_POST['personaje_elegido'])
-            {
-                $_SESSION['intentos'][] =$p;
+    if (!$pjYaIntentado) {
+        foreach ($personajes as $p) {
+            if ($p['nombre'] == $_POST['personaje_elegido']) {
+                $_SESSION['intentos'][] = $p;
                 break;
             }
         }
@@ -75,7 +66,7 @@ $intentos = $_SESSION['intentos'];
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <?php include 'header.php';?>
+    <?php include 'header.php'; ?>
 
     <!--botones para reiniciar intentos y el personaje-->
     <a href="?reset=todo">cambiar personaje</a>
@@ -87,7 +78,9 @@ $intentos = $_SESSION['intentos'];
     <form method="POST">
         <div style="position:relative; display:inline-block">
             <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
-            <div id="dropdown" style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;"></div>
+            <div id="dropdown"
+                style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;">
+            </div>
             <!-- se manda el hidden para que no se envíen datos erroneos -->
             <input type="hidden" name="personaje_elegido" id="personajeElegido">
         </div>
@@ -99,79 +92,75 @@ $intentos = $_SESSION['intentos'];
             <tr>
                 <th>Imagen</th>
                 <th>Nombre</th>
-                <th>Apariciones</th>
+                <th>Debut</th>
+                <th>Stage</th>
                 <th>Especie</th>
-                <th>Ocupacion</th>
-                <th>Ubicacion</th>
+                <th>Ubicación</th>
+                <th>Jugable</th>
             </tr>
         </thead>
         <tbody>
 
-    <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
-    <!--array invertido porque se más cómodo que el último intento salga arriba del todo-->
-    <?php foreach(array_reverse($intentos) as $i):
+            <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
+            <!--array invertido porque se más cómodo que el último intento salga arriba del todo-->
+            <?php foreach (array_reverse($intentos) as $i):
 
-        $idIntento = $i['id_personaje'];
-        $idSecreto = $pjAdivinar['id_personaje'];
+                $idIntento = $i['id_personaje'];
+                $idSecreto = $pjAdivinar['id_personaje'];
 
-        // nombre
-        $estadoNombre=($idIntento==$idSecreto)? 'verde':'rojo';
+                // nombre
+                $estadoNombre = ($idIntento == $idSecreto) ? 'verde' : 'rojo';
 
-        // apariciones
-        if (mismasApariciones($conn,$idIntento,$idSecreto))
-        {
-            $estadoApariciones='verde';
-        }
-        elseif (coincidenApariciones($conn,$idIntento,$idSecreto))
-        {
-            $estadoApariciones='naranja';
-        }
-        else
-        {
-            $estadoApariciones='rojo';
-        }
+                // apariciones
+                if (mismasApariciones($conn, $idIntento, $idSecreto)) {
+                    $estadoApariciones = 'verde';
+                } elseif (coincidenApariciones($conn, $idIntento, $idSecreto)) {
+                    $estadoApariciones = 'naranja';
+                } else {
+                    $estadoApariciones = 'rojo';
+                }
 
-        // especie
-        $estadoEspecie = ($i['especie_normalizada']==$pjAdivinar['especie_normalizada'])?'verde':'rojo';
+                // especie
+                $estadoEspecie = ($i['especie_normalizada'] == $pjAdivinar['especie_normalizada']) ? 'verde' : 'rojo';
 
-        // ocupacion
-        $estadoOcupacion = ($i['ocupacion']==$pjAdivinar['ocupacion'])?'verde':'rojo';
+                // ocupacion
+                $estadoOcupacion = ($i['ocupacion'] == $pjAdivinar['ocupacion']) ? 'verde' : 'rojo';
 
-        // ubicacion
-        $estadoUbicacion = ($i['ubicacion']==$pjAdivinar['ubicacion'])?'verde':'rojo';
-    ?>
+                // ubicacion
+                $estadoUbicacion = ($i['ubicacion'] == $pjAdivinar['ubicacion']) ? 'verde' : 'rojo';
+                ?>
 
-            <tr>
-                <td class="<?=$estadoNombre?>">
-                    <img src="<?=$i['imagen']?>" width=100 height=100>
-                </td>
+                <tr>
+                    <td class="<?= $estadoNombre ?>">
+                        <img src="<?= $i['imagen'] ?>" width=100 height=100>
+                    </td>
 
-                <td class="<?= $estadoNombre ?>">
-                    <?= $i['nombre'] ?>
-                </td>
+                    <td class="<?= $estadoNombre ?>">
+                        <?= $i['nombre'] ?>
+                    </td>
 
-                <td class="<?= $estadoApariciones ?>">
-                    <?php foreach (getApariciones($conn,$idIntento) as $j): ?>
-                    <span>
-                        <?=$j?>
-                    </span><br>
-                    <?php endforeach; ?>
-                </td>
+                    <td class="<?= $estadoApariciones ?>">
+                        <?php foreach (getApariciones($conn, $idIntento) as $j): ?>
+                            <span>
+                                <?= $j ?>
+                            </span><br>
+                        <?php endforeach; ?>
+                    </td>
 
-                <td class="<?= $estadoEspecie ?>">
-                    <?= $i['especie_normalizada'] ?>
-                </td>
+                    <td class="<?= $estadoEspecie ?>">
+                        <?= $i['especie_normalizada'] ?>
+                    </td>
 
-                <td class="<?= $estadoOcupacion ?>">
-                    <?= $i['ocupacion'] ?>
-                </td>
+                    <td class="<?= $estadoOcupacion ?>">
+                        <?= $i['ocupacion'] ?>
+                    </td>
 
-                <td class="<?= $estadoUbicacion ?>">
-                    <?= $i['ubicacion'] ?>
-                </td>
-            </tr>
+                    <td class="<?= $estadoUbicacion ?>">
+                        <?= $i['ubicacion'] ?>
+                    </td>
+                </tr>
 
-    <?php endforeach; ?>
+            <?php endforeach; ?>
 
         </tbody>
     </table>
@@ -182,4 +171,5 @@ $intentos = $_SESSION['intentos'];
     </script>
     <script src="js/buscador.js"></script>
 </body>
+
 </html>
