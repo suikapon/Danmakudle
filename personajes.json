@@ -1,0 +1,1138 @@
+{
+    "personajes": [
+        {
+            "nombre": "Reimu Hakurei",
+            "imagen": "reimu.png",
+            "debut": 6,
+            "stage": 0,
+            "ubicacion": "Templo Hakurei",
+            "especie": "Humana",
+            "jugable": true
+        },
+        {
+            "nombre": "Marisa Kirisame",
+            "imagen": "marisa.png",
+            "debut": 6,
+            "stage": 0,
+            "ubicacion": "Bosque de la Magia",
+            "especie": "Humana",
+            "jugable": true
+        },
+        {
+            "nombre": "Rumia",
+            "imagen": "rumia.png",
+            "debut": 6,
+            "stage": 1,
+            "ubicacion": "Desconocida",
+            "especie": "Youkai",
+            "jugable": false
+        },
+        {
+            "nombre": "Daiyousei",
+            "imagen": "daiyousei.png",
+            "debut": 6,
+            "stage": 2,
+            "ubicacion": "Lago Niebla",
+            "especie": "Hada",
+            "jugable": false
+        },
+        {
+            "nombre": "Cirno",
+            "imagen": "cirno.png",
+            "debut": 6,
+            "stage": 2,
+            "ubicacion": "Lago Niebla",
+            "especie": "Hada de Hielo",
+            "jugable": true
+        },
+        {
+            "nombre": "Hong Meiling",
+            "imagen": "meiling.png",
+            "debut": 6,
+            "stage": 3,
+            "ubicacion": "Mansión del Demonio Escarlata",
+            "especie": "Youkai",
+            "jugable": true
+        },
+        {
+            "nombre": "Koakuma",
+            "imagen": "koakuma.png",
+            "debut": 6,
+            "stage": 4,
+            "ubicacion": "Mansión del Demonio Escarlata",
+            "especie": "Demonio",
+            "jugable": false
+        },
+        {
+            "nombre": "Patchouli Knowledge",
+            "imagen": "patchouli.png",
+            "debut": 6,
+            "stage": 4,
+            "ubicacion": "Mansión del Demonio Escarlata",
+            "especie": "Maga Youkai",
+            "jugable": true
+        },
+        {
+            "nombre": "Sakuya Izayoi",
+            "imagen": "sakuya.png",
+            "debut": 6,
+            "stage": 5,
+            "ubicacion": "Mansión del Demonio Escarlata",
+            "especie": "Humana",
+            "jugable": true
+        },
+        {
+            "nombre": "Remilia Scarlet",
+            "imagen": "remilia.png",
+            "debut": 6,
+            "stage": 6,
+            "ubicacion": "Mansión del Demonio Escarlata",
+            "especie": "Vampiro",
+            "jugable": true
+        },
+        {
+            "nombre": "Flandre Scarlet",
+            "imagen": "flandre.png",
+            "debut": 6,
+            "stage": "Extra",
+            "ubicacion": "Mansión del Demonio Escarlata",
+            "especie": "Vampiro",
+            "jugable": false
+        },
+        {
+            "nombre": "Letty Whiterock",
+            "imagen": "letty.png",
+            "debut": 7,
+            "stage": 1,
+            "ubicacion": "Desconocida",
+            "especie": "Youkai de Invierno",
+            "jugable": false
+        },
+        {
+            "nombre": "Chen",
+            "imagen": "chen.png",
+            "debut": 7,
+            "stage": 2,
+            "ubicacion": "Bosque de la Magia",
+            "especie": "Bakeneko Shikigami",
+            "jugable": false
+        },
+        {
+            "nombre": "Alice Margatroid",
+            "imagen": "alice.png",
+            "debut": 7,
+            "stage": 3,
+            "ubicacion": "Bosque de la Magia",
+            "especie": "Maga Youkai",
+            "jugable": true
+        },
+        {
+            "nombre": "Lily White",
+            "imagen": "lily_white.png",
+            "debut": 7,
+            "stage": 4,
+            "ubicacion": "Desconocida",
+            "especie": "Hada de Primavera",
+            "jugable": false
+        },
+        {
+            "nombre": "Lunasa Prismriver",
+            "imagen": "lunasa.png",
+            "debut": 7,
+            "stage": 4,
+            "ubicacion": "Mansión Prismriver",
+            "especie": "Poltergeist",
+            "jugable": false
+        },
+        {
+            "nombre": "Merlin Prismriver",
+            "imagen": "merlin.png",
+            "debut": 7,
+            "stage": 4,
+            "ubicacion": "Mansión Prismriver",
+            "especie": "Poltergeist",
+            "jugable": false
+        },
+        {
+            "nombre": "Lyrica Prismriver",
+            "imagen": "lyrica.png",
+            "debut": 7,
+            "stage": 4,
+            "ubicacion": "Mansión Prismriver",
+            "especie": "Poltergeist",
+            "jugable": false
+        },
+        {
+            "nombre": "Youmu Konpaku",
+            "imagen": "youmu.png",
+            "debut": 7,
+            "stage": 5,
+            "ubicacion": "Hakugyokurou",
+            "especie": "Mitad Humana, Mitad Fantasma",
+            "jugable": true
+        },
+        {
+            "nombre": "Yuyuko Saigyouji",
+            "imagen": "yuyuko.png",
+            "debut": 7,
+            "stage": 6,
+            "ubicacion": "Hakugyokurou",
+            "especie": "Fantasma",
+            "jugable": true
+        },
+        {
+            "nombre": "Ran Yakumo",
+            "imagen": "ran.png",
+            "debut": 7,
+            "stage": "Extra",
+            "ubicacion": "Mayohiga",
+            "especie": "Kitsune Shikigami",
+            "jugable": false
+        },
+        {
+            "nombre": "Yukari Yakumo",
+            "imagen": "yukari.png",
+            "debut": 7,
+            "stage": "Phantasm",
+            "ubicacion": "Mayohiga",
+            "especie": "Youkai",
+            "jugable": true
+        },
+        {
+            "nombre": "Wriggle Nightbug",
+            "imagen": "wriggle.png",
+            "debut": 8,
+            "stage": 1,
+            "ubicacion": "Desconocida",
+            "especie": "Youkai Insecto",
+            "jugable": false
+        },
+        {
+            "nombre": "Mystia Lorelei",
+            "imagen": "mystia.png",
+            "debut": 8,
+            "stage": 2,
+            "ubicacion": "Camino de la Montaña Youkai",
+            "especie": "Youkai Gorrión Nocturno",
+            "jugable": false
+        },
+        {
+            "nombre": "Keine Kamishirasawa",
+            "imagen": "keine.png",
+            "debut": 8,
+            "stage": 3,
+            "ubicacion": "Aldea Humana",
+            "especie": "Were-hakutaku",
+            "jugable": false
+        },
+        {
+            "nombre": "Tewi Inaba",
+            "imagen": "tewi.png",
+            "debut": 8,
+            "stage": 5,
+            "ubicacion": "Eientei",
+            "especie": "Youkai Conejo",
+            "jugable": false
+        },
+        {
+            "nombre": "Reisen Udongein Inaba",
+            "imagen": "reisen.png",
+            "debut": 8,
+            "stage": 5,
+            "ubicacion": "Eientei",
+            "especie": "Conejo Lunar",
+            "jugable": true
+        },
+        {
+            "nombre": "Eirin Yagokoro",
+            "imagen": "eirin.png",
+            "debut": 8,
+            "stage": 6,
+            "ubicacion": "Eientei",
+            "especie": "Lunarian",
+            "jugable": false
+        },
+        {
+            "nombre": "Kaguya Houraisan",
+            "imagen": "kaguya.png",
+            "debut": 8,
+            "stage": 6,
+            "ubicacion": "Eientei",
+            "especie": "Lunarian",
+            "jugable": false
+        },
+        {
+            "nombre": "Fujiwara no Mokou",
+            "imagen": "mokou.png",
+            "debut": 8,
+            "stage": "Extra",
+            "ubicacion": "Bosque de Bambú",
+            "especie": "Humana Inmortal",
+            "jugable": true
+        },
+        {
+            "nombre": "Shizuha Aki",
+            "imagen": "shizuha.png",
+            "debut": 9,
+            "stage": 1,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Diosa",
+            "jugable": true
+        },
+        {
+            "nombre": "Minoriko Aki",
+            "imagen": "minoriko.png",
+            "debut": 9,
+            "stage": 1,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Diosa",
+            "jugable": true
+        },
+        {
+            "nombre": "Hina Kagiyama",
+            "imagen": "hina.png",
+            "debut": 9,
+            "stage": 2,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Diosa de la Maldición",
+            "jugable": true
+        },
+        {
+            "nombre": "Nitori Kawashiro",
+            "imagen": "nitori.png",
+            "debut": 9,
+            "stage": 3,
+            "ubicacion": "Río Genbu",
+            "especie": "Kappa",
+            "jugable": true
+        },
+        {
+            "nombre": "Momiji Inubashiri",
+            "imagen": "momiji.png",
+            "debut": 9,
+            "stage": 4,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Tengu Lobo Blanco",
+            "jugable": false
+        },
+        {
+            "nombre": "Aya Shameimaru",
+            "imagen": "aya.png",
+            "debut": 9,
+            "stage": 4,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Tengu Cuervo",
+            "jugable": true
+        },
+        {
+            "nombre": "Sanae Kochiya",
+            "imagen": "sanae.png",
+            "debut": 9,
+            "stage": 5,
+            "ubicacion": "Santuario Moriya",
+            "especie": "Humana/Descendiente de Diosa",
+            "jugable": true
+        },
+        {
+            "nombre": "Kanako Yasaka",
+            "imagen": "kanako.png",
+            "debut": 9,
+            "stage": 6,
+            "ubicacion": "Santuario Moriya",
+            "especie": "Diosa",
+            "jugable": false
+        },
+        {
+            "nombre": "Suwako Moriya",
+            "imagen": "suwako.png",
+            "debut": 9,
+            "stage": "Extra",
+            "ubicacion": "Santuario Moriya",
+            "especie": "Diosa",
+            "jugable": true
+        },
+        {
+            "nombre": "Sunny Milk",
+            "imagen": "sunny.png",
+            "debut": 9.5,
+            "stage": 0,
+            "ubicacion": "Desconocida",
+            "especie": "Hada",
+            "jugable": false
+        },
+        {
+            "nombre": "Luna Child",
+            "imagen": "luna.png",
+            "debut": 9.5,
+            "stage": 0,
+            "ubicacion": "Desconocida",
+            "especie": "Hada",
+            "jugable": false
+        },
+        {
+            "nombre": "Star Sapphire",
+            "imagen": "star.png",
+            "debut": 9.5,
+            "stage": 0,
+            "ubicacion": "Desconocida",
+            "especie": "Hada",
+            "jugable": false
+        },
+        {
+            "nombre": "Eiki Shiki Yamaxanadu",
+            "imagen": "eiki.png",
+            "debut": 9,
+            "stage": "Extra",
+            "ubicacion": "Higan",
+            "especie": "Yama",
+            "jugable": true
+        },
+        {
+            "nombre": "Iku Nagae",
+            "imagen": "iku.png",
+            "debut": 10.5,
+            "stage": 0,
+            "ubicacion": "Cielo",
+            "especie": "Oarfish Youkai",
+            "jugable": true
+        },
+        {
+            "nombre": "Tenshi Hinanawi",
+            "imagen": "tenshi.png",
+            "debut": 10.5,
+            "stage": 0,
+            "ubicacion": "Cielo",
+            "especie": "Celestial",
+            "jugable": true
+        },
+        {
+            "nombre": "Kisume",
+            "imagen": "kisume.png",
+            "debut": 11,
+            "stage": 1,
+            "ubicacion": "Antigua Capital Subterránea",
+            "especie": "Tsurube-otoshi",
+            "jugable": false
+        },
+        {
+            "nombre": "Yamame Kurodani",
+            "imagen": "yamame.png",
+            "debut": 11,
+            "stage": 1,
+            "ubicacion": "Antigua Capital Subterránea",
+            "especie": "Tsuchigumo",
+            "jugable": false
+        },
+        {
+            "nombre": "Parsee Mizuhashi",
+            "imagen": "parsee.png",
+            "debut": 11,
+            "stage": 2,
+            "ubicacion": "Puente del Abismo sin Retorno",
+            "especie": "Hashihime",
+            "jugable": false
+        },
+        {
+            "nombre": "Yuugi Hoshiguma",
+            "imagen": "yuugi.png",
+            "debut": 11,
+            "stage": 3,
+            "ubicacion": "Antigua Capital Subterránea",
+            "especie": "Oni",
+            "jugable": true
+        },
+        {
+            "nombre": "Satori Komeiji",
+            "imagen": "satori.png",
+            "debut": 11,
+            "stage": 4,
+            "ubicacion": "Palacio de los Espíritus Terrestres",
+            "especie": "Satori",
+            "jugable": true
+        },
+        {
+            "nombre": "Rin Kaenbyou (Orin)",
+            "imagen": "orin.png",
+            "debut": 11,
+            "stage": 5,
+            "ubicacion": "Palacio de los Espíritus Terrestres",
+            "especie": "Kasha",
+            "jugable": false
+        },
+        {
+            "nombre": "Utsuho Reiuji (Okuu)",
+            "imagen": "okuu.png",
+            "debut": 11,
+            "stage": 6,
+            "ubicacion": "Palacio de los Espíritus Terrestres",
+            "especie": "Cuervo del Infierno",
+            "jugable": true
+        },
+        {
+            "nombre": "Koishi Komeiji",
+            "imagen": "koishi.png",
+            "debut": 11,
+            "stage": "Extra",
+            "ubicacion": "Palacio de los Espíritus Terrestres",
+            "especie": "Satori",
+            "jugable": true
+        },
+        {
+            "nombre": "Nazrin",
+            "imagen": "nazrin.png",
+            "debut": 12,
+            "stage": 1,
+            "ubicacion": "Templo Myouren",
+            "especie": "Ratón Youkai",
+            "jugable": false
+        },
+        {
+            "nombre": "Kogasa Tatara",
+            "imagen": "kogasa.png",
+            "debut": 12,
+            "stage": 2,
+            "ubicacion": "Desconocida",
+            "especie": "Karakasa",
+            "jugable": true
+        },
+        {
+            "nombre": "Ichirin Kumoi",
+            "imagen": "ichirin.png",
+            "debut": 12,
+            "stage": 3,
+            "ubicacion": "Templo Myouren",
+            "especie": "Nyuudou Tsukumogami",
+            "jugable": true
+        },
+        {
+            "nombre": "Unzan",
+            "imagen": "unzan.png",
+            "debut": 12,
+            "stage": 3,
+            "ubicacion": "Templo Myouren",
+            "especie": "Nyuudou",
+            "jugable": false
+        },
+        {
+            "nombre": "Minamitsu Murasa",
+            "imagen": "murasa.png",
+            "debut": 12,
+            "stage": 4,
+            "ubicacion": "Templo Myouren",
+            "especie": "Fantasma",
+            "jugable": false
+        },
+        {
+            "nombre": "Shou Toramaru",
+            "imagen": "shou.png",
+            "debut": 12,
+            "stage": 5,
+            "ubicacion": "Templo Myouren",
+            "especie": "Tigre Youkai",
+            "jugable": true
+        },
+        {
+            "nombre": "Byakuren Hijiri",
+            "imagen": "byakuren.png",
+            "debut": 12,
+            "stage": 6,
+            "ubicacion": "Templo Myouren",
+            "especie": "Maga",
+            "jugable": true
+        },
+        {
+            "nombre": "Nue Houjuu",
+            "imagen": "nue.png",
+            "debut": 12,
+            "stage": "Extra",
+            "ubicacion": "Templo Myouren",
+            "especie": "Nue",
+            "jugable": true
+        },
+        {
+            "nombre": "Hatate Himekaidou",
+            "imagen": "hatate.png",
+            "debut": 12.5,
+            "stage": 0,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Tengu Cuervo",
+            "jugable": false
+        },
+        {
+            "nombre": "Kyouko Kasodani",
+            "imagen": "kyouko.png",
+            "debut": 13,
+            "stage": 2,
+            "ubicacion": "Templo Myouren",
+            "especie": "Yamabiko",
+            "jugable": false
+        },
+        {
+            "nombre": "Yoshika Miyako",
+            "imagen": "yoshika.png",
+            "debut": 13,
+            "stage": 3,
+            "ubicacion": "Mausoleo del Deseo de los Divinos Espíritus",
+            "especie": "Jiang Shi",
+            "jugable": false
+        },
+        {
+            "nombre": "Seiga Kaku",
+            "imagen": "seiga.png",
+            "debut": 13,
+            "stage": 4,
+            "ubicacion": "Mausoleo del Deseo de los Divinos Espíritus",
+            "especie": "Ermitaña Malvada",
+            "jugable": false
+        },
+        {
+            "nombre": "Tojiko",
+            "imagen": "tojiko.png",
+            "debut": 13,
+            "stage": 5,
+            "ubicacion": "Mausoleo del Deseo de los Divinos Espíritus",
+            "especie": "Fantasma Vengativo",
+            "jugable": false
+        },
+        {
+            "nombre": "Futo Mononobe",
+            "imagen": "futo.png",
+            "debut": 13,
+            "stage": 5,
+            "ubicacion": "Mausoleo del Deseo de los Divinos Espíritus",
+            "especie": "Shikaisen",
+            "jugable": true
+        },
+        {
+            "nombre": "Miko",
+            "imagen": "miko.png",
+            "debut": 13,
+            "stage": 6,
+            "ubicacion": "Mausoleo del Deseo de los Divinos Espíritus",
+            "especie": "Shikaisen",
+            "jugable": true
+        },
+        {
+            "nombre": "Mamizou Futatsuiwa",
+            "imagen": "mamizou.png",
+            "debut": 13,
+            "stage": "Extra",
+            "ubicacion": "Bosque de Bambú",
+            "especie": "Tanuki Bake-danuki",
+            "jugable": true
+        },
+        {
+            "nombre": "Kokoro",
+            "imagen": "kokoro.png",
+            "debut": 13.5,
+            "stage": 0,
+            "ubicacion": "Templo Myouren",
+            "especie": "Menreiki Tsukumogami",
+            "jugable": true
+        },
+        {
+            "nombre": "Wakasagihime",
+            "imagen": "wakasagihime.png",
+            "debut": 14,
+            "stage": 1,
+            "ubicacion": "Lago Niebla",
+            "especie": "Sirena",
+            "jugable": false
+        },
+        {
+            "nombre": "Sekibanki",
+            "imagen": "sekibanki.png",
+            "debut": 14,
+            "stage": 2,
+            "ubicacion": "Aldea Humana",
+            "especie": "Rokurokubi/Nukekubi",
+            "jugable": true
+        },
+        {
+            "nombre": "Kagerou Imaizumi",
+            "imagen": "kagerou.png",
+            "debut": 14,
+            "stage": 3,
+            "ubicacion": "Bosque de Bambú",
+            "especie": "Hombre Lobo",
+            "jugable": false
+        },
+        {
+            "nombre": "Benben Tsukumo",
+            "imagen": "benben.png",
+            "debut": 14,
+            "stage": 4,
+            "ubicacion": "Desconocida",
+            "especie": "Biwa Tsukumogami",
+            "jugable": false
+        },
+        {
+            "nombre": "Yatsuhashi Tsukumo",
+            "imagen": "yatsuhashi.png",
+            "debut": 14,
+            "stage": 4,
+            "ubicacion": "Desconocida",
+            "especie": "Koto Tsukumogami",
+            "jugable": false
+        },
+        {
+            "nombre": "Seija Kijin",
+            "imagen": "seija.png",
+            "debut": 14,
+            "stage": 5,
+            "ubicacion": "Desconocida",
+            "especie": "Amanojaku",
+            "jugable": true
+        },
+        {
+            "nombre": "Shinmyoumaru Sukuna",
+            "imagen": "shinmyoumaru.png",
+            "debut": 14,
+            "stage": 6,
+            "ubicacion": "Mausoleo del Deseo de los Divinos Espíritus",
+            "especie": "Inchling",
+            "jugable": true
+        },
+        {
+            "nombre": "Raiko Horikawa",
+            "imagen": "raiko.png",
+            "debut": 14,
+            "stage": "Extra",
+            "ubicacion": "Desconocida",
+            "especie": "Taiko no Bakemono Tsukumogami",
+            "jugable": true
+        },
+        {
+            "nombre": "Kasen Ibaraki",
+            "imagen": "kasen.png",
+            "debut": 14.3,
+            "stage": 0,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Oni Ermitaña",
+            "jugable": false
+        },
+        {
+            "nombre": "Sumireko Usami",
+            "imagen": "sumireko.png",
+            "debut": 14.5,
+            "stage": 0,
+            "ubicacion": "Mundo Exterior",
+            "especie": "Humana",
+            "jugable": true
+        },
+        {
+            "nombre": "Seiran",
+            "imagen": "seiran.png",
+            "debut": 15,
+            "stage": 1,
+            "ubicacion": "Luna",
+            "especie": "Conejo Lunar",
+            "jugable": false
+        },
+        {
+            "nombre": "Ringo",
+            "imagen": "ringo.png",
+            "debut": 15,
+            "stage": 2,
+            "ubicacion": "Luna",
+            "especie": "Conejo Lunar",
+            "jugable": false
+        },
+        {
+            "nombre": "Doremy Sweet",
+            "imagen": "doremy.png",
+            "debut": 15,
+            "stage": 3,
+            "ubicacion": "Mundo de los Sueños",
+            "especie": "Baku",
+            "jugable": false
+        },
+        {
+            "nombre": "Sagume Kishin",
+            "imagen": "sagume.png",
+            "debut": 15,
+            "stage": 4,
+            "ubicacion": "Luna",
+            "especie": "Diosa Lunarian",
+            "jugable": false
+        },
+        {
+            "nombre": "Clownpiece",
+            "imagen": "clownpiece.png",
+            "debut": 15,
+            "stage": 5,
+            "ubicacion": "Infierno",
+            "especie": "Hada del Infierno",
+            "jugable": true
+        },
+        {
+            "nombre": "Junko",
+            "imagen": "junko.png",
+            "debut": 15,
+            "stage": 6,
+            "ubicacion": "Luna",
+            "especie": "Espíritu Divino",
+            "jugable": false
+        },
+        {
+            "nombre": "Hecatia Lapislazuli",
+            "imagen": "hecatia.png",
+            "debut": 15,
+            "stage": "Extra",
+            "ubicacion": "Infierno",
+            "especie": "Diosa",
+            "jugable": false
+        },
+        {
+            "nombre": "Eternity Larva",
+            "imagen": "eternity.png",
+            "debut": 16,
+            "stage": 1,
+            "ubicacion": "Desconocida",
+            "especie": "Hada Mariposa",
+            "jugable": false
+        },
+        {
+            "nombre": "Nemuno Sakata",
+            "imagen": "nemuno.png",
+            "debut": 16,
+            "stage": 2,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Yamauba",
+            "jugable": false
+        },
+        {
+            "nombre": "Aunn Komano",
+            "imagen": "aunn.png",
+            "debut": 16,
+            "stage": 3,
+            "ubicacion": "Templo Hakurei",
+            "especie": "Komainu",
+            "jugable": true
+        },
+        {
+            "nombre": "Narumi Yatadera",
+            "imagen": "narumi.png",
+            "debut": 16,
+            "stage": 4,
+            "ubicacion": "Desconocida",
+            "especie": "Jizou Haniwa",
+            "jugable": false
+        },
+        {
+            "nombre": "Mai Teireida",
+            "imagen": "mai.png",
+            "debut": 16,
+            "stage": 5,
+            "ubicacion": "Tierra de las Puertas Traseras",
+            "especie": "Diosa",
+            "jugable": false
+        },
+        {
+            "nombre": "Satono Nishida",
+            "imagen": "satono.png",
+            "debut": 16,
+            "stage": 5,
+            "ubicacion": "Tierra de las Puertas Traseras",
+            "especie": "Diosa",
+            "jugable": false
+        },
+        {
+            "nombre": "Okina Matara",
+            "imagen": "okina.png",
+            "debut": 16,
+            "stage": 6,
+            "ubicacion": "Tierra de las Puertas Traseras",
+            "especie": "Diosa Secreta",
+            "jugable": true
+        },
+        {
+            "nombre": "Eika Ebisu",
+            "imagen": "eika.png",
+            "debut": 17,
+            "stage": 1,
+            "ubicacion": "Infierno Bestial",
+            "especie": "Alto Espíritu Jizou Haniwa",
+            "jugable": false
+        },
+        {
+            "nombre": "Urumi Ushizaki",
+            "imagen": "urumi.png",
+            "debut": 17,
+            "stage": 2,
+            "ubicacion": "Infierno Bestial",
+            "especie": "Ushi-oni",
+            "jugable": false
+        },
+        {
+            "nombre": "Kutaka Niwatari",
+            "imagen": "kutaka.png",
+            "debut": 17,
+            "stage": 3,
+            "ubicacion": "Infierno Bestial",
+            "especie": "Fantasma de Pollo",
+            "jugable": false
+        },
+        {
+            "nombre": "Yachie Kicchou",
+            "imagen": "yachie.png",
+            "debut": 17,
+            "stage": 4,
+            "ubicacion": "Infierno Bestial",
+            "especie": "Jidiao",
+            "jugable": false
+        },
+        {
+            "nombre": "Mayumi Joutouguu",
+            "imagen": "mayumi.png",
+            "debut": 17,
+            "stage": 5,
+            "ubicacion": "Infierno Bestial",
+            "especie": "Haniwa",
+            "jugable": false
+        },
+        {
+            "nombre": "Keiki Haniyasushin",
+            "imagen": "keiki.png",
+            "debut": 17,
+            "stage": 6,
+            "ubicacion": "Jardín de los Cielos Prístinos",
+            "especie": "Diosa",
+            "jugable": false
+        },
+        {
+            "nombre": "Saki Kurokoma",
+            "imagen": "saki.png",
+            "debut": 17,
+            "stage": "Extra",
+            "ubicacion": "Infierno Bestial",
+            "especie": "Keukegen",
+            "jugable": false
+        },
+        {
+            "nombre": "Mike Goutokuji",
+            "imagen": "mike.png",
+            "debut": 18,
+            "stage": 1,
+            "ubicacion": "Bosque Arcoíris del Dragón",
+            "especie": "Bakeneko",
+            "jugable": false
+        },
+        {
+            "nombre": "Takane Yamashiro",
+            "imagen": "takane.png",
+            "debut": 18,
+            "stage": 2,
+            "ubicacion": "Bosque Arcoíris del Dragón",
+            "especie": "Yamawaro",
+            "jugable": false
+        },
+        {
+            "nombre": "Sannyo Komakusa",
+            "imagen": "sannyo.png",
+            "debut": 18,
+            "stage": 3,
+            "ubicacion": "Bosque Arcoíris del Dragón",
+            "especie": "Zashiki-warashi",
+            "jugable": false
+        },
+        {
+            "nombre": "Misumaru Tamatsukuri",
+            "imagen": "misumaru.png",
+            "debut": 18,
+            "stage": 4,
+            "ubicacion": "Desconocida",
+            "especie": "Diosa",
+            "jugable": false
+        },
+        {
+            "nombre": "Tsukasa Kudamaki",
+            "imagen": "tsukasa.png",
+            "debut": 18,
+            "stage": 5,
+            "ubicacion": "Bosque Arcoíris del Dragón",
+            "especie": "Kuda-gitsune",
+            "jugable": false
+        },
+        {
+            "nombre": "Megumu Iizunamaru",
+            "imagen": "megumu.png",
+            "debut": 18,
+            "stage": 6,
+            "ubicacion": "Montaña Youkai",
+            "especie": "Daitengu",
+            "jugable": false
+        },
+        {
+            "nombre": "Chimata Tenkyuu",
+            "imagen": "chimata.png",
+            "debut": 18,
+            "stage": "Extra",
+            "ubicacion": "Desconocida",
+            "especie": "Diosa del Mercado Libre",
+            "jugable": false
+        },
+        {
+            "nombre": "Momoyo Himemushi",
+            "imagen": "momoyo.png",
+            "debut": 18.5,
+            "stage": 0,
+            "ubicacion": "Infierno Bestial",
+            "especie": "Oumukade",
+            "jugable": false
+        },
+        {
+            "nombre": "Chiyari Tenkajin",
+            "imagen": "chiyari.png",
+            "debut": 19,
+            "stage": 1,
+            "ubicacion": "Mundo de los Sueños",
+            "especie": "Zashiki-warashi Otter",
+            "jugable": false
+        },
+        {
+            "nombre": "Hisami Yomotsu",
+            "imagen": "hisami.png",
+            "debut": 19,
+            "stage": 2,
+            "ubicacion": "Infierno",
+            "especie": "Kishin",
+            "jugable": false
+        },
+        {
+            "nombre": "Zanmu Nippaku",
+            "imagen": "zanmu.png",
+            "debut": 19,
+            "stage": 3,
+            "ubicacion": "Infierno",
+            "especie": "Jikininki",
+            "jugable": false
+        },
+        {
+            "nombre": "Enoko Mitsugashira",
+            "imagen": "enoko.png",
+            "debut": 19,
+            "stage": 4,
+            "ubicacion": "Infierno",
+            "especie": "Yamabiko Konoha-tengu",
+            "jugable": false
+        },
+        {
+            "nombre": "Biten Shirayuki",
+            "imagen": "son.png",
+            "debut": 19,
+            "stage": 5,
+            "ubicacion": "Infierno",
+            "especie": "Youkai Arroyo",
+            "jugable": false
+        },
+        {
+            "nombre": "Suika Ibuki",
+            "imagen": "suika.png",
+            "debut": 19,
+            "stage": 6,
+            "ubicacion": "Hakurei Shrine",
+            "especie": "Oni",
+            "jugable": true
+        },
+        {
+            "nombre": "Yuuma Toutetsu",
+            "imagen": "yuuma.png",
+            "debut": 19,
+            "stage": "Extra",
+            "ubicacion": "Infierno Bestial",
+            "especie": "Taotie",
+            "jugable": false
+        },
+        {
+            "nombre": "Medicine Melancholy",
+            "imagen": "medicine.png",
+            "debut": 20,
+            "stage": 1,
+            "ubicacion": "Jardín del Sol",
+            "especie": "Muñeca Tsukumogami Venenosa",
+            "jugable": false
+        },
+        {
+            "nombre": "Elis",
+            "imagen": "elis.png",
+            "debut": 20,
+            "stage": 2,
+            "ubicacion": "Mundo Exterior",
+            "especie": "Demonio",
+            "jugable": false
+        },
+        {
+            "nombre": "Kikuri",
+            "imagen": "kikuri.png",
+            "debut": 20,
+            "stage": 2,
+            "ubicacion": "Mundo Exterior",
+            "especie": "Demonio",
+            "jugable": false
+        },
+        {
+            "nombre": "Sariel",
+            "imagen": "sariel.png",
+            "debut": 20,
+            "stage": 3,
+            "ubicacion": "Mundo Exterior",
+            "especie": "Ángel",
+            "jugable": false
+        },
+        {
+            "nombre": "Konngara",
+            "imagen": "konngara.png",
+            "debut": 20,
+            "stage": 3,
+            "ubicacion": "Mundo Exterior",
+            "especie": "Astral Knight",
+            "jugable": false
+        },
+        {
+            "nombre": "Meira",
+            "imagen": "meira.png",
+            "debut": 20,
+            "stage": 4,
+            "ubicacion": "Mundo Exterior",
+            "especie": "Humana",
+            "jugable": false
+        },
+        {
+            "nombre": "Rika",
+            "imagen": "rika.png",
+            "debut": 20,
+            "stage": 4,
+            "ubicacion": "Mundo Exterior",
+            "especie": "Maga",
+            "jugable": false
+        },
+        {
+            "nombre": "Mima",
+            "imagen": "mima.png",
+            "debut": 20,
+            "stage": 5,
+            "ubicacion": "Mundo Exterior",
+            "especie": "Espíritu Vengativo",
+            "jugable": false
+        },
+        {
+            "nombre": "Yuuka Kazami",
+            "imagen": "yuuka.png",
+            "debut": 20,
+            "stage": 6,
+            "ubicacion": "Jardín del Sol",
+            "especie": "Youkai",
+            "jugable": true
+        },
+        {
+            "nombre": "Watari Nina",
+            "imagen": "nina.png",
+            "debut": 20,
+            "stage": "Extra",
+            "ubicacion": "Mundo Exterior",
+            "especie": "Kalavinka",
+            "jugable": false
+        }
+    ]
+}
