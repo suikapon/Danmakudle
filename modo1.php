@@ -93,9 +93,23 @@ $intentos = $_SESSION['intentos'];
         </div>
         <button type="submit">Adivinar</button>
     </form>
-    
+
+    <table class="tabla-intentos">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Apariciones</th>
+                <th>Especie</th>
+                <th>Ocupacion</th>
+                <th>Ubicacion</th>
+            </tr>
+        </thead>
+        <tbody>
+
     <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
-    <?php foreach($intentos as $i):
+    <!--array invertido porque se más cómodo que el último intento salga arriba del todo-->
+    <?php foreach(array_reverse($intentos) as $i):
 
         $idIntento = $i['id_personaje'];
         $idSecreto = $pjAdivinar['id_personaje'];
@@ -127,39 +141,44 @@ $intentos = $_SESSION['intentos'];
         $estadoUbicacion = ($i['ubicacion']==$pjAdivinar['ubicacion'])?'verde':'rojo';
     ?>
 
-<div class="fila-intento">
-    <!-- reutilizado el estado del nombre porque no veo necesario comparara la imagen-->
-    <div class="caja <?=$estadoNombre?>">
-        <img src="<?=$i['imagen']?>" width=100 height=100>
-    </div>
-    <div class="caja <?= $estadoNombre ?>">
-        <?= $i['nombre'] ?>
-    </div>
+            <tr>
+                <td class="<?=$estadoNombre?>">
+                    <img src="<?=$i['imagen']?>" width=100 height=100>
+                </td>
 
-    <div class="caja <?= $estadoApariciones ?>">
-        <?php foreach (getApariciones($conn,$idIntento) as $j): ?>
-            <span><?=$j?></span><br>
-        <?php endforeach; ?>
-    </div>
+                <td class="<?= $estadoNombre ?>">
+                    <?= $i['nombre'] ?>
+                </td>
 
-    <div class="caja <?= $estadoEspecie ?>">
-        <?= $i['especie_normalizada'] ?>
-    </div>
+                <td class="<?= $estadoApariciones ?>">
+                    <?php foreach (getApariciones($conn,$idIntento) as $j): ?>
+                    <span>
+                        <?=$j?>
+                    </span><br>
+                    <?php endforeach; ?>
+                </td>
 
-    <div class="caja <?= $estadoOcupacion ?>">
-        <?= $i['ocupacion'] ?>
-    </div>
-    
-    <div class="caja <?= $estadoUbicacion ?>">
-        <?= $i['ubicacion'] ?>
-    </div>
-</div>
+                <td class="<?= $estadoEspecie ?>">
+                    <?= $i['especie_normalizada'] ?>
+                </td>
 
-<?php endforeach; ?>
+                <td class="<?= $estadoOcupacion ?>">
+                    <?= $i['ocupacion'] ?>
+                </td>
+
+                <td class="<?= $estadoUbicacion ?>">
+                    <?= $i['ubicacion'] ?>
+                </td>
+            </tr>
+
+    <?php endforeach; ?>
+
+        </tbody>
+    </table>
 
     <!-- pasarle los datos al archivo javascript -->
     <script>
-        const datos = <?= json_encode($datos,JSON_UNESCAPED_UNICODE) ?>;
+        const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
     <script src="js/buscador.js"></script>
 </body>
