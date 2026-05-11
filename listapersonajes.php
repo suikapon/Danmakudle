@@ -36,6 +36,7 @@ $personajes = getPersonajes($conn)
                 stage: <?= $p['stage'] ?><br>
                 ubicación: <?= $p['ubicacion'] ?><br>
                 especie: <?= $p['especie'] ?><br>
+                especie normalizada: <?= $p['especie_normalizada'] ?><br>
                 jugable: <?= $p['jugable'] ?><br>
             </li>
         <?php endforeach; ?>
