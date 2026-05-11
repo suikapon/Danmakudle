@@ -27,7 +27,7 @@ input.addEventListener('input', function()
             
             // imagen
             const img = document.createElement('img');
-            img.src = datos[i].imagen;
+            img.src = 'img/pj/' + datos[i].imagen;
             img.width = 30;
             img.height = 30;
 
