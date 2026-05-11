@@ -1047,17 +1047,17 @@
         {
             "nombre": "Medicine Melancholy",
             "imagen": "medicine.png",
-            "debut": 20,
-            "stage": 1,
+            "debut": 9,
+            "stage": 0,
             "ubicacion": "Jardín del Sol",
             "especie": "Muñeca Tsukumogami Venenosa",
-            "jugable": false
+            "jugable": true
         },
         {
             "nombre": "Yuuka Kazami",
             "imagen": "yuuka.png",
-            "debut": 20,
-            "stage": 6,
+            "debut": 9,
+            "stage": 0,
             "ubicacion": "Jardín del Sol",
             "especie": "Youkai",
             "jugable": true
