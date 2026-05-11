@@ -1054,69 +1054,6 @@
             "jugable": false
         },
         {
-            "nombre": "Elis",
-            "imagen": "elis.png",
-            "debut": 20,
-            "stage": 2,
-            "ubicacion": "Mundo Exterior",
-            "especie": "Demonio",
-            "jugable": false
-        },
-        {
-            "nombre": "Kikuri",
-            "imagen": "kikuri.png",
-            "debut": 20,
-            "stage": 2,
-            "ubicacion": "Mundo Exterior",
-            "especie": "Demonio",
-            "jugable": false
-        },
-        {
-            "nombre": "Sariel",
-            "imagen": "sariel.png",
-            "debut": 20,
-            "stage": 3,
-            "ubicacion": "Mundo Exterior",
-            "especie": "Ángel",
-            "jugable": false
-        },
-        {
-            "nombre": "Konngara",
-            "imagen": "konngara.png",
-            "debut": 20,
-            "stage": 3,
-            "ubicacion": "Mundo Exterior",
-            "especie": "Astral Knight",
-            "jugable": false
-        },
-        {
-            "nombre": "Meira",
-            "imagen": "meira.png",
-            "debut": 20,
-            "stage": 4,
-            "ubicacion": "Mundo Exterior",
-            "especie": "Humana",
-            "jugable": false
-        },
-        {
-            "nombre": "Rika",
-            "imagen": "rika.png",
-            "debut": 20,
-            "stage": 4,
-            "ubicacion": "Mundo Exterior",
-            "especie": "Maga",
-            "jugable": false
-        },
-        {
-            "nombre": "Mima",
-            "imagen": "mima.png",
-            "debut": 20,
-            "stage": 5,
-            "ubicacion": "Mundo Exterior",
-            "especie": "Espíritu Vengativo",
-            "jugable": false
-        },
-        {
             "nombre": "Yuuka Kazami",
             "imagen": "yuuka.png",
             "debut": 20,
