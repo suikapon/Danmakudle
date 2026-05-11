@@ -129,7 +129,7 @@ $intentos = $_SESSION['intentos'];
 
                 <tr>
                     <td class="<?= $estadoNombre ?>">
-                        <img src="<?= $i['imagen'] ?>" width=100 height=100>
+                        <img src="img/pj/<?= $i['imagen'] ?>" width=100 height=100>
                     </td>
 
                     <td class="<?= $estadoNombre ?>">
