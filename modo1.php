@@ -142,7 +142,19 @@ function compararValor($intento, $secreto)
                 $estadoStage = ($resultadoStage=='verde')? 'verde' : 'rojo';
 
                 // especie
-                $estadoEspecie = ($i['especie'] == $pjAdivinar['especie']) ? 'verde' : 'rojo';
+                if ($i['especie'] == $pjAdivinar['especie'])
+                    $estadoEspecie = 'verde';
+                else
+                {
+                // separar las especies normalizadas por coma y quitar espacios
+                $especiesIntento  = array_map('trim', explode(',', $i['especie_normalizada']));
+                $especiesSecreto  = array_map('trim', explode(',', $pjAdivinar['especie_normalizada']));
+                // naranja si comparten al menos una
+                 if (count(array_intersect($especiesIntento, $especiesSecreto)) > 0)
+                    $estadoEspecie = 'naranja';
+                else
+                    $estadoEspecie = 'rojo';
+                }
 
                 // ubicacion
                 $estadoUbicacion = ($i['ubicacion'] == $pjAdivinar['ubicacion']) ? 'verde' : 'rojo';
