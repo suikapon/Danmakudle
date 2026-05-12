@@ -50,6 +50,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 }
 // recuperar los intentos de la sesión para recorrerlos
 $intentos = $_SESSION['intentos'];
+
+// ordenar los stages
+function ordenarStage($stage)
+{
+    $orden = ['0'=>0,'1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'Extra'=>7,'Phantasm'=>8];
+    return $orden[$stage]?? -1;
+}
+// ^^^^^ devuelve una posición numérica para facilitar la comparación de stages con cualquier otro valor devuelve -1
+
+function compararValor($intento, $secreto)
+{
+    if($intento==$secreto)
+        return 'verde';
+    if($intento<$secreto)
+        return '↑';
+    if($intento>$secreto)
+        return '↓';
+}
 ?>
 
 <!DOCTYPE html>
@@ -104,27 +122,33 @@ $intentos = $_SESSION['intentos'];
             <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
             <!--array invertido porque se más cómodo que el último intento salga arriba del todo-->
             <?php foreach (array_reverse($intentos) as $i):
-
+            // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
                 $idIntento = $i['id_personaje'];
                 $idSecreto = $pjAdivinar['id_personaje'];
 
                 // nombre
                 $estadoNombre = ($idIntento == $idSecreto) ? 'verde' : 'rojo';
 
-                // apariciones
-                if (mismasApariciones($conn, $idIntento, $idSecreto)) {
-                    $estadoApariciones = 'verde';
-                } elseif (coincidenApariciones($conn, $idIntento, $idSecreto)) {
-                    $estadoApariciones = 'naranja';
-                } else {
-                    $estadoApariciones = 'rojo';
-                }
+                //debut
+                // resultado primero el intento y después el secreto,,
+                $resultadoDebut = compararValor((float)$i['debut'], (float)$pjAdivinar['debut']);
+                $estadoDebut = ($resultadoDebut=='verde')? 'verde' : 'rojo';
+
+                // stage
+                //guardar la posición numérica del stage del personaje secreto y el intento
+                $stageIntento = ordenarStage($i['stage']);
+                $stageSecreto = ordenarStage($pjAdivinar['stage']);
+                $resultadoStage = compararValor($stageIntento,$stageSecreto);
+                $estadoStage = ($resultadoStage=='verde')? 'verde' : 'rojo';
 
                 // especie
-                $estadoEspecie = ($i['especie_normalizada'] == $pjAdivinar['especie_normalizada']) ? 'verde' : 'rojo';
+                $estadoEspecie = ($i['especie'] == $pjAdivinar['especie']) ? 'verde' : 'rojo';
 
                 // ubicacion
                 $estadoUbicacion = ($i['ubicacion'] == $pjAdivinar['ubicacion']) ? 'verde' : 'rojo';
+
+                // jugable
+                $estadoJugable = ($i['jugable'] == $pjAdivinar['jugable']) ? 'verde' : 'rojo';
                 ?>
 
                 <tr>
@@ -136,20 +160,27 @@ $intentos = $_SESSION['intentos'];
                         <?= $i['nombre'] ?>
                     </td>
 
-                    <td class="<?= $estadoApariciones ?>">
-                        <?php foreach (getApariciones($conn, $idIntento) as $j): ?>
-                            <span>
-                                <?= $j ?>
-                            </span><br>
-                        <?php endforeach; ?>
+                    <td class="<?= $estadoDebut ?>">
+                        <?= $i['debut']?>
+                        <!--pone la flecha del estado si no vale verde!-->
+                        <?= $resultadoDebut!== 'verde'? $resultadoDebut : '' ?>
                     </td>
 
-                    <td class="<?= $estadoEspecie ?>">
-                        <?= $i['especie_normalizada'] ?>
+                    <td class="<?= $estadoStage ?>">
+                        <?= $i['stage'] ?>
+                        <?= $resultadoStage!== 'verde'? $resultadoDebut : '' ?>
                     </td>
                     
+                    <td class="<?= $estadoEspecie ?>">
+                        <?= $i['especie'] ?>
+                    </td>
+
                     <td class="<?= $estadoUbicacion ?>">
                         <?= $i['ubicacion'] ?>
+                    </td>
+
+                    <td class="<?= $estadoJugable ?>">
+                        <?= ($i['jugable'])? 'Sí' : 'No' ?>
                     </td>
                 </tr>
 
