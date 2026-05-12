@@ -168,7 +168,7 @@ function compararValor($intento, $secreto)
 
                     <td class="<?= $estadoStage ?>">
                         <?= $i['stage'] ?>
-                        <?= $resultadoStage!== 'verde'? $resultadoDebut : '' ?>
+                        <?= $resultadoStage!== 'verde'? $resultadoStage : '' ?>
                     </td>
                     
                     <td class="<?= $estadoEspecie ?>">
