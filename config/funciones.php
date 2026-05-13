@@ -16,4 +16,25 @@ function compararValor($intento, $secreto)
     if($intento>$secreto)
         return '↓';
 }
+
+function estadoSimple($intento, $secreto, $campo)
+{
+    return ($intento[$campo] == $secreto[$campo]) ? 'verde' : 'rojo';
+}
+
+// devuelve el estado de color para la especie
+function estadoEspecie($intento, $secreto)
+{
+    if ($intento['especie'] == $secreto['especie'])
+        return 'verde';
+
+    $especiesIntento = array_map('trim', explode(',', $intento['especie_normalizada']));
+    $especiesSecreto = array_map('trim', explode(',', $secreto['especie_normalizada']));
+
+    if (count(array_intersect($especiesIntento, $especiesSecreto)) > 0)
+        return 'naranja';
+
+    return 'rojo';
+}
+
 ?>

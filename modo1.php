@@ -91,8 +91,7 @@ $intentos = $_SESSION['intentos'];
     <div id="texto-vidas">
         <span>Vidas:</span>
         <?php 
-            $vidas = $_SESSION['vidas'];
-            for ($i=0; $i<$vidas; $i++): ?>
+            for ($i=0; $i<$_SESSION['vidas']; $i++): ?>
                 <img src="img/stars/vida.png" width="20" height="20">
         <?php endfor; ?>
     </div>
@@ -132,40 +131,24 @@ $intentos = $_SESSION['intentos'];
                 $idSecreto = $pjAdivinar['id_personaje'];
 
                 // nombre
-                $estadoNombre = ($idIntento == $idSecreto) ? 'verde' : 'rojo';
+                $estadoNombre = estadoSimple($i, $pjAdivinar, 'id_personaje');
 
                 //debut
-                // resultado primero el intento y después el secreto,,
                 $resultadoDebut = compararValor((float)$i['debut'], (float)$pjAdivinar['debut']);
                 $estadoDebut = ($resultadoDebut=='verde')? 'verde' : 'rojo';
 
                 // stage
-                //guardar la posición numérica del stage del personaje secreto y el intento
-                $stageIntento = ordenarStage($i['stage']);
-                $stageSecreto = ordenarStage($pjAdivinar['stage']);
-                $resultadoStage = compararValor($stageIntento,$stageSecreto);
+                $resultadoStage = compararValor(ordenarStage($i['stage']), ordenarStage($pjAdivinar['stage']));
                 $estadoStage = ($resultadoStage=='verde')? 'verde' : 'rojo';
 
                 // especie
-                if ($i['especie'] == $pjAdivinar['especie'])
-                    $estadoEspecie = 'verde';
-                else
-                {
-                    // separar las especies normalizadas por coma y quitar espacios
-                    $especiesIntento  = array_map('trim', explode(',', $i['especie_normalizada']));
-                    $especiesSecreto  = array_map('trim', explode(',', $pjAdivinar['especie_normalizada']));
-                    // naranja si comparten al menos una
-                if (count(array_intersect($especiesIntento, $especiesSecreto)) > 0)
-                    $estadoEspecie = 'naranja';
-                else
-                    $estadoEspecie = 'rojo';
-                }
+                $estadoEspecie = estadoEspecie($i, $pjAdivinar);
 
                 // ubicacion
-                $estadoUbicacion = ($i['ubicacion'] == $pjAdivinar['ubicacion']) ? 'verde' : 'rojo';
+                $estadoUbicacion = estadoSimple($i, $pjAdivinar, 'ubicacion');
 
                 // jugable
-                $estadoJugable = ($i['jugable'] == $pjAdivinar['jugable']) ? 'verde' : 'rojo';
+                $estadoJugable = estadoSimple($i, $pjAdivinar, 'jugable');
                 ?>
 
                 <tr>
