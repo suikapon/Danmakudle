@@ -108,7 +108,7 @@ function compararValor($intento, $secreto)
         <?php 
             $vidas = $_SESSION['vidas'];
             for ($i=0; $i<$vidas; $i++): ?>
-                <img src="img/vida.png" width="20" height="20">
+                <img src="img/stars/vida.png" width="20" height="20">
         <?php endfor; ?>
     </div>
     <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
