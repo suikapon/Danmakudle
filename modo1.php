@@ -17,6 +17,7 @@ if (isset($_GET['reset'])) {
 
 require_once 'config/config.php';
 require_once 'config/consultas.php';
+require_once 'config/funciones.php';
 
 // cargamos todos los personajes de la base de datos
 $personajes = getPersonajes($conn);
@@ -64,23 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 // recuperar los intentos de la sesión para recorrerlos
 $intentos = $_SESSION['intentos'];
 
-// ordenar los stages
-function ordenarStage($stage)
-{
-    $orden = ['0'=>0,'1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'Extra'=>7,'Phantasm'=>8];
-    return $orden[$stage] ?? -1;
-}
-// ^^^^^ devuelve una posición numérica para facilitar la comparación de stages con cualquier otro valor devuelve -1
 
-function compararValor($intento, $secreto)
-{
-    if($intento==$secreto)
-        return 'verde';
-    if($intento<$secreto)
-        return '↑';
-    if($intento>$secreto)
-        return '↓';
-}
 ?>
 
 <!DOCTYPE html>
