@@ -71,3 +71,14 @@
     object-fit: contain;
     margin-bottom: 1rem;
 }
+
+#texto-vidas{
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+
+#vidas{
+    display:flex;
+    gap:5px;
+}

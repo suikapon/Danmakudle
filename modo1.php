@@ -1,9 +1,16 @@
 <?php
 session_start();
+//session_destroy();
+
+// variable para tener control de cuantas vidas se quieren
+// elegir al principio de una partida en vez de poner el número
+$vidas = 6;
+
 // reiniciar los intentos y el personaje para pruebas por ahora
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentos']);
     unset($_SESSION['pjAdivinar']);
+    $_SESSION['vidas'] = $vidas;
     header('Location: modo1.php');
     exit();
 }
@@ -19,6 +26,8 @@ if (!isset($_SESSION['pjAdivinar'])) {
     $pjAdivinar = getPersonajeAleatorio(($conn));
     $_SESSION['pjAdivinar'] = $pjAdivinar;
     $_SESSION['intentos'] = [];
+    // las vidas
+    $_SESSION['vidas'] = $vidas;
 }
 $pjAdivinar = $_SESSION['pjAdivinar'];
 
@@ -43,6 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
         foreach ($personajes as $p) {
             if ($p['nombre'] == $_POST['personaje_elegido']) {
                 $_SESSION['intentos'][] = $p;
+
+                // restar una vida en fallo
+                if ($p['id_personaje'] != $pjAdivinar['id_personaje'])
+                    $_SESSION['vidas']--;
                 break;
             }
         }
@@ -55,7 +68,7 @@ $intentos = $_SESSION['intentos'];
 function ordenarStage($stage)
 {
     $orden = ['0'=>0,'1'=>1,'2'=>2,'3'=>3,'4'=>4,'5'=>5,'6'=>6,'Extra'=>7,'Phantasm'=>8];
-    return $orden[$stage]?? -1;
+    return $orden[$stage] ?? -1;
 }
 // ^^^^^ devuelve una posición numérica para facilitar la comparación de stages con cualquier otro valor devuelve -1
 
@@ -90,7 +103,14 @@ function compararValor($intento, $secreto)
     <a href="?reset=todo">cambiar personaje</a>
 
     <h1>Adivina el personaje</h1>
-
+    <div id="texto-vidas">
+        <span>Vidas:</span>
+        <?php 
+            $vidas = $_SESSION['vidas'];
+            for ($i=0; $i<$vidas; $i++): ?>
+                <img src="img/vida.png" width="20" height="20">
+        <?php endfor; ?>
+    </div>
     <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
 
     <form method="POST">
@@ -146,11 +166,11 @@ function compararValor($intento, $secreto)
                     $estadoEspecie = 'verde';
                 else
                 {
-                // separar las especies normalizadas por coma y quitar espacios
-                $especiesIntento  = array_map('trim', explode(',', $i['especie_normalizada']));
-                $especiesSecreto  = array_map('trim', explode(',', $pjAdivinar['especie_normalizada']));
-                // naranja si comparten al menos una
-                 if (count(array_intersect($especiesIntento, $especiesSecreto)) > 0)
+                    // separar las especies normalizadas por coma y quitar espacios
+                    $especiesIntento  = array_map('trim', explode(',', $i['especie_normalizada']));
+                    $especiesSecreto  = array_map('trim', explode(',', $pjAdivinar['especie_normalizada']));
+                    // naranja si comparten al menos una
+                if (count(array_intersect($especiesIntento, $especiesSecreto)) > 0)
                     $estadoEspecie = 'naranja';
                 else
                     $estadoEspecie = 'rojo';
