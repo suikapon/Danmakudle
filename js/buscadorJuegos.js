@@ -20,7 +20,9 @@ input.addEventListener('input', function()
     // recorrer todos los datos de los juegos para mostrarlos
     for (let i=0;i<datos.length;i++)
     {
-        if (datos[i].nombre.toLowerCase().startsWith(q))
+        const th = String(datos[i].id);
+        
+        if (datos[i].nombre.toLowerCase().includes(q) || th.startsWith(q))
         {
             // contenedor
             const div = document.createElement('div');

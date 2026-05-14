@@ -34,7 +34,7 @@ $juegoAdivinar = $_SESSION['juegoAdivinar'];
 // preparar nombres y la imagen de cada juego para pasárselo al javascript
 $datos = [];
 foreach ($juegos as $j) {
-    $datos[] = ['nombre' => $j['nombre'], 'imagen' => $j['imagen']];
+    $datos[] = ['nombre' => $j['nombre'], 'imagen' => $j['imagen'], 'id' => $j['id']];
 }
 
 // procesar el intento enviado
@@ -107,7 +107,7 @@ $blur = $_SESSION['vidas'] * 5;
         <?php if (!$gano && !$perdio): ?>
             <form method="POST">
                 <div style="position:relative; display:inline-block">
-                    <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
+                    <input type="text" id="searchInput" placeholder="Escribe un título/versión" autocomplete="off" style="width:300px">
                     <div id="dropdown"
                         style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;">
                     </div>
