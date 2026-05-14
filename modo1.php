@@ -65,6 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 // recuperar los intentos de la sesión para recorrerlos
 $intentos = $_SESSION['intentos'];
 
+$gano = !empty($intentos) && end($intentos)['id_personaje'] == $pjAdivinar['id_personaje'];
+$perdio = $_SESSION['vidas'] <= 0 && !$gano;
 
 ?>
 
@@ -96,7 +98,8 @@ $intentos = $_SESSION['intentos'];
         <?php endfor; ?>
     </div>
     <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
-
+    
+    <?php if(!$gano && !$perdio): ?>
     <form method="POST">
         <div style="position:relative; display:inline-block">
             <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
@@ -108,6 +111,7 @@ $intentos = $_SESSION['intentos'];
         </div>
         <button type="submit">Adivinar</button>
     </form>
+    <?php endif; ?>
 
     <table class="tabla-intentos">
         <thead>
