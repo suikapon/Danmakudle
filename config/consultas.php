@@ -26,9 +26,13 @@ function getNombreJuego($conexion, $debut)
 
 function getJuegos($conexion)
 {
-    $stmt = $conexion->prepare("SELECT * FROM juegos ORDER BY id");
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $conexion->query("SELECT * FROM juegos")->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+function getJuegoAleatorio($conexion)
+{
+    return $conexion->query("SELECT * FROM juegos ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 }
 
 ?>
