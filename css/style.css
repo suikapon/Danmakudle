@@ -72,6 +72,10 @@
     margin-bottom: 1rem;
 }
 
+.silueta {
+    filter: brightness(0);
+}
+
 #texto-vidas{
     display:flex;
     align-items:center;
