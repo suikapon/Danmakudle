@@ -24,4 +24,11 @@ function getNombreJuego($conexion, $debut)
     return $stmt->fetchColumn();
 }
 
+function getJuegos($conexion)
+{
+    $stmt = $conexion->prepare("SELECT * FROM juegos ORDER BY id");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>
