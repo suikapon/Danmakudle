@@ -1,45 +1,5 @@
 [
     {
-        "id": 1,
-        "nombre": "Highly Responsive to Prayers",
-        "año": 1996,
-        "tipo": "Acción",
-        "plataforma": "PC-98",
-        "imagen": "th01.png"
-    },
-    {
-        "id": 2,
-        "nombre": "Story of Eastern Wonderland",
-        "año": 1997,
-        "tipo": "Shooter",
-        "plataforma": "PC-98",
-        "imagen": "th02.png"
-    },
-    {
-        "id": 3,
-        "nombre": "Phantasmagoria of Dim.Dream",
-        "año": 1997,
-        "tipo": "Shooter",
-        "plataforma": "PC-98",
-        "imagen": "th03.png"
-    },
-    {
-        "id": 4,
-        "nombre": "Lotus Land Story",
-        "año": 1998,
-        "tipo": "Shooter",
-        "plataforma": "PC-98",
-        "imagen": "th04.png"
-    },
-    {
-        "id": 5,
-        "nombre": "Mystic Square",
-        "año": 1998,
-        "tipo": "Shooter",
-        "plataforma": "PC-98",
-        "imagen": "th05.png"
-    },
-    {
         "id": 6,
         "nombre": "The Embodiment of Scarlet Devil",
         "año": 2002,
