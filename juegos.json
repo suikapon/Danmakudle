@@ -1,0 +1,266 @@
+[
+    {
+        "id": 1,
+        "nombre": "Highly Responsive to Prayers",
+        "año": 1996,
+        "tipo": "Acción",
+        "plataforma": "PC-98",
+        "imagen": "th01.png"
+    },
+    {
+        "id": 2,
+        "nombre": "Story of Eastern Wonderland",
+        "año": 1997,
+        "tipo": "Shooter",
+        "plataforma": "PC-98",
+        "imagen": "th02.png"
+    },
+    {
+        "id": 3,
+        "nombre": "Phantasmagoria of Dim.Dream",
+        "año": 1997,
+        "tipo": "Shooter",
+        "plataforma": "PC-98",
+        "imagen": "th03.png"
+    },
+    {
+        "id": 4,
+        "nombre": "Lotus Land Story",
+        "año": 1998,
+        "tipo": "Shooter",
+        "plataforma": "PC-98",
+        "imagen": "th04.png"
+    },
+    {
+        "id": 5,
+        "nombre": "Mystic Square",
+        "año": 1998,
+        "tipo": "Shooter",
+        "plataforma": "PC-98",
+        "imagen": "th05.png"
+    },
+    {
+        "id": 6,
+        "nombre": "The Embodiment of Scarlet Devil",
+        "año": 2002,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th06.png"
+    },
+    {
+        "id": 7,
+        "nombre": "Perfect Cherry Blossom",
+        "año": 2003,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th07.png"
+    },
+    {
+        "id": 7.5,
+        "nombre": "Immaterial and Missing Power",
+        "año": 2004,
+        "tipo": "Fighting",
+        "plataforma": "Windows",
+        "imagen": "th075.png"
+    },
+    {
+        "id": 8,
+        "nombre": "Imperishable Night",
+        "año": 2004,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th08.png"
+    },
+    {
+        "id": 9,
+        "nombre": "Phantasmagoria of Flower View",
+        "año": 2005,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th09.png"
+    },
+    {
+        "id": 9.5,
+        "nombre": "Shoot the Bullet",
+        "año": 2005,
+        "tipo": "Fotografía",
+        "plataforma": "Windows",
+        "imagen": "th095.png"
+    },
+    {
+        "id": 10,
+        "nombre": "Mountain of Faith",
+        "año": 2007,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th10.png"
+    },
+    {
+        "id": 10.5,
+        "nombre": "Scarlet Weather Rhapsody",
+        "año": 2008,
+        "tipo": "Fighting",
+        "plataforma": "Windows",
+        "imagen": "th105.png"
+    },
+    {
+        "id": 11,
+        "nombre": "Subterranean Animism",
+        "año": 2008,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th11.png"
+    },
+    {
+        "id": 12,
+        "nombre": "Undefined Fantastic Object",
+        "año": 2009,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th12.png"
+    },
+    {
+        "id": 12.3,
+        "nombre": "Touhou Hisoutensoku",
+        "año": 2009,
+        "tipo": "Fighting",
+        "plataforma": "Windows",
+        "imagen": "th123.png"
+    },
+    {
+        "id": 12.5,
+        "nombre": "Double Spoiler",
+        "año": 2010,
+        "tipo": "Fotografía",
+        "plataforma": "Windows",
+        "imagen": "th125.png"
+    },
+    {
+        "id": 12.8,
+        "nombre": "Great Fairy Wars",
+        "año": 2010,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th128.png"
+    },
+    {
+        "id": 13,
+        "nombre": "Ten Desires",
+        "año": 2011,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th13.png"
+    },
+    {
+        "id": 13.5,
+        "nombre": "Hopeless Masquerade",
+        "año": 2013,
+        "tipo": "Fighting",
+        "plataforma": "Windows",
+        "imagen": "th135.png"
+    },
+    {
+        "id": 14,
+        "nombre": "Double Dealing Character",
+        "año": 2013,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th14.png"
+    },
+    {
+        "id": 14.3,
+        "nombre": "Impossible Spell Card",
+        "año": 2014,
+        "tipo": "Esquiva",
+        "plataforma": "Windows",
+        "imagen": "th143.png"
+    },
+    {
+        "id": 14.5,
+        "nombre": "Urban Legend in Limbo",
+        "año": 2015,
+        "tipo": "Fighting",
+        "plataforma": "Windows",
+        "imagen": "th145.png"
+    },
+    {
+        "id": 15,
+        "nombre": "Legacy of Lunatic Kingdom",
+        "año": 2015,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th15.png"
+    },
+    {
+        "id": 15.5,
+        "nombre": "Antinomy of Common Flowers",
+        "año": 2017,
+        "tipo": "Fighting",
+        "plataforma": "Windows",
+        "imagen": "th155.png"
+    },
+    {
+        "id": 16,
+        "nombre": "Hidden Star in Four Seasons",
+        "año": 2017,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th16.png"
+    },
+    {
+        "id": 16.5,
+        "nombre": "Violet Detector",
+        "año": 2018,
+        "tipo": "Fotografía",
+        "plataforma": "Windows",
+        "imagen": "th165.png"
+    },
+    {
+        "id": 17,
+        "nombre": "Wily Beast and Weakest Creature",
+        "año": 2019,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th17.png"
+    },
+    {
+        "id": 17.5,
+        "nombre": "Touhou Gouyoku Ibun",
+        "año": 2021,
+        "tipo": "Fighting",
+        "plataforma": "Windows",
+        "imagen": "th175.png"
+    },
+    {
+        "id": 18,
+        "nombre": "Unconnected Marketeers",
+        "año": 2021,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th18.png"
+    },
+    {
+        "id": 18.5,
+        "nombre": "100th Black Market",
+        "año": 2022,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th185.png"
+    },
+    {
+        "id": 19,
+        "nombre": "Unfinished Dream of All Living Ghost",
+        "año": 2023,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th19.png"
+    },
+    {
+        "id": 20,
+        "nombre": "Fossilized Wonders",
+        "año": 2025,
+        "tipo": "Shooter",
+        "plataforma": "Windows",
+        "imagen": "th20.png"
+    }
+]

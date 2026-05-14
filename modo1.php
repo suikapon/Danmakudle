@@ -165,6 +165,8 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
                     </td>
 
                     <td class="<?= $estadoDebut ?>">
+                        <?= getNombreJuego($conn, $i['debut']) ?>
+                        </br>
                         <?= $i['debut']?>
                         <!--pone la flecha del estado si no vale verde!-->
                         <?= $resultadoDebut!== 'verde'? $resultadoDebut : '' ?>

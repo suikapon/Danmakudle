@@ -17,4 +17,11 @@ function getPersonajeAleatorio($conexion)
     return $conexion->query("SELECT * FROM personajes ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 }
 
+function getNombreJuego($conexion, $debut)
+{
+    $stmt = $conexion->prepare("SELECT nombre FROM juegos WHERE id = ?");
+    $stmt->execute([$debut]);
+    return $stmt->fetchColumn();
+}
+
 ?>
