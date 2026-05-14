@@ -86,114 +86,118 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
 <body class="d-flex flex-column min-vh-100">
     <?php include 'header.php'; ?>
 
-    <!--botones para reiniciar intentos y el personaje-->
-    <a href="?reset=todo">cambiar personaje</a>
+    <main class="container d-flex flex-column align-items-center flex-grow-1">
 
-    <h1>Adivina el personaje</h1>
-    <div id="texto-vidas">
-        <span>Vidas:</span>
-        <?php 
-            for ($i=0; $i<$_SESSION['vidas']; $i++): ?>
+
+        <!--botones para reiniciar intentos y el personaje-->
+        <a href="?reset=todo">cambiar personaje</a>
+
+        <h1>Adivina el personaje</h1>
+        <div id="texto-vidas">
+            <span>Vidas:</span>
+            <?php
+            for ($i = 0; $i < $_SESSION['vidas']; $i++): ?>
                 <img src="img/stars/vida.png" width="20" height="20">
-        <?php endfor; ?>
-    </div>
-    <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
-    
-    <?php if(!$gano && !$perdio): ?>
-    <form method="POST">
-        <div style="position:relative; display:inline-block">
-            <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
-            <div id="dropdown"
-                style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;">
-            </div>
-            <!-- se manda el hidden para que no se envíen datos erroneos -->
-            <input type="hidden" name="personaje_elegido" id="personajeElegido">
+            <?php endfor; ?>
         </div>
-        <button type="submit">Adivinar</button>
-    </form>
-    <?php endif; ?>
+        <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
 
-    <table class="tabla-intentos">
-        <thead>
-            <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-                <th>Debut</th>
-                <th>Stage</th>
-                <th>Especie</th>
-                <th>Ubicación</th>
-                <th>Jugable</th>
-            </tr>
-        </thead>
-        <tbody>
+        <?php if (!$gano && !$perdio): ?>
+            <form method="POST">
+                <div style="position:relative; display:inline-block">
+                    <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
+                    <div id="dropdown"
+                        style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;">
+                    </div>
+                    <!-- se manda el hidden para que no se envíen datos erroneos -->
+                    <input type="hidden" name="personaje_elegido" id="personajeElegido">
+                </div>
+                <button type="submit">Adivinar</button>
+            </form>
+        <?php endif; ?>
 
-            <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
-            <!--array invertido porque se más cómodo que el último intento salga arriba del todo-->
-            <?php foreach (array_reverse($intentos) as $i):
-            // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
-                $idIntento = $i['id_personaje'];
-                $idSecreto = $pjAdivinar['id_personaje'];
-
-                // nombre
-                $estadoNombre = estadoSimple($i, $pjAdivinar, 'id_personaje');
-
-                //debut
-                $resultadoDebut = compararValor((float)$i['debut'], (float)$pjAdivinar['debut']);
-                $estadoDebut = ($resultadoDebut=='verde')? 'verde' : 'rojo';
-
-                // stage
-                $resultadoStage = compararValor(ordenarStage($i['stage']), ordenarStage($pjAdivinar['stage']));
-                $estadoStage = ($resultadoStage=='verde')? 'verde' : 'rojo';
-
-                // especie
-                $estadoEspecie = estadoEspecie($i, $pjAdivinar);
-
-                // ubicacion
-                $estadoUbicacion = estadoSimple($i, $pjAdivinar, 'ubicacion');
-
-                // jugable
-                $estadoJugable = estadoSimple($i, $pjAdivinar, 'jugable');
-                ?>
-
+        <table class="tabla-intentos">
+            <thead>
                 <tr>
-                    <td class="<?= $estadoNombre ?>">
-                        <img src="img/pj/<?= $i['imagen'] ?>" width=100 height=100>
-                    </td>
-
-                    <td class="<?= $estadoNombre ?>">
-                        <?= $i['nombre'] ?>
-                    </td>
-
-                    <td class="<?= $estadoDebut ?>">
-                        <?= getNombreJuego($conn, $i['debut']) ?>
-                        </br>
-                        <?= $i['debut']?>
-                        <!--pone la flecha del estado si no vale verde!-->
-                        <?= $resultadoDebut!== 'verde'? $resultadoDebut : '' ?>
-                    </td>
-
-                    <td class="<?= $estadoStage ?>">
-                        <?= $i['stage'] ?>
-                        <?= $resultadoStage!== 'verde'? $resultadoStage : '' ?>
-                    </td>
-                    
-                    <td class="<?= $estadoEspecie ?>">
-                        <?= $i['especie'] ?>
-                    </td>
-
-                    <td class="<?= $estadoUbicacion ?>">
-                        <?= $i['ubicacion'] ?>
-                    </td>
-
-                    <td class="<?= $estadoJugable ?>">
-                        <?= ($i['jugable'])? 'Sí' : 'No' ?>
-                    </td>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Debut</th>
+                    <th>Stage</th>
+                    <th>Especie</th>
+                    <th>Ubicación</th>
+                    <th>Jugable</th>
                 </tr>
+            </thead>
+            <tbody>
 
-            <?php endforeach; ?>
+                <!--guardar estado de las coincidencias de los juegos para elegir el juego-->
+                <!--array invertido porque se más cómodo que el último intento salga arriba del todo-->
+                <?php foreach (array_reverse($intentos) as $i):
+                    // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
+                    $idIntento = $i['id_personaje'];
+                    $idSecreto = $pjAdivinar['id_personaje'];
 
-        </tbody>
-    </table>
+                    // nombre
+                    $estadoNombre = estadoSimple($i, $pjAdivinar, 'id_personaje');
+
+                    //debut
+                    $resultadoDebut = compararValor((float) $i['debut'], (float) $pjAdivinar['debut']);
+                    $estadoDebut = ($resultadoDebut == 'verde') ? 'verde' : 'rojo';
+
+                    // stage
+                    $resultadoStage = compararValor(ordenarStage($i['stage']), ordenarStage($pjAdivinar['stage']));
+                    $estadoStage = ($resultadoStage == 'verde') ? 'verde' : 'rojo';
+
+                    // especie
+                    $estadoEspecie = estadoEspecie($i, $pjAdivinar);
+
+                    // ubicacion
+                    $estadoUbicacion = estadoSimple($i, $pjAdivinar, 'ubicacion');
+
+                    // jugable
+                    $estadoJugable = estadoSimple($i, $pjAdivinar, 'jugable');
+                    ?>
+
+                    <tr>
+                        <td class="<?= $estadoNombre ?>">
+                            <img src="img/pj/<?= $i['imagen'] ?>" width=100 height=100>
+                        </td>
+
+                        <td class="<?= $estadoNombre ?>">
+                            <?= $i['nombre'] ?>
+                        </td>
+
+                        <td class="<?= $estadoDebut ?>">
+                            <?= getNombreJuego($conn, $i['debut']) ?>
+                            </br>
+                            <?= $i['debut'] ?>
+                            <!--pone la flecha del estado si no vale verde!-->
+                            <?= $resultadoDebut !== 'verde' ? $resultadoDebut : '' ?>
+                        </td>
+
+                        <td class="<?= $estadoStage ?>">
+                            <?= $i['stage'] ?>
+                            <?= $resultadoStage !== 'verde' ? $resultadoStage : '' ?>
+                        </td>
+
+                        <td class="<?= $estadoEspecie ?>">
+                            <?= $i['especie'] ?>
+                        </td>
+
+                        <td class="<?= $estadoUbicacion ?>">
+                            <?= $i['ubicacion'] ?>
+                        </td>
+
+                        <td class="<?= $estadoJugable ?>">
+                            <?= ($i['jugable']) ? 'Sí' : 'No' ?>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+
+            </tbody>
+        </table>
+    </main>
 
     <!-- pasarle los datos al archivo javascript -->
     <script>
