@@ -86,90 +86,71 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
 <body class="d-flex flex-column min-vh-100">
     <?php include 'header.php'; ?>
 
-    <!--botones para reiniciar intentos y el personaje-->
-    <a href="?reset=todo">cambiar personaje</a>
+    <main class="container d-flex flex-column align-items-center flex-grow-1">
+        <!--botones para reiniciar intentos y el personaje-->
+        <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
 
-    <h1>Adivina el personaje</h1>
-    <div id="texto-vidas">
-        <span>Vidas:</span>
-        <?php 
-            for ($i=0; $i<$_SESSION['vidas']; $i++): ?>
+        <h1 class="text-center mb-4">Adivina el personaje</h1>
+        <div id="texto-vidas" class="d-flex justify-content-center mb-4">
+            <span>Vidas:</span>
+            <?php
+            for ($i = 0; $i < $_SESSION['vidas']; $i++): ?>
                 <img src="img/stars/vida.png" width="20" height="20">
-        <?php endfor; ?>
-    </div>
-    <p>personaje a adivinar: <?= $silAdivinar['nombre'] ?></p>
-    <img src="img/pj/<?= $silAdivinar['imagen'] ?>" class="silueta" width=300 height=300>
-    
-    <?php if(!$gano && !$perdio): ?>
-    <form method="POST">
-        <div style="position:relative; display:inline-block">
-            <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
-            <div id="dropdown"
-                style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;">
-            </div>
-            <!-- se manda el hidden para que no se envíen datos erroneos -->
-            <input type="hidden" name="personaje_elegido" id="personajeElegido">
+            <?php endfor; ?>
         </div>
-        <button type="submit">Adivinar</button>
-    </form>
-    <?php endif; ?>
+        <p>personaje a adivinar:
+            <?= $silAdivinar['nombre'] ?>
+        </p>
+        <img src="img/pj/<?= $silAdivinar['imagen'] ?>" class="silueta" width=300 height=300>
 
-    <table class="tabla-intentos">
-        <thead>
-            <tr>
-                <th>Imagen</th>
-                <th>Nombre</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach (array_reverse($intentosSil) as $i):
-            // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
-                $idIntento = $i['id_personaje'];
-                $idSecreto = $silAdivinar['id_personaje'];
+        <?php if (!$gano && !$perdio): ?>
+            <form method="POST">
+                <div style="position:relative; display:inline-block">
+                    <input type="text" id="searchInput" placeholder="Escribe un nombre..." autocomplete="off">
+                    <div id="dropdown"
+                        style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;">
+                    </div>
+                    <!-- se manda el hidden para que no se envíen datos erroneos -->
+                    <input type="hidden" name="personaje_elegido" id="personajeElegido">
+                </div>
+                <button type="submit">Adivinar</button>
+            </form>
+        <?php endif; ?>
 
-                // nombre
-                $estadoNombre = estadoSimple($i, $silAdivinar, 'id_personaje');
-                ?>
-
+        <table class="tabla-intentos">
+            <thead>
                 <tr>
-                    <td class="<?= $estadoNombre ?>">
-                        <img src="img/pj/<?= $i['imagen'] ?>" width=100 height=100>
-                    </td>
-
-                    <td class="<?= $estadoNombre ?>">
-                        <?= $i['nombre'] ?>
-                    </td>
-
-                    <td class="<?= $estadoDebut ?>">
-                        <?= getNombreJuego($conn, $i['debut']) ?>
-                        </br>
-                        <?= $i['debut']?>
-                        <!--pone la flecha del estado si no vale verde!-->
-                        <?= $resultadoDebut!== 'verde'? $resultadoDebut : '' ?>
-                    </td>
-
-                    <td class="<?= $estadoStage ?>">
-                        <?= $i['stage'] ?>
-                        <?= $resultadoStage!== 'verde'? $resultadoStage : '' ?>
-                    </td>
-                    
-                    <td class="<?= $estadoEspecie ?>">
-                        <?= $i['especie'] ?>
-                    </td>
-
-                    <td class="<?= $estadoUbicacion ?>">
-                        <?= $i['ubicacion'] ?>
-                    </td>
-
-                    <td class="<?= $estadoJugable ?>">
-                        <?= ($i['jugable'])? 'Sí' : 'No' ?>
-                    </td>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
                 </tr>
+            </thead>
+            <tbody>
+                <?php foreach (array_reverse($intentosSil) as $i):
+                    // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
+                    $idIntento = $i['id_personaje'];
+                    $idSecreto = $silAdivinar['id_personaje'];
 
-            <?php endforeach; ?>
+                    // nombre
+                    $estadoNombre = estadoSimple($i, $silAdivinar, 'id_personaje');
+                    ?>
 
-        </tbody>
-    </table>
+                    <tr>
+                        <td class="<?= $estadoNombre ?>">
+                            <img src="img/pj/<?= $i['imagen'] ?>" width=100 height=100>
+                        </td>
+
+                        <td class="<?= $estadoNombre ?>">
+                            <?= $i['nombre'] ?>
+                        </td>
+                    </tr>
+
+                <?php endforeach; ?>
+
+            </tbody>
+        </table>
+    </main>
+
+
 
     <!-- pasarle los datos al archivo javascript -->
     <script>
