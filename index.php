@@ -49,6 +49,39 @@
             <div class="col-md-4 mt-4">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
+                        <img src="img/silueta.png" class="card-img-top mx-auto mt-6">
+                        <h2>Adivina la silueta</h2>
+                        <p class="text-secondary">Adivina el personaje de la silueta</p>
+                        <a href="modo3.php" class="boton stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column text-center">
+                        <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
+                        <h2>Lista de personajes</h2>
+                        <p class="text-secondary">¡Información acerca de todos los personajes!</p>
+                        <a href="listapersonajes.php" class="boton stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column text-center">
+                        <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
+                        <h2>Lista de personajes</h2>
+                        <p class="text-secondary">¡Información acerca de todos los personajes!</p>
+                        <a href="listapersonajes.php" class="boton stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mt-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column text-center">
                         <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
                         <h2>Lista de personajes</h2>
                         <p class="text-secondary">¡Información acerca de todos los personajes!</p>

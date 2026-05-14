@@ -90,7 +90,7 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
         <!--botones para reiniciar intentos y el personaje-->
         <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
 
-        <h1 class="text-center mb-4">Adivina el personaje</h1>
+        <h1 class="text-center mb-4">Adivina el personaje de la silueta</h1>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
             <?php
