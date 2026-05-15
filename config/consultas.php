@@ -5,6 +5,11 @@ function getPersonajes($conexion)
     return $conexion->query("SELECT * FROM personajes")->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getPersonajesConTemas($conexion) 
+{
+    return $conexion->query("SELECT * FROM personajes WHERE audio IS NOT null")->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getPersonajeXID($conexion, $id)
 {
     $stmt = $conexion->prepare("SELECT * FROM personajes WHERE id_personaje = ?");
@@ -15,6 +20,11 @@ function getPersonajeXID($conexion, $id)
 function getPersonajeAleatorio($conexion)
 {
     return $conexion->query("SELECT * FROM personajes ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+}
+
+function getPersonajeConTemaAleatorio($conexion)
+{
+    return $conexion->query("SELECT * FROM personajes WHERE audio IS NOT NULL ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 }
 
 function getNombreJuego($conexion, $debut)
