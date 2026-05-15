@@ -95,13 +95,10 @@ $perdio = $_SESSION['vidasAudio'] <= 0 && !$gano;
                 <img src="img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
-        <p>personaje a adivinar:
-            <?= $audioAdivinar['nombre'] ?>
-        </p>
 
         <!-- audio !-->
         <div class="audio">
-            <audio controls="">
+            <audio controls>
                 <source src="media/audio/<?= $audioAdivinar['audio'] ?>">
             </audio>
         </div>
