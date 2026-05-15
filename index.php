@@ -60,10 +60,10 @@
             <div class="col-md-4 mt-4">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
-                        <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
-                        <h2>Lista de personajes</h2>
-                        <p class="text-secondary">¡Información acerca de todos los personajes!</p>
-                        <a href="listapersonajes.php" class="boton stretched-link"></a>
+                        <img src="img/temas.png" class="card-img-top mx-auto mt-6">
+                        <h2>Adivina el tema</h2>
+                        <p class="text-secondary">Adivina el personaje por su tema</p>
+                        <a href="modo4.php" class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>
