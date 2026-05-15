@@ -17,10 +17,6 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/modos.php">Modos</a>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link" href="/rankings.php">Rankings</a>
                 </li>
             </ul>
