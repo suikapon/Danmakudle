@@ -8,58 +8,61 @@
 }
 
 .container {
-    overflow-x: hidden;
+    overflow-x: clip;
+    width:100%;
 }
 
-.tabla-intentos
-{
-    display: block;
-    overflow-x: auto;
-    width:100%;
-    max-width: 100vw;
-    border-collapse:collapse;
-    margin-top:20px;
+.tabla-intentos {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
 }
 
 .tabla-intentos th,
-.tabla-intentos td
-{
-    min-width:150px;
-    padding:12px;
-    border-radius:8px;
-    color:white;
-    font-weight:bold;
-    text-align:center;
-    border:4px solid white;
+.tabla-intentos td {
+    min-width: 150px;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    border: 4px solid white;
 }
 
-.tabla-intentos th
-{
-    background:#222;
+.tabla-intentos th {
+    background: #222;
 }
 
-.caja
-{
-    min-width:150px;
-    padding:12px;
-    border-radius:8px;
-    color:white;
-    font-weight:bold;
+@media (max-width: 700px) {
+    .tabla-intentos {
+        display: block;
+        overflow-x: auto;
+        width: 100%;
+        max-width: 100vw;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
 }
 
-.verde
-{
-    background:green;
+.caja {
+    min-width: 150px;
+    padding: 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
 }
 
-.naranja
-{
-    background:orange;
+.verde {
+    background: green;
 }
 
-.rojo
-{
-    background:red;
+.naranja {
+    background: orange;
+}
+
+.rojo {
+    background: red;
 }
 
 /* animaciones */
@@ -83,13 +86,13 @@
     filter: brightness(0);
 }
 
-#texto-vidas{
-    display:flex;
-    align-items:center;
-    gap:5px;
+#texto-vidas {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
-#vidas{
-    display:flex;
-    gap:5px;
+#vidas {
+    display: flex;
+    gap: 5px;
 }
