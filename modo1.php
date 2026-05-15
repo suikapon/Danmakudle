@@ -100,8 +100,6 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
                 <img src="img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
-        <p>personaje a adivinar: <?= $pjAdivinar['nombre'] ?></p>
-
         <?php if (!$gano && !$perdio): ?>
             <form method="POST">
                 <div style="position:relative; display:inline-block">

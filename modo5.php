@@ -1,17 +1,13 @@
 <?php
 session_start();
-//session_destroy();
 
-// variable para tener control de cuantas vidas se quieren
-// elegir al principio de una partida en vez de poner el número
 $vidas = 6;
 
-// reiniciar los intentos y el personaje para pruebas por ahora
 if (isset($_GET['reset'])) {
-    unset($_SESSION['intentosSil']);
-    unset($_SESSION['silAdivinar']);
-    $_SESSION['vidas'] = $vidas;
-    header('Location: modo3.php');
+    unset($_SESSION['intentosAudio']);
+    unset($_SESSION['audioAdivinar']);
+    $_SESSION['vidasAudio'] = $vidas;
+    header('Location: modo4.php');
     exit();
 }
 
@@ -23,14 +19,13 @@ require_once 'config/funciones.php';
 $personajes = getPersonajes($conn);
 
 // guardamos en la sesión el personaje a adivinar para que no se resetee
-if (!isset($_SESSION['silAdivinar'])) {
-    $silAdivinar = getPersonajeAleatorio(($conn));
-    $_SESSION['silAdivinar'] = $silAdivinar;
-    $_SESSION['intentosSil'] = [];
-    // las vidas
-    $_SESSION['vidas'] = $vidas;
+if (!isset($_SESSION['audioAdivinar'])) {
+    $audioAdivinar = getPersonajeConTemaAleatorio($conn);
+    $_SESSION['audioAdivinar'] = $audioAdivinar;
+    $_SESSION['intentosAudio'] = [];
+    $_SESSION['vidasAudio'] = $vidas;
 }
-$silAdivinar = $_SESSION['silAdivinar'];
+$audioAdivinar = $_SESSION['audioAdivinar'];
 
 // preparar nombres y la imagen de cada personaje para pasárselo al javascript
 $datos = [];
@@ -42,32 +37,34 @@ foreach ($personajes as $p) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido'])) {
     // comprobar si ya ha sido intentado el personaje
     $pjYaIntentado = false;
-    foreach ($_SESSION['intentosSil'] as $i) {
+    foreach ($_SESSION['intentosAudio'] as $i) {
         if ($i['nombre'] == $_POST['personaje_elegido']) {
             $pjYaIntentado = true;
             break;
         }
     }
+
     // agregarlo a los intentos si no está ya intentado
     if (!$pjYaIntentado) {
         foreach ($personajes as $p) {
             if ($p['nombre'] == $_POST['personaje_elegido']) {
-                $_SESSION['intentosSil'][] = $p;
+                $_SESSION['intentosAudio'][] = $p;
 
                 // restar una vida en fallo
-                if ($p['id_personaje'] != $silAdivinar['id_personaje'])
-                    $_SESSION['vidas']--;
+                if ($p['id_personaje'] != $audioAdivinar['id_personaje'])
+                    $_SESSION['vidasAudio']--;
                 break;
             }
         }
     }
 }
 // recuperar los intentos de la sesión para recorrerlos
-$intentosSil = $_SESSION['intentosSil'];
+$intentosAudio = $_SESSION['intentosAudio'];
 
-$gano = !empty($intentosSil) && end($intentosSil)['id_personaje'] == $silAdivinar['id_personaje'];
-$perdio = $_SESSION['vidas'] <= 0 && !$gano;
+$gano = !empty($intentosAudio) && end($intentosAudio)['id_personaje'] == $audioAdivinar['id_personaje'];
+$perdio = $_SESSION['vidasAudio'] <= 0 && !$gano;
 
+// rutas audios
 ?>
 
 <!DOCTYPE html>
@@ -90,15 +87,25 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
         <!--botones para reiniciar intentos y el personaje-->
         <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
 
-        <h1 class="text-center mb-4">Adivina el personaje de la silueta</h1>
+        <h1 class="text-center mb-4">Adivina el personaje del tema</h1>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
             <?php
-            for ($i = 0; $i < $_SESSION['vidas']; $i++): ?>
+            for ($i = 0; $i < $_SESSION['vidasAudio']; $i++): ?>
                 <img src="img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
-        <img src="img/pj/<?= $silAdivinar['imagen'] ?>" class="silueta" width=300 height=300>
+
+        <p>personaje a adivinar:
+            <?= $silAdivinar['nombre'] ?>
+        </p>
+
+        <!-- audio !-->
+        <div class="audio">
+            <audio controls>
+                <source src="media/audio/<?= $audioAdivinar['audio'] ?>">
+            </audio>
+        </div>
 
         <?php if (!$gano && !$perdio): ?>
             <form method="POST">
@@ -117,18 +124,23 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
         <table class="tabla-intentos">
             <thead>
                 <tr>
-                    <th>Imagen</th>
+                    <th>Personaje</th>
                     <th>Nombre</th>
+                    <th>Debut</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach (array_reverse($intentosSil) as $i):
+                <?php foreach (array_reverse($intentosAudio) as $i):
                     // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
                     $idIntento = $i['id_personaje'];
-                    $idSecreto = $silAdivinar['id_personaje'];
+                    $idSecreto = $audioAdivinar['id_personaje'];
 
                     // nombre
-                    $estadoNombre = estadoSimple($i, $silAdivinar, 'id_personaje');
+                    $estadoNombre = estadoSimple($i, $audioAdivinar, 'id_personaje');
+
+                    //debut
+                    $resultadoDebut = compararValor((float) $i['debut'], (float) $audioAdivinar['debut']);
+                    $estadoDebut = ($resultadoDebut == 'verde') ? 'verde' : 'rojo';
                     ?>
 
                     <tr>
@@ -138,6 +150,14 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
 
                         <td class="<?= $estadoNombre ?>">
                             <?= $i['nombre'] ?>
+                        </td>
+
+                        <td class="<?= $estadoDebut ?>">
+                            <?= getNombreJuego($conn, $i['debut']) ?>
+                            </br>
+                            <?= $i['debut'] ?>
+                            <!--pone la flecha del estado si no vale verde!-->
+                            <?= $resultadoDebut !== 'verde' ? $resultadoDebut : '' ?>
                         </td>
                     </tr>
 
