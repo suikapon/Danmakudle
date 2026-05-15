@@ -9,7 +9,7 @@ $vidas = 6;
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentosPortada']);
     unset($_SESSION['juegoAdivinar']);
-    $_SESSION['vidas'] = $vidas;
+    $_SESSION['vidasJuegos'] = $vidas;
     header('Location: modo2.php');
     exit();
 }
@@ -27,7 +27,7 @@ if (!isset($_SESSION['juegoAdivinar'])) {
     $_SESSION['juegoAdivinar'] = $juegoAdivinar;
     $_SESSION['intentosPortada'] = [];
     // las vidas
-    $_SESSION['vidas'] = $vidas;
+    $_SESSION['vidasJuegos'] = $vidas;
 }
 $juegoAdivinar = $_SESSION['juegoAdivinar'];
 
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
 
                 // restar una vida en fallo
                 if ($j['id'] != $juegoAdivinar['id'])
-                    $_SESSION['vidas']--;
+                    $_SESSION['vidasJuegos']--;
                 break;
             }
         }
@@ -65,10 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
 $intentosPortada = $_SESSION['intentosPortada'];
 
 $gano = !empty($intentosPortada) && end($intentosPortada)['id'] == $juegoAdivinar['id'];
-$perdio = $_SESSION['vidas'] <= 0 && !$gano;
+$perdio = $_SESSION['vidasJuegos'] <= 0 && !$gano;
 
 //nivel de blur según vidas restantes a menos vidas más se ve la imagen
-$blur = $_SESSION['vidas'] * 5;
+$blur = $_SESSION['vidasJuegos'] * 5;
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +94,7 @@ $blur = $_SESSION['vidas'] * 5;
         <h1 class="text-center mb-4">Adivina el juego por la portada</h1>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
-            <?php for ($i = 0; $i < $_SESSION['vidas']; $i++): ?>
+            <?php for ($i = 0; $i < $_SESSION['vidasJuegos']; $i++): ?>
                 <img src="img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>

@@ -10,7 +10,7 @@ $vidas = 6;
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentos']);
     unset($_SESSION['pjAdivinar']);
-    $_SESSION['vidas'] = $vidas;
+    $_SESSION['vidasPersonajes'] = $vidas;
     header('Location: modo1.php');
     exit();
 }
@@ -28,7 +28,7 @@ if (!isset($_SESSION['pjAdivinar'])) {
     $_SESSION['pjAdivinar'] = $pjAdivinar;
     $_SESSION['intentos'] = [];
     // las vidas
-    $_SESSION['vidas'] = $vidas;
+    $_SESSION['vidasPersonajes'] = $vidas;
 }
 $pjAdivinar = $_SESSION['pjAdivinar'];
 
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 
                 // restar una vida en fallo
                 if ($p['id_personaje'] != $pjAdivinar['id_personaje'])
-                    $_SESSION['vidas']--;
+                    $_SESSION['vidasPersonajes']--;
                 break;
             }
         }
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 $intentos = $_SESSION['intentos'];
 
 $gano = !empty($intentos) && end($intentos)['id_personaje'] == $pjAdivinar['id_personaje'];
-$perdio = $_SESSION['vidas'] <= 0 && !$gano;
+$perdio = $_SESSION['vidasPersonajes'] <= 0 && !$gano;
 
 ?>
 
@@ -96,7 +96,7 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
         <div id="texto-vidas">
             <span>Vidas:</span>
             <?php
-            for ($i = 0; $i < $_SESSION['vidas']; $i++): ?>
+            for ($i = 0; $i < $_SESSION['vidasPersonajes']; $i++): ?>
                 <img src="img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
