@@ -1,8 +1,3 @@
-<meta property="og:title" content="Danmakudle">
-<meta property="og:description" content="Demuestra cuánto sabes de Touhou Project">
-<meta property="og:image" content="danmakudle-azaa.onrender.com/img/wriggle.jpg">
-<meta property="og:type" content="website">
-
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
     <div class="container-fluid px-4">
         <a class="navbar-brand" href="/index.php">
