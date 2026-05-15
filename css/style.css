@@ -7,6 +7,10 @@
     font-family: 'Danmakudle', monospace;
 }
 
+.container {
+    overflow-x: hidden;
+}
+
 .tabla-intentos
 {
     width:100%;

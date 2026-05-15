@@ -4,6 +4,11 @@
             <img src="img/danmakudle.png" alt="Danmakudle" height="20">
         </a>
 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+            aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <!-- los distintos elementos del header -->
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav me-auto">
@@ -26,7 +31,7 @@
                         <i class="bi bi-person-circle"></i>
                         <span>hola</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                         <li>
                             <a class="dropdown-item" href="/index.php">hola</a>
                         </li>
@@ -40,7 +45,7 @@
                 </li>
             </ul>
         </div>
-    
+
     </div>
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

@@ -98,7 +98,8 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
                 <img src="img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
-        <img src="img/pj/<?= $silAdivinar['imagen'] ?>" class="silueta" width=300 height=300>
+        <img src="img/pj/<?= $silAdivinar['imagen'] ?>" class="silueta img-fluid"
+            style="max-width: 300px; height: auto;">
 
         <?php if (!$gano && !$perdio): ?>
             <form method="POST">
@@ -114,37 +115,39 @@ $perdio = $_SESSION['vidas'] <= 0 && !$gano;
             </form>
         <?php endif; ?>
 
-        <table class="tabla-intentos">
-            <thead>
-                <tr>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach (array_reverse($intentosSil) as $i):
-                    // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
-                    $idIntento = $i['id_personaje'];
-                    $idSecreto = $silAdivinar['id_personaje'];
-
-                    // nombre
-                    $estadoNombre = estadoSimple($i, $silAdivinar, 'id_personaje');
-                    ?>
-
+        <div class="table-responsive w-100" style="max-width: 500px;">
+            <table class="tabla-intentos">
+                <thead>
                     <tr>
-                        <td class="<?= $estadoNombre ?>">
-                            <img src="img/pj/<?= $i['imagen'] ?>" width=100 height=100>
-                        </td>
-
-                        <td class="<?= $estadoNombre ?>">
-                            <?= $i['nombre'] ?>
-                        </td>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
                     </tr>
+                </thead>
+                <tbody>
+                    <?php foreach (array_reverse($intentosSil) as $i):
+                        // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
+                        $idIntento = $i['id_personaje'];
+                        $idSecreto = $silAdivinar['id_personaje'];
 
-                <?php endforeach; ?>
+                        // nombre
+                        $estadoNombre = estadoSimple($i, $silAdivinar, 'id_personaje');
+                        ?>
 
-            </tbody>
-        </table>
+                        <tr>
+                            <td class="<?= $estadoNombre ?>">
+                                <img src="img/pj/<?= $i['imagen'] ?>" class="img-fluid" style="max-width: 60px; height: auto;">
+                            </td>
+
+                            <td class="<?= $estadoNombre ?>">
+                                <?= $i['nombre'] ?>
+                            </td>
+                        </tr>
+
+                    <?php endforeach; ?>
+
+                </tbody>
+            </table>
+        </div>
     </main>
 
 
