@@ -45,4 +45,23 @@ function getJuegoAleatorio($conexion)
     return $conexion->query("SELECT * FROM juegos ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 }
 
+function existeUsername($conexion, $username, $idExcluir = null)
+{
+    if ($idExcluir) {
+        $stmt = $conexion->prepare("SELECT id_usuario FROM usuarios WHERE username = ? AND id_usuario != ?");
+        $stmt->execute([$username, $idExcluir]);
+    } else {
+        $stmt = $conexion->prepare("SELECT id_usuario FROM usuarios WHERE username = ?");
+        $stmt->execute([$username]);
+    }
+    
+    return $stmt->fetchColumn() ? true : false;
+}
+
+function insertarUsuario($conexion, $username, $email, $password, $rol, $avatar)
+{
+    $stmt = $conexion->prepare("INSERT INTO usuarios (username, email, password, rol, avatar) VALUES (?, ?, ?, ?, ?)");
+    return $stmt->execute([$username, $email, $password, $rol, $avatar]);
+}
+
 ?>

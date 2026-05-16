@@ -1,3 +1,13 @@
+<?php
+// comprobación de sesión activa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$logeado = isset($_SESSION['id_usuario']);
+$avatarUsuario = $_SESSION['avatar'] ?? 'default.png';
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
     <div class="container-fluid px-4">
         <a class="navbar-brand" href="/index.php">
@@ -22,23 +32,31 @@
             </ul>
 
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                        <i class="bi bi-person-circle"></i>
-                        <span>hola</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                        <li>
-                            <a class="dropdown-item" href="/index.php">hola</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/index.php">hola</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/index.php">hola</a>
-                        </li>
-                    </ul>
-                </li>
+                <?php if ($logeado): ?>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#"
+                            data-bs-toggle="dropdown">
+                            <img src="img/avatares/<?php echo htmlspecialchars($avatarUsuario); ?>" alt="Avatar"
+                                class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;">
+                            <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="/perfil.php"><i class="bi bi-person"></i> Mi Perfil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item text-danger" href="config/logout.php"><i
+                                        class="bi bi-box-arrow-left"></i> Cerrar sesión</a></li>
+                        </ul>
+                    </li>
+                <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="login.php">Iniciar sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-sm btn-danmaku text-white" href="registro.php">Registrarse</a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
 

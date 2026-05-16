@@ -21,8 +21,13 @@ body {
 /* para login, registro... */
 .card-log {
     background-color: #111 !important;
-    border-color: #444 !important;
+    border-color:#444 !important;
     color: #fff !important;
+
+    max-width: 500px;
+    width: 100%;
+    margin: 10px auto;
+    padding: 20px;
 }
 
 .card-log-header {
@@ -137,4 +142,18 @@ body {
 #vidas {
     display: flex;
     gap: 5px;
+}
+
+.btn-danmaku {
+    background-color: rgb(80, 5, 32);
+    border-color: rgb(20, 2, 8);
+    font-weight: bold;
+    color: white;
+}
+
+.btn-danmaku:hover {
+    background-color: rgb(179, 12, 73);
+    border-color: rgb(241, 191, 208);
+    font-weight: bold;
+    color: rgb(36, 2, 2);
 }

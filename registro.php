@@ -13,10 +13,10 @@
 
 <body class="d-flex flex-column min-vh-100">
     <?php include 'header.php'; ?>
-    <main class="container flex-grow-1">
+    <main class="container flex-grow-1 ">
         <div class="card-log">
-            <div class="card-log-header text-center">
-                <h5 class="mb-0">Crear cuenta</h5>
+            <div class="text-center">
+                <h5>Crear cuenta</h5>
             </div>
             <div class="card-log-body">
                 <?php if (isset($_GET['error'])): ?>
@@ -32,15 +32,6 @@
                     <div class="mb-3">
                         <label>Username</label>
                         <input type="text" class="form-control" name="username" id="username" placeholder="Tu username">
-                    </div>
-                    <div class="mb-3">
-                        <label>Nombre</label>
-                        <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Tu nombre">
-                    </div>
-                    <div class="mb-3">
-                        <label>Apellidos</label>
-                        <input type="text" class="form-control" name="apellidos" id="apellidos"
-                            placeholder="Tus apellidos">
                     </div>
                     <div class="mb-3">
                         <label>Correo electrónico</label>
@@ -60,7 +51,7 @@
                         <label>Avatar <small>(opcional)</small></label>
                         <input type="file" class="form-control" name="avatar" accept="image/*">
                     </div>
-                    <button class="btn btn-primary w-100" type="submit">
+                    <button class="btn btn-danmaku w-100" type="submit">
                         <i class="bi bi-person-plus"></i> Registrarse
                     </button>
                 </form>
