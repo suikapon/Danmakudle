@@ -7,9 +7,39 @@
     font-family: 'Danmakudle', monospace;
 }
 
+body {
+    background-image: url('../img/bg.jpg');
+    background-size: cover;
+
+    color:rgb(255, 255, 255);
+}
+
+.subtitulo {
+    color:rgb(173, 173, 173);
+}
+
+/* para login, registro... */
+.card-log {
+    background-color: #111 !important;
+    border-color: #444 !important;
+    color: #fff !important;
+}
+
+.card-log-header {
+    background-color: #ffffff !important;
+    border-bottom: 1px solid #333 !important;
+    color: #fff !important;
+}
+
+.card-log-footer {
+    background-color: #000 !important;
+    border-color: #444 !important;
+}
+
+
 .container {
     overflow-x: clip;
-    width:100%;
+    width: 100%;
 }
 
 .tabla-intentos {
@@ -65,9 +95,21 @@
     background: red;
 }
 
-/* animaciones */
+/* animaciones y color de las cartas*/
 .card {
     transition: transform 0.3s;
+
+    background-color: rgba(20, 20, 20, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+}
+
+.card h2 {
+    color: #ffffff;
+}
+
+.card .subtitulo {
+    color:rgb(170, 170, 170);
 }
 
 .card:hover {

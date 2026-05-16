@@ -19,7 +19,7 @@
         <div class="row mt-4 text-center">
             <div class="col">
                 <h1>Danmakudle</h1>
-                <p class="text-secondary">Demuestra cuánto sabes sobre el género Bullet Hell</p>
+                <p class="subtitulo">Demuestra cuánto sabes sobre el género Bullet Hell</p>
             </div>
         </div>
 
@@ -30,7 +30,7 @@
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/reimu.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina el personaje</h2>
-                        <p class="text-secondary">Adivina el nombre del personaje</p>
+                        <p class="subtitulo">Adivina el nombre del personaje</p>
                         <a href="modo1.php" class="boton stretched-link"></a>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/eosd.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina el videojuego</h2>
-                        <p class="text-secondary">Adivina el nombre del videojuego</p>
+                        <p class="subtitulo">Adivina el nombre del videojuego</p>
                         <a href="modo2.php" class="boton stretched-link"></a>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/silueta.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina la silueta</h2>
-                        <p class="text-secondary">Adivina el personaje de la silueta</p>
+                        <p class="subtitulo">Adivina el personaje de la silueta</p>
                         <a href="modo3.php" class="boton stretched-link"></a>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/temas.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina el tema</h2>
-                        <p class="text-secondary">Adivina el personaje por su tema</p>
+                        <p class="subtitulo">Adivina el personaje por su tema</p>
                         <a href="modo4.php" class="boton stretched-link"></a>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
                         <h2>Lista de juegos</h2>
-                        <p class="text-secondary">¡Información acerca de todos los juegos!</p>
+                        <p class="subtitulo">¡Información acerca de todos los juegos!</p>
                         <a href="listajuegos.php" class="boton stretched-link"></a>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
                         <h2>Lista de personajes</h2>
-                        <p class="text-secondary">¡Información acerca de todos los personajes!</p>
+                        <p class="subtitulo">¡Información acerca de todos los personajes!</p>
                         <a href="listapersonajes.php" class="boton stretched-link"></a>
                     </div>
                 </div>
