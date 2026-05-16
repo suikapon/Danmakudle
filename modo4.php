@@ -6,6 +6,7 @@ $vidas = 6;
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentosAudio']);
     unset($_SESSION['audioAdivinar']);
+    unset($_SESSION['audioOffset']);
     $_SESSION['vidasAudio'] = $vidas;
     header('Location: modo4.php');
     exit();
@@ -65,6 +66,10 @@ $gano = !empty($intentosAudio) && end($intentosAudio)['id_personaje'] == $audioA
 $perdio = $_SESSION['vidasAudio'] <= 0 && !$gano;
 
 // rutas audios
+
+// guardar el offset para que no cambie al recargar
+if (!isset($_SESSION['audioOffset']))
+    $_SESSION['audioOffset'] = null; // el javascript da un offset la primera vez
 ?>
 
 <!DOCTYPE html>
@@ -98,11 +103,10 @@ $perdio = $_SESSION['vidasAudio'] <= 0 && !$gano;
 
         <!-- audio !-->
         <div class="audio">
-            <audio controls>
-                <source src="media/audio/<?= $audioAdivinar['audio'] ?>">
-            </audio>
+            <button onclick="reproducir()">Reproducir</button>
+            <button onclick="parar()">Parar</button>
         </div>
-
+        </br>
         <?php if (!$gano && !$perdio): ?>
             <form method="POST">
                 <div style="position:relative; display:inline-block">
@@ -170,6 +174,69 @@ $perdio = $_SESSION['vidasAudio'] <= 0 && !$gano;
         const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
     <script src="js/buscador.js"></script>
+    <script>
+        // ruta del audio del personaje a adivinar
+        const audioSrc='media/audio/<?= $audioAdivinar['audio']?>';
+        
+        //motor de audio del navegador
+        const audioCtx = new AudioContext();
+        // el audio cargado y decodificado 
+        let buffer = null;
+        // la fuente de audio que está sonando ahora
+        let source = null;
+        // el segundo por el que empieza el audio
+        let startOffset = null;
+
+        // offset guardado en sesión por php, si no hay por ser la primera vez que carga hacerlo nulo
+        const audioOffset = <?= $_SESSION['audioOffset'] ?? 'null' ?>;
+
+        // cargar el archivo de audio
+        fetch(audioSrc)
+            .then(res => res.arrayBuffer())
+            .then(data => audioCtx.decodeAudioData(data))
+            .then(decoded =>
+            {
+                // guardar el audio decodificado
+                buffer = decoded;
+                if (audioOffset===null)
+                {
+                    // calcular el maximo segundo desde donde pueda empezar
+                    // restando 5 para que quepan 5 segundos antes del final
+                    const maxStart = Math.max(0, buffer.duration-5);
+                    startOffset = Math.random() * maxStart;
+                    
+                    //guardarlo en la sesión php para que persista
+                    fetch('guardarOffset.php?offset='+startOffset);
+                } else
+                    startOffset = audioOffset;
+            });
+
+        function reproducir()
+        {
+            // si no hay audio cargado no hacer nada
+            if (!buffer) return;
+
+            // si hay algo reproduciendose parar el anterior antes de empezar
+            // (sino empiezan a sonar muchos a la vez)
+            if (source) {source.stop(); source = null;}
+
+            // crear una nueva fuente de audio a partir del buffer
+            source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+
+            // conectar la fuente a los altavoces
+            source.connect(audioCtx.destination);
+
+            // empieza a sonar ahora (el 0) desde el offset calculado durante 5 segundos
+            source.start(0,startOffset,5);
+        }
+
+        function parar()
+        {
+            // si hay algo sonando detenerlo
+            if (source) {source.stop(); source = null;}
+        }
+    </script>
 </body>
 
 </html>
