@@ -26,9 +26,16 @@ if (!isset($_SESSION['juegoAdivinar'])) {
     $juegoAdivinar = getJuegoAleatorio($conn);
     $_SESSION['juegoAdivinar'] = $juegoAdivinar;
     $_SESSION['intentosPortada'] = [];
-    // las vidas
     $_SESSION['vidasJuegos'] = $vidas;
 }
+
+if (!isset($_SESSION['intentosPortada'])) {
+    $_SESSION['intentosPortada'] = [];
+}
+if (!isset($_SESSION['vidasJuegos'])) {
+    $_SESSION['vidasJuegos'] = $vidas;
+}
+
 $juegoAdivinar = $_SESSION['juegoAdivinar'];
 
 // preparar nombres y la imagen de cada juego para pasárselo al javascript
@@ -100,14 +107,14 @@ $blur = $_SESSION['vidasJuegos'] * 5;
         </div>
 
         <!--portada con blur desaparece al ganar o perder -->
-        <img src="img/juegos/<?=$juegoAdivinar['imagen']?>" class="portada"
-        style="filter: blur(<?= ($gano||$perdio) ? 0 : $blur ?>px)"
-        width=300 height=300>
+        <img src="img/juegos/<?= $juegoAdivinar['imagen'] ?>" class="portada"
+            style="filter: blur(<?= ($gano || $perdio) ? 0 : $blur ?>px)" width=300 height=300>
 
         <?php if (!$gano && !$perdio): ?>
             <form method="POST">
                 <div style="position:relative; display:inline-block">
-                    <input type="text" id="searchInput" placeholder="Escribe un título/versión" autocomplete="off" style="width:300px">
+                    <input type="text" id="searchInput" placeholder="Escribe un título/versión" autocomplete="off"
+                        style="width:300px">
                     <div id="dropdown"
                         style="border:1px solid #ccc; max-height:200px; overflow-y:auto; display:none; position:absolute; width:100%; z-index:999; background:white;">
                     </div>
@@ -135,7 +142,7 @@ $blur = $_SESSION['vidasJuegos'] * 5;
                     $estadoNombre = estadoSimple($i, $juegoAdivinar, 'id');
 
                     // año
-                    $resultadoAño = compararValor((int)$i['año'], (int)$juegoAdivinar['año']);
+                    $resultadoAño = compararValor((int) $i['año'], (int) $juegoAdivinar['año']);
                     $estadoAño = ($resultadoAño == 'verde') ? 'verde' : 'rojo';
 
                     // tipo
@@ -175,4 +182,5 @@ $blur = $_SESSION['vidasJuegos'] * 5;
     </script>
     <script src="js/buscadorJuegos.js"></script>
 </body>
+
 </html>

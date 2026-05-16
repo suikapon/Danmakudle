@@ -30,6 +30,14 @@ if (!isset($_SESSION['pjAdivinar'])) {
     // las vidas
     $_SESSION['vidasPersonajes'] = $vidas;
 }
+
+if (!isset($_SESSION['intentos'])) {
+    $_SESSION['intentos'] = [];
+}
+if (!isset($_SESSION['vidas'])) {
+    $_SESSION['vidas'] = $vidas;
+}
+
 $pjAdivinar = $_SESSION['pjAdivinar'];
 
 // preparar nombres y la imagen de cada personaje para pasárselo al javascript

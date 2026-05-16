@@ -26,6 +26,14 @@ if (!isset($_SESSION['audioAdivinar'])) {
     $_SESSION['intentosAudio'] = [];
     $_SESSION['vidasAudio'] = $vidas;
 }
+
+if (!isset($_SESSION['intentosAudio'])) {
+    $_SESSION['intentosAudio'] = [];
+}
+if (!isset($_SESSION['vidasAudio'])) {
+    $_SESSION['vidasAudio'] = $vidas;
+}
+
 $audioAdivinar = $_SESSION['audioAdivinar'];
 
 // preparar nombres y la imagen de cada personaje para pasárselo al javascript
