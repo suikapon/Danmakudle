@@ -4,7 +4,7 @@ require_once 'consultas.php';
 
 $username = $_POST['username'];
 $email = $_POST['email'];
-$password = hash('sha256',$_POST['pass']);
+$password = hash('sha256',$_POST['password']);
 // imagen predeterminada
 $avatar = 'https://res.cloudinary.com/dv8vqn76n/image/upload/v1779032144/wriggle_lqaaby.jpg';
 
