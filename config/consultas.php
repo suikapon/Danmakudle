@@ -70,4 +70,22 @@ function crearEstadisticas($conexion, $id_usuario)
     return $stmt->execute([$id_usuario]);
 }
 
+function actualizarEstadisticas($conexion, $id_usuario, $gano)
+{
+    $stmt = $conexion->prepare("SELECT * FROM estadisticas_usuario WHERE id_usuario = ?");
+    $stmt->execute([$id_usuario]);
+    $stats = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    // se va sumando
+    $partidas_jugadas = $stats['partidas_jugadas'] + 1;
+    $partidas_ganadas = $stats['partidas_ganadas'] + ($gano ? 1 : 0);
+    // si no se gana una partida se reinicia el contador de racha a 0
+    $racha_actual = $gano ? $stats['racha_actual'] + 1 : 0;
+    $racha_max = max($racha_actual, $stats['racha_max']);
+    $puntos = $stats['puntos'] + ($gano ? 10 : 0);
+
+    $stmt = $conexion->prepare("UPDATE estadisticas_usuario SET partidas_jugadas=?, partidas_ganadas=?, racha_actual=?, racha_max=?, puntos=? WHERE id_usuario=?");
+    return $stmt->execute([$partidas_jugadas, $partidas_ganadas, $racha_actual, $racha_max, $puntos, $id_usuario]);
+}
+
 ?>

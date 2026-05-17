@@ -10,6 +10,7 @@ $vidas = 6;
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentos']);
     unset($_SESSION['pjAdivinar']);
+    unset($_SESSION['partidaContada']);
     $_SESSION['vidasPersonajes'] = $vidas;
     header('Location: modo1.php');
     exit();
@@ -76,6 +77,13 @@ $intentos = $_SESSION['intentos'];
 $gano = !empty($intentos) && end($intentos)['id_personaje'] == $pjAdivinar['id_personaje'];
 $perdio = $_SESSION['vidasPersonajes'] <= 0 && !$gano;
 
+if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['partidaContada']))
+{
+    actualizarEstadisticas($conn,$_SESSION['id_usuario'],$gano);
+    // para que no se vuelva a sumar la misma partida
+    $_SESSION['partidaContada']=true;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -99,7 +107,7 @@ $perdio = $_SESSION['vidasPersonajes'] <= 0 && !$gano;
 
         <!--botones para reiniciar intentos y el personaje-->
         <a href="?reset=todo">cambiar personaje</a>
-
+        <p>personaje a adivinar (para pruebas) <?= $pjAdivinar['nombre']?></p>
         <h1>Adivina el personaje</h1>
         <div id="texto-vidas">
             <span>Vidas:</span>
