@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $logeado = isset($_SESSION['id_usuario']);
-$avatarUsuario = $_SESSION['avatar'] ?? 'default.png';
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
@@ -36,7 +35,7 @@ $avatarUsuario = $_SESSION['avatar'] ?? 'default.png';
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#"
                             data-bs-toggle="dropdown">
-                            <img src="img/avatares/<?php echo htmlspecialchars($avatarUsuario); ?>" alt="Avatar"
+                            <img src="<?= $_SESSION['avatar'] ?>" alt="Avatar"
                                 class="rounded-circle" style="width: 24px; height: 24px; object-fit: cover;">
                             <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                         </a>
