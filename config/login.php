@@ -2,7 +2,7 @@
 require_once 'config.php';
 
 $email = $_POST['email'];
-$password = $_POST['password'];
+$password = $password = hash('sha256',$_POST['password']);
 $recordar = isset($_POST['recordar']);
 
 $stmt = $conn->prepare("SELECT * FROM usuarios WHERE email = ? AND password = ?");
