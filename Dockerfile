@@ -9,6 +9,8 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 RUN a2enmod rewrite
 
 COPY . /var/www/html
+RUN mkdir -p /var/www/html/img/avatares
+RUN chown -R www-data:www-data /var/www/html/img/avatares && chmod -R 755 /var/www/html/img/avatares
 
 EXPOSE 80
 CMD ["apache2-foreground"]
