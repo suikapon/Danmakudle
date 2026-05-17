@@ -3,31 +3,7 @@ session_start();
 //session_destroy();
 
 // configurar dificultad
-$dificultad = isset($_GET['diff']) ? $_GET['diff'] : 'normal';
-
-switch ($dificultad) {
-    case 'facil':
-        $vidas = 8;
-        $desde = 1;
-        $hasta = 10;
-        break;
-    case 'normal':
-        $vidas = 7;
-        $desde = 1;
-        $hasta = 15;
-        break;
-    case 'dificil':
-        $vidas = 6;
-        $desde = 1;
-        $hasta = 20;
-        break;
-    default:
-        $dificultad = 'normal';
-        $vidas = 7;
-        $desde = 1;
-        $hasta = 15;
-        break;
-}
+require_once 'config/dificultad.php';
 
 // reiniciar los intentos y el personaje para pruebas por ahora
 if (isset($_GET['reset'])) {
@@ -131,12 +107,7 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
         <a href="?diff=<?= $dificultad ?>&reset=todo">cambiar personaje</a>
         <p>personaje a adivinar (para pruebas) <?= $pjAdivinar['nombre'] ?></p>
         <h1>Adivina el personaje</h1>
-        <div style="margin-bottom: 15px;">
-            <a href="?diff=facil&reset=1" style="margin-right: 10px;">Fácil</a>
-            <a href="?diff=normal&reset=1" style="margin-right: 10px;">Normal</a>
-            <a href="?diff=dificil&reset=1">Difícil</a>
-        </div>
-        <p>Modo actual: <?= $dificultad?></p>
+        <?php botonesDificultad($dificultad);?>
         <div id="texto-vidas">
             <span>Vidas:</span>
             <?php

@@ -1,16 +1,16 @@
 <?php
 
-function getPersonajes($conexion) 
+function getPersonajes($conexion)
 {
     return $conexion->query("SELECT * FROM personajes")->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getPersonajesXDebut($conexion, $desde, $hasta) 
+function getPersonajesXDebut($conexion, $desde, $hasta)
 {
     return $conexion->query("SELECT * FROM personajes WHERE debut BETWEEN $desde AND $hasta")->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getPersonajesConTemas($conexion) 
+function getPersonajesConTemas($conexion)
 {
     return $conexion->query("SELECT * FROM personajes WHERE audio IS NOT null")->fetchAll(PDO::FETCH_ASSOC);
 }
@@ -55,6 +55,16 @@ function getJuegoAleatorio($conexion)
     return $conexion->query("SELECT * FROM juegos ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 }
 
+function getJuegosXDebut($conexion, $desde, $hasta)
+{
+    return $conexion->query("SELECT * FROM juegos WHERE id BETWEEN $desde AND $hasta")->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getJuegoAleatorioXDebut($conexion, $desde, $hasta)
+{
+    return $conexion->query("SELECT * FROM juegos WHERE id BETWEEN $desde AND $hasta ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+}
+
 function existeUsername($conexion, $username, $idExcluir = null)
 {
     if ($idExcluir) {
@@ -64,7 +74,7 @@ function existeUsername($conexion, $username, $idExcluir = null)
         $stmt = $conexion->prepare("SELECT id_usuario FROM usuarios WHERE username = ?");
         $stmt->execute([$username]);
     }
-    
+
     return $stmt->fetchColumn() ? true : false;
 }
 

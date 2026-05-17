@@ -1,16 +1,16 @@
 <?php
 session_start();
+require_once 'config/dificultad.php';
 //session_destroy();
 
 // variable para tener control de cuantas vidas se quieren
 // elegir al principio de una partida en vez de poner el número
-$vidas = 6;
 
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentosPortada']);
     unset($_SESSION['juegoAdivinar']);
     $_SESSION['vidasJuegos'] = $vidas;
-    header('Location: modo2.php');
+    header('Location: modo2.php?diff=' . $dificultad);
     exit();
 }
 
@@ -19,11 +19,11 @@ require_once 'config/consultas.php';
 require_once 'config/funciones.php';
 
 // cargamos todos los juegos de la base de datos
-$juegos = getJuegos($conn);
+$juegos = getJuegosXDebut($conn, $desde, $hasta);
 
 // guardamos en la sesión el juego a adivinar para que no se resetee
 if (!isset($_SESSION['juegoAdivinar'])) {
-    $juegoAdivinar = getJuegoAleatorio($conn);
+    $juegoAdivinar = getJuegoAleatorioXDebut($conn, $desde, $hasta);
     $_SESSION['juegoAdivinar'] = $juegoAdivinar;
     $_SESSION['intentosPortada'] = [];
     $_SESSION['vidasJuegos'] = $vidas;
@@ -96,9 +96,10 @@ $blur = $_SESSION['vidasJuegos'] * 5;
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
         <!--botones para reiniciar intentos y el juego-->
-        <a class="text-center mb-4" href="?reset=todo">cambiar juego</a>
+        <a class="text-center mb-4" href="?diff=<?= $dificultad ?>&reset=todo">cambiar juego</a>
 
         <h1 class="text-center mb-4">Adivina el juego por la portada</h1>
+        <?php botonesDificultad($dificultad);?>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
             <?php for ($i = 0; $i < $_SESSION['vidasJuegos']; $i++): ?>
