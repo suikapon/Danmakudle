@@ -2,9 +2,32 @@
 session_start();
 //session_destroy();
 
-// variable para tener control de cuantas vidas se quieren
-// elegir al principio de una partida en vez de poner el número
-$vidas = 6;
+// configurar dificultad
+$dificultad = isset($_GET['diff']) ? $_GET['diff'] : 'normal';
+
+switch ($dificultad) {
+    case 'facil':
+        $vidas = 8;
+        $desde = 1;
+        $hasta = 10;
+        break;
+    case 'normal':
+        $vidas = 7;
+        $desde = 1;
+        $hasta = 15;
+        break;
+    case 'dificil':
+        $vidas = 6;
+        $desde = 1;
+        $hasta = 20;
+        break;
+    default:
+        $dificultad = 'normal';
+        $vidas = 7;
+        $desde = 1;
+        $hasta = 15;
+        break;
+}
 
 // reiniciar los intentos y el personaje para pruebas por ahora
 if (isset($_GET['reset'])) {
@@ -12,7 +35,7 @@ if (isset($_GET['reset'])) {
     unset($_SESSION['pjAdivinar']);
     unset($_SESSION['partidaContada']);
     $_SESSION['vidasPersonajes'] = $vidas;
-    header('Location: modo1.php');
+    header('Location: modo1.php?diff=' . $dificultad);
     exit();
 }
 
@@ -20,12 +43,12 @@ require_once 'config/config.php';
 require_once 'config/consultas.php';
 require_once 'config/funciones.php';
 
-// cargamos todos los personajes de la base de datos
-$personajes = getPersonajes($conn);
+// cargamos los personajes de la base de datos dependiendo de la dificultad
+$personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
 // guardamos en la sesión el personaje a adivinar para que no se resetee
 if (!isset($_SESSION['pjAdivinar'])) {
-    $pjAdivinar = getPersonajeAleatorio(($conn));
+    $pjAdivinar = getPersonajeAleatorioXDebut($conn, $desde, $hasta);
     $_SESSION['pjAdivinar'] = $pjAdivinar;
     $_SESSION['intentos'] = [];
     // las vidas
@@ -77,11 +100,10 @@ $intentos = $_SESSION['intentos'];
 $gano = !empty($intentos) && end($intentos)['id_personaje'] == $pjAdivinar['id_personaje'];
 $perdio = $_SESSION['vidasPersonajes'] <= 0 && !$gano;
 
-if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['partidaContada']))
-{
-    actualizarEstadisticas($conn,$_SESSION['id_usuario'],$gano);
+if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['partidaContada'])) {
+    actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano);
     // para que no se vuelva a sumar la misma partida
-    $_SESSION['partidaContada']=true;
+    $_SESSION['partidaContada'] = true;
 }
 
 ?>
@@ -106,9 +128,15 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
 
 
         <!--botones para reiniciar intentos y el personaje-->
-        <a href="?reset=todo">cambiar personaje</a>
-        <p>personaje a adivinar (para pruebas) <?= $pjAdivinar['nombre']?></p>
+        <a href="?diff=<?= $dificultad ?>&reset=todo">cambiar personaje</a>
+        <p>personaje a adivinar (para pruebas) <?= $pjAdivinar['nombre'] ?></p>
         <h1>Adivina el personaje</h1>
+        <div style="margin-bottom: 15px;">
+            <a href="?diff=facil&reset=1" style="margin-right: 10px;">Fácil</a>
+            <a href="?diff=normal&reset=1" style="margin-right: 10px;">Normal</a>
+            <a href="?diff=dificil&reset=1">Difícil</a>
+        </div>
+        <p>Modo actual: <?= $dificultad?></p>
         <div id="texto-vidas">
             <span>Vidas:</span>
             <?php
