@@ -91,6 +91,17 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-4 mt-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column text-center">
+                        <img src="img/017.png" class="card-img-top mx-auto mt-6">
+                        <h2>Modo Extra</h2>
+                        <p class="subtitulo">???</p>
+                        <a href="modoExtra.php" class="boton stretched-link"></a>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </main>
