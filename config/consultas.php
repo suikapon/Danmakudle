@@ -64,4 +64,10 @@ function insertarUsuario($conexion, $username, $email, $password, $rol, $avatar)
     return $stmt->execute([$username, $email, $password, $rol, $avatar]);
 }
 
+function crearEstadisticas($conexion, $id_usuario)
+{
+    $stmt = $conexion->prepare("INSERT INTO estadisticas_usuario (id_usuario, partidas_jugadas, partidas_ganadas, racha_actual, racha_max, puntos) VALUES (?, 0, 0, 0, 0, 0)");
+    return $stmt->execute([$id_usuario]);
+}
+
 ?>

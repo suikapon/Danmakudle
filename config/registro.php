@@ -23,5 +23,9 @@ if (isset($_FILES['avatar']) && $_FILES['avatar']['size'] > 0) {
 }
 
 insertarUsuario($conn, $username, $email, $password, 'normal', $avatar);
+
+$id = $conn->lastInsertId();
+crearEstadisticas($conn, $id);
+
 header('Location: ../login.php?registro=1');
 exit;

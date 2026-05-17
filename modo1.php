@@ -34,8 +34,8 @@ if (!isset($_SESSION['pjAdivinar'])) {
 if (!isset($_SESSION['intentos'])) {
     $_SESSION['intentos'] = [];
 }
-if (!isset($_SESSION['vidas'])) {
-    $_SESSION['vidas'] = $vidas;
+if (!isset($_SESSION['vidasPersonajes'])) {
+    $_SESSION['vidasPersonajes'] = $vidas;
 }
 
 $pjAdivinar = $_SESSION['pjAdivinar'];
