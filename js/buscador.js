@@ -33,6 +33,7 @@ input.addEventListener('input', function()
 
             // texto del nombre
             const span = document.createElement('span');
+            span.classList.add('texto-buscador');
             span.textContent = datos[i].nombre;
 
             // cuando se coloca el cursor sobre una opción se convierte en un puntero
