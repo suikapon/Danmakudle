@@ -26,7 +26,7 @@ $logeado = isset($_SESSION['id_usuario']);
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/rankings.php">Rankings</a>
+                    <a class="nav-link" href="rankings.php">Rankings</a>
                 </li>
             </ul>
 
