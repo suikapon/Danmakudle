@@ -10,7 +10,7 @@ if (isset($_GET['reset'])) {
     unset($_SESSION['intentosPortada']);
     unset($_SESSION['juegoAdivinar']);
     $_SESSION['vidasJuegos'] = $vidas;
-    header('Location: modo2.php?diff=' . $dificultad);
+    header('Location: modoPortadas.php?diff=' . $dificultad);
     exit();
 }
 
