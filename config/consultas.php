@@ -108,4 +108,15 @@ function actualizarEstadisticas($conexion, $id_usuario, $gano)
     return $stmt->execute([$partidas_jugadas, $partidas_ganadas, $racha_actual, $racha_max, $puntos, $id_usuario]);
 }
 
+function getRanking($conn, $orden)
+{
+    $stmt = $conn->prepare("
+        SELECT u.username, u.avatar, e.puntos, e.racha_actual, e.partidas_jugadas, e.partidas_ganadas, e.racha_max
+        FROM estadisticas_usuario e
+        JOIN usuarios u ON e.id_usuario = u.id_usuario
+        ORDER BY e.$orden DESC
+        LIMIT 50");
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>

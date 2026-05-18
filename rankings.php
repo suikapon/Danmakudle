@@ -8,14 +8,7 @@ $filtros = ['puntos', 'partidas_ganadas','racha_actual', 'racha_max', 'partidas_
 // por defecto se selecciona puntos
 $orden = isset($_GET['orden']) && in_array($_GET['orden'], $filtros) ? $_GET['orden']:'puntos';
 
-$stmt = $conn->prepare("
-    SELECT u.username, u.avatar, e.puntos, e.racha_actual, e.partidas_jugadas, e.partidas_ganadas, e.racha_max
-    FROM estadisticas_usuario e
-    JOIN usuarios u ON e.id_usuario = u.id_usuario
-    ORDER BY e.$orden DESC
-    LIMIT 50");
-$stmt->execute();
-$ranking = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$ranking = getRanking($conn,$orden);
 ?>
 
 <!DOCTYPE html>
