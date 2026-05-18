@@ -37,4 +37,10 @@ function estadoEspecie($intento, $secreto)
     return 'rojo';
 }
 
+function revelarPersonaje($secreto)
+{
+    echo
+    '<p>'.$secreto['nombre'].'</p>';
+}
+
 ?>

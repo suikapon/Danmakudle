@@ -129,6 +129,11 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
             </form>
         <?php endif; ?>
 
+        <?php if ($perdio):
+            revelarPersonaje($pjAdivinar);
+        endif;
+        ?>
+
         <table class="tabla-intentos">
             <thead>
                 <tr>
