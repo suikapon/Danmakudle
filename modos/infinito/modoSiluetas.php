@@ -106,7 +106,7 @@ $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
                 <img src="../../img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
-        <img src="../../img/pj/<?= $silAdivinar['imagen'] ?>" class="silueta img-fluid"
+        <img src="../../img/pj/<?= $silAdivinar['imagen'] ?>" class="<?= ($gano||$perdio) ? '' : 'silueta' ?> img-fluid"
             style="max-width: 300px; height: auto;">
 
         <?php if (!$gano && !$perdio): ?>
@@ -122,6 +122,11 @@ $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
                 <button type="submit">Adivinar</button>
             </form>
         <?php endif; ?>
+        
+        <?php if ($perdio):
+            revelarPersonaje($silAdivinar);
+        endif;
+        ?>
 
         <div class="table-responsive w-100" style="max-width: 500px;">
             <table class="tabla-intentos">
