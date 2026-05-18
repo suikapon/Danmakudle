@@ -32,7 +32,7 @@
                         <img src="img/reimu.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina el personaje</h2>
                         <p class="subtitulo">Adivina el nombre del personaje</p>
-                        <a href="modo1.php" class="boton stretched-link"></a>
+                        <a href="modos/infinito/modoClasico.php" class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                         <img src="img/eosd.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina el videojuego</h2>
                         <p class="subtitulo">Adivina el nombre del videojuego</p>
-                        <a href="modo2.php" class="boton stretched-link"></a>
+                        <a href="modos/infinito/modoPortadas.php" class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         <img src="img/silueta.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina la silueta</h2>
                         <p class="subtitulo">Adivina el personaje de la silueta</p>
-                        <a href="modo3.php" class="boton stretched-link"></a>
+                        <a href="modoSiluetas.php" class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                         <img src="img/temas.png" class="card-img-top mx-auto mt-6">
                         <h2>Adivina el tema</h2>
                         <p class="subtitulo">Adivina el personaje por su tema</p>
-                        <a href="modo4.php" class="boton stretched-link"></a>
+                        <a href="modoTemas.php" class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>

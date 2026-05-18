@@ -3,7 +3,7 @@ session_start();
 //session_destroy();
 
 // configurar dificultad
-require_once 'config/dificultad.php';
+require_once '../../config/dificultad.php';
 
 // reiniciar los intentos y el personaje para pruebas por ahora
 if (isset($_GET['reset'])) {
@@ -15,9 +15,9 @@ if (isset($_GET['reset'])) {
     exit();
 }
 
-require_once 'config/config.php';
-require_once 'config/consultas.php';
-require_once 'config/funciones.php';
+require_once '../../config/config.php';
+require_once '../../config/consultas.php';
+require_once '../../config/funciones.php';
 
 // cargamos los personajes de la base de datos dependiendo de la dificultad
 $personajes = getPersonajesXDebut($conn, $desde, $hasta);
@@ -94,11 +94,11 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <?php include 'header.php'; ?>
+    <?php include '../../header.php'; ?>
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
 
@@ -112,7 +112,7 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
             <span>Vidas:</span>
             <?php
             for ($i = 0; $i < $_SESSION['vidasPersonajes']; $i++): ?>
-                <img src="img/stars/vida.png" width="20" height="20">
+                <img src="../../img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
         <?php if (!$gano && !$perdio): ?>
@@ -216,7 +216,7 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
     <script>
         const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
-    <script src="js/buscador.js"></script>
+    <script src="../../js/buscador.js"></script>
 </body>
 
 </html>
