@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'config/dificultad.php';
+require_once '../../config/dificultad.php';
 //session_destroy();
 
 // variable para tener control de cuantas vidas se quieren
@@ -14,9 +14,9 @@ if (isset($_GET['reset'])) {
     exit();
 }
 
-require_once 'config/config.php';
-require_once 'config/consultas.php';
-require_once 'config/funciones.php';
+require_once '../../config/config.php';
+require_once '../../config/consultas.php';
+require_once '../../config/funciones.php';
 
 // cargamos todos los juegos de la base de datos
 $juegos = getJuegosXDebut($conn, $desde, $hasta);
@@ -88,11 +88,11 @@ $blur = $_SESSION['vidasJuegos'] * 5;
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <?php include 'header.php'; ?>
+    <?php include '../../header.php'; ?>
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
         <!--botones para reiniciar intentos y el juego-->
@@ -103,12 +103,12 @@ $blur = $_SESSION['vidasJuegos'] * 5;
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
             <?php for ($i = 0; $i < $_SESSION['vidasJuegos']; $i++): ?>
-                <img src="img/stars/vida.png" width="20" height="20">
+                <img src="../../img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
 
         <!--portada con blur desaparece al ganar o perder -->
-        <img src="img/juegos/<?= $juegoAdivinar['imagen'] ?>" class="portada"
+        <img src="../../img/juegos/<?= $juegoAdivinar['imagen'] ?>" class="portada"
             style="filter: blur(<?= ($gano || $perdio) ? 0 : $blur ?>px)" width=300 height=300>
 
         <?php if (!$gano && !$perdio): ?>
@@ -154,7 +154,7 @@ $blur = $_SESSION['vidasJuegos'] * 5;
                     ?>
                     <tr>
                         <td class="<?= $estadoNombre ?>">
-                            <img src="img/juegos/<?= $i['imagen'] ?>" width=100 height=100>
+                            <img src="../../img/juegos/<?= $i['imagen'] ?>" width=100 height=100>
                         </td>
                         <td class="<?= $estadoNombre ?>">
                             Touhou <?= $i['id'] ?>
@@ -181,7 +181,7 @@ $blur = $_SESSION['vidasJuegos'] * 5;
     <script>
         const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
-    <script src="js/buscadorJuegos.js"></script>
+    <script src="../../js/buscadorJuegos.js"></script>
 </body>
 
 </html>

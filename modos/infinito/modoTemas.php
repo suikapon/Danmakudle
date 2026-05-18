@@ -12,9 +12,9 @@ if (isset($_GET['reset'])) {
     exit();
 }
 
-require_once 'config/config.php';
-require_once 'config/consultas.php';
-require_once 'config/funciones.php';
+require_once '../../config/config.php';
+require_once '../../config/consultas.php';
+require_once '../../config/funciones.php';
 
 // cargamos todos los personajes de la base de datos
 $personajes = getPersonajes($conn);
@@ -90,11 +90,11 @@ if (!isset($_SESSION['audioOffset']))
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    <?php include 'header.php'; ?>
+    <?php include '../../header.php'; ?>
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
         <!--botones para reiniciar intentos y el personaje-->
@@ -105,7 +105,7 @@ if (!isset($_SESSION['audioOffset']))
             <span>Vidas:</span>
             <?php
             for ($i = 0; $i < $_SESSION['vidasAudio']; $i++): ?>
-                <img src="img/stars/vida.png" width="20" height="20">
+                <img src="../../img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
 
@@ -153,7 +153,7 @@ if (!isset($_SESSION['audioOffset']))
 
                     <tr>
                         <td class="<?= $estadoNombre ?>">
-                            <img src="img/pj/<?= $i['imagen'] ?>" width=100 height=100>
+                            <img src="../../img/pj/<?= $i['imagen'] ?>" width=100 height=100>
                         </td>
 
                         <td class="<?= $estadoNombre ?>">
@@ -181,10 +181,10 @@ if (!isset($_SESSION['audioOffset']))
     <script>
         const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
-    <script src="js/buscador.js"></script>
+    <script src="../../js/buscador.js"></script>
     <script>
         // ruta del audio del personaje a adivinar
-        const audioSrc='media/audio/<?= $audioAdivinar['audio']?>';
+        const audioSrc='../../media/audio/<?= $audioAdivinar['audio']?>';
         
         //motor de audio del navegador
         const audioCtx = new AudioContext();
@@ -214,7 +214,7 @@ if (!isset($_SESSION['audioOffset']))
                     startOffset = Math.random() * maxStart;
                     
                     //guardarlo en la sesión php para que persista
-                    fetch('guardarOffset.php?offset='+startOffset);
+                    fetch('../../guardarOffset.php?offset='+startOffset);
                 } else
                     startOffset = audioOffset;
             });
