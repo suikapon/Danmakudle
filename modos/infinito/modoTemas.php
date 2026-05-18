@@ -111,8 +111,8 @@ if (!isset($_SESSION['audioOffset']))
 
         <!-- audio !-->
         <div class="audio">
-            <button onclick="reproducir()">Reproducir</button>
-            <button onclick="parar()">Parar</button>
+            <button onclick="reproducir()" class="btn btn-danmaku">Reproducir</button>
+            <button onclick="parar()" class="btn btn-danmaku">Parar</button>
         </div>
         </br>
         <?php if (!$gano && !$perdio): ?>
