@@ -11,7 +11,7 @@ if (isset($_GET['reset'])) {
     unset($_SESSION['intentosSil']);
     unset($_SESSION['silAdivinar']);
     $_SESSION['vidasSil'] = $vidas;
-    header('Location: modo3.php');
+    header('Location: modoSiluetas.php');
     exit();
 }
 

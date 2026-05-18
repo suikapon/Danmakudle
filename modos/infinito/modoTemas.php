@@ -8,7 +8,7 @@ if (isset($_GET['reset'])) {
     unset($_SESSION['audioAdivinar']);
     unset($_SESSION['audioOffset']);
     $_SESSION['vidasAudio'] = $vidas;
-    header('Location: modo4.php');
+    header('Location: modoTemas.php');
     exit();
 }
 
