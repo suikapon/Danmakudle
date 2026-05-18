@@ -10,7 +10,7 @@ $logeado = isset($_SESSION['id_usuario']);
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000;">
     <div class="container-fluid px-4">
         <a class="navbar-brand" href="/index.php">
-            <img src="img/danmakudle.png" alt="Danmakudle" height="20">
+            <img src="/img/danmakudle.png" alt="Danmakudle" height="20">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"

@@ -11,7 +11,7 @@ if (isset($_GET['reset'])) {
     unset($_SESSION['pjAdivinar']);
     unset($_SESSION['partidaContada']);
     $_SESSION['vidasPersonajes'] = $vidas;
-    header('Location: modo1.php?diff=' . $dificultad);
+    header('Location: modoClasico.php?diff=' . $dificultad);
     exit();
 }
 
@@ -173,7 +173,7 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
 
                     <tr>
                         <td class="<?= $estadoNombre ?>">
-                            <img src="img/pj/<?= $i['imagen'] ?>" width=100 height=100>
+                            <img src="../../img/pj/<?= $i['imagen'] ?>" width=100 height=100>
                         </td>
 
                         <td class="<?= $estadoNombre ?>">

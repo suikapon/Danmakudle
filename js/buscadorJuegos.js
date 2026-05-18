@@ -29,7 +29,7 @@ input.addEventListener('input', function()
             
             // imagen
             const img = document.createElement('img');
-            img.src = 'img/juegos/' + datos[i].imagen;
+            img.src = '/img/juegos/' + datos[i].imagen;
             img.width = 30;
             img.height = 30;
 
