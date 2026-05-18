@@ -39,8 +39,15 @@ function estadoEspecie($intento, $secreto)
 
 function revelarPersonaje($secreto)
 {
-    echo
-    '<p>'.$secreto['nombre'].'</p>';
+    echo '
+    <div class="card mt-3 p-3 w-100" style="pointer-events: none;">
+        <div class="d-flex align-items-center justify-content-center gap-3">
+            <span class="fw-bold text-white">El personaje era:</span>
+            <img src="../../img/pj/' . $secreto['imagen'] . '" width="60" height="60" class="rounded">
+            <span class="fs-5 text-white h2">' . $secreto['nombre'] . '</span>
+        </div>
+    </div>
+    ';
 }
 
 ?>
