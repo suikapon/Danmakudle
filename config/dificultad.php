@@ -28,10 +28,10 @@ switch ($dificultad) {
 function botonesDificultad($dificultad)
 {
     echo '
-    <div style="margin-bottom: 15px; text-align: center;">
-        <a href="?diff=facil&reset=1" style="margin-right: 10px; font-weight: ' . ($dificultad == "facil" ? "bold" : "normal") . '">Fácil</a>
-        <a href="?diff=normal&reset=1" style="margin-right: 10px; font-weight: ' . ($dificultad == "normal" ? "bold" : "normal") . '">Normal</a>
-        <a href="?diff=dificil&reset=1" style="font-weight: ' . ($dificultad == "dificil" ? "bold" : "normal") . '">Difícil</a>
+    <div class="mb-3 text-center">
+        <a href="?diff=facil&reset=1" class="btn btn-sm ' . ($dificultad == "facil" ? "btn-danmaku" : "btn-secondary") . '">Fácil</a>
+        <a href="?diff=normal&reset=1" class="btn btn-sm ' . ($dificultad == "normal" ? "btn-danmaku" : "btn-secondary") . '">Normal</a>
+        <a href="?diff=dificil&reset=1" class="btn btn-sm ' . ($dificultad == "dificil" ? "btn-danmaku" : "btn-secondary") . '">Difícil</a>
     </div>
     <p class="text-center">Modo actual: <strong style="text-transform: uppercase;">' . $dificultad . '</strong></p>
     ';
