@@ -129,6 +129,11 @@ if (!isset($_SESSION['audioOffset']))
             </form>
         <?php endif; ?>
 
+        <?php if ($perdio):
+            revelarPersonaje($audioAdivinar);
+        endif;
+        ?>
+
         <table class="tabla-intentos">
             <thead>
                 <tr>
