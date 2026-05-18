@@ -1,8 +1,10 @@
 <?php
+ob_start();
+
 require_once 'config/config.php';
 require_once 'config/consultas.php';
 
-$personajes = getPersonajes($conn)
+$personajes = getPersonajes($conn);
 
 ?>
 
