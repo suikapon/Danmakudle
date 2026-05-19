@@ -2,8 +2,7 @@
 session_start();
 //session_destroy();
 
-// variable para tener control de cuantas vidas se quieren
-// elegir al principio de una partida en vez de poner el número
+require_once '../../config/dificultad.php';
 $vidas = 6;
 
 // reiniciar los intentos y el personaje para pruebas por ahora
@@ -11,7 +10,7 @@ if (isset($_GET['reset'])) {
     unset($_SESSION['intentosSil']);
     unset($_SESSION['silAdivinar']);
     $_SESSION['vidasSil'] = $vidas;
-    header('Location: modoSiluetas.php');
+    header('Location: modoSiluetas.php?diff=' . $dificultad);
     exit();
 }
 
@@ -19,12 +18,11 @@ require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
 
-// cargamos todos los personajes de la base de datos
-$personajes = getPersonajes($conn);
+$personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
 // guardamos en la sesión el personaje a adivinar para que no se resetee
 if (!isset($_SESSION['silAdivinar'])) {
-    $silAdivinar = getPersonajeAleatorio(($conn));
+    $silAdivinar = getPersonajeAleatorioXDebut($conn, $desde, $hasta);
     $_SESSION['silAdivinar'] = $silAdivinar;
     $_SESSION['intentosSil'] = [];
     // las vidas
@@ -99,6 +97,7 @@ $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
         <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
 
         <h1 class="text-center mb-4">Adivina el personaje de la silueta</h1>
+        <?php botonesDificultad($dificultad);?>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
             <?php
