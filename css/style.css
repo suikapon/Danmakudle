@@ -11,17 +11,17 @@ body {
     background-image: url('../img/bg.jpg');
     background-size: cover;
 
-    color:rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
 }
 
 .subtitulo {
-    color:rgb(173, 173, 173);
+    color: rgb(173, 173, 173);
 }
 
 /* para login, registro... */
 .card-log {
     background-color: #111 !important;
-    border-color:#444 !important;
+    border-color: #444 !important;
     color: #fff !important;
 
     max-width: 500px;
@@ -47,7 +47,7 @@ body {
     width: 100%;
 }
 
-.tabla-intentos{
+.tabla-intentos {
     display: table;
     width: 100%;
     border-collapse: collapse;
@@ -114,7 +114,7 @@ body {
 }
 
 .card .subtitulo {
-    color:rgb(170, 170, 170);
+    color: rgb(170, 170, 170);
 }
 
 .card:hover {
@@ -144,6 +144,13 @@ body {
     gap: 5px;
 }
 
+.modal-content.modal-danmaku {
+    background-color: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    color: #ffffff;
+}
+
 .btn-danmaku {
     background-color: rgb(80, 5, 32);
     border-color: rgb(20, 2, 8);
@@ -158,28 +165,27 @@ body {
     color: rgb(36, 2, 2);
 }
 
-.texto-buscador
-{
-   color: black; 
+.texto-buscador {
+    color: black;
 }
 
-.oro{
+.oro {
     background: rgba(255, 215, 0, 0.7);
 }
 
-.plata{
+.plata {
     background: rgba(192, 192, 192, 0.7);
 }
 
-.bronze{
+.bronze {
     background: rgba(165, 42, 42, 0.7);
 }
 
-.otro{
+.otro {
     background: rgba(0, 0, 0, 0.7);
 }
 
-.tabla-ranking{
+.tabla-ranking {
     display: table;
     width: 100%;
     margin-top: 20px;
@@ -187,6 +193,7 @@ body {
     border-collapse: separate;
     border-spacing: 0 10px;
 }
+
 .tabla-ranking th {
     background: #222;
 }
@@ -209,22 +216,23 @@ body {
 .main-panel {
     background-color: rgba(20, 20, 20, 0.65);
     backdrop-filter: blur(6px);
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 25px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
 /*poner borde al principio y al final porque en las filas de tablas no se puede poner como tal*/
 .tabla-ranking td:first-child {
-    border-left: 1px solid rgba(255,255,255,0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
 
     border-top-left-radius: 16px;
     border-bottom-left-radius: 16px;
 }
 
 .tabla-ranking td:last-child {
-    border-right: 1px solid rgba(255,255,255,0.1);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
 
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;

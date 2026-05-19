@@ -29,6 +29,7 @@
         <div class="row mt-5">
             <div class="col">
                 <h2 class="text-center mb-4">Modos Diarios</h2>
+                <p class="subtitulo">¡Un nuevo reto cada día!</p>
             </div>
         </div>
 
@@ -39,7 +40,8 @@
                         <img src="img/reimu.png" class="card-img-top mx-auto mt-6">
                         <h2>Modo Clásico</h2>
                         <p class="subtitulo">Adivina el personaje en base a pistas</p>
-                        <a href="modos/diario/modoClasico.php" class="boton stretched-link"></a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalClasicoDiario"
+                            class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -50,7 +52,8 @@
                         <img src="img/eosd.png" class="card-img-top mx-auto mt-6">
                         <h2>Modo Videojuegos</h2>
                         <p class="subtitulo">Adivina el videojuego</p>
-                        <a href="modos/diario/modoPortadas.php" class="boton stretched-link"></a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalVideoJuegosDiario"
+                            class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -61,7 +64,8 @@
                         <img src="img/silueta.png" class="card-img-top mx-auto mt-6">
                         <h2>Modo Siluetas</h2>
                         <p class="subtitulo">Adivina el personaje de la silueta</p>
-                        <a href="modos/diario/modoSiluetas.php" class="boton stretched-link"></a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalSiluetasDiario"
+                            class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -72,7 +76,8 @@
                         <img src="img/temas.png" class="card-img-top mx-auto mt-6">
                         <h2>Modo Temas</h2>
                         <p class="subtitulo">Adivina el personaje por su tema</p>
-                        <a href="modos/diario/modoTemas.php" class="boton stretched-link"></a>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalTemasDiario"
+                            class="boton stretched-link"></a>
                     </div>
                 </div>
             </div>
@@ -84,79 +89,83 @@
             </div>
 
             <div class="row g-4">
-            <div class="col-md-4 mt-4">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column text-center">
-                        <img src="img/reimu.png" class="card-img-top mx-auto mt-6">
-                        <h2>Modo Clásico</h2>
-                        <p class="subtitulo">Adivina el personaje en base a pistas</p>
-                        <a href="modos/infinito/modoClasico.php" class="boton stretched-link"></a>
+                <div class="col-md-4 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column text-center">
+                            <img src="img/reimu.png" class="card-img-top mx-auto mt-6">
+                            <h2>Modo Clásico</h2>
+                            <p class="subtitulo">Adivina el personaje en base a pistas</p>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalClasicoInfinito"
+                            class="boton stretched-link"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mt-4">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column text-center">
-                        <img src="img/eosd.png" class="card-img-top mx-auto mt-6">
-                        <h2>Modo Videojuegos</h2>
-                        <p class="subtitulo">Adivina el videojuego</p>
-                        <a href="modos/infinito/modoPortadas.php" class="boton stretched-link"></a>
+                <div class="col-md-4 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column text-center">
+                            <img src="img/eosd.png" class="card-img-top mx-auto mt-6">
+                            <h2>Modo Videojuegos</h2>
+                            <p class="subtitulo">Adivina el videojuego</p>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalVideoJuegosInfinito"
+                            class="boton stretched-link"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mt-4">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column text-center">
-                        <img src="img/silueta.png" class="card-img-top mx-auto mt-6">
-                        <h2>Modo Siluetas</h2>
-                        <p class="subtitulo">Adivina el personaje de la silueta</p>
-                        <a href="modos/infinito/modoSiluetas.php" class="boton stretched-link"></a>
+                <div class="col-md-4 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column text-center">
+                            <img src="img/silueta.png" class="card-img-top mx-auto mt-6">
+                            <h2>Modo Siluetas</h2>
+                            <p class="subtitulo">Adivina el personaje de la silueta</p>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalSiluetasInfinito"
+                            class="boton stretched-link"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mt-4">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column text-center">
-                        <img src="img/temas.png" class="card-img-top mx-auto mt-6">
-                        <h2>Modo Temas</h2>
-                        <p class="subtitulo">Adivina el personaje por su tema</p>
-                        <a href="modos/infinito/modoTemas.php" class="boton stretched-link"></a>
+                <div class="col-md-4 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column text-center">
+                            <img src="img/temas.png" class="card-img-top mx-auto mt-6">
+                            <h2>Modo Temas</h2>
+                            <p class="subtitulo">Adivina el personaje por su tema</p>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalTemasInfinito"
+                            class="boton stretched-link"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row mt-5">
-                <div class="col">
-                    <h2 class="text-center mb-4">Información</h2>
-                </div>
-            </div>
-
-            <div class="col-md-4 mt-4">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column text-center">
-                        <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
-                        <h2>Lista de juegos</h2>
-                        <p class="subtitulo">¡Información acerca de todos los juegos!</p>
-                        <a href="listajuegos.php" class="boton stretched-link"></a>
+                <div class="row mt-5">
+                    <div class="col">
+                        <h2 class="text-center mb-4">Información</h2>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4 mt-4">
-                <div class="card h-100">
-                    <div class="card-body d-flex flex-column text-center">
-                        <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
-                        <h2>Lista de personajes</h2>
-                        <p class="subtitulo">¡Información acerca de todos los personajes!</p>
-                        <a href="listapersonajes.php" class="boton stretched-link"></a>
+                <div class="col-md-4 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column text-center">
+                            <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
+                            <h2>Lista de juegos</h2>
+                            <p class="subtitulo">¡Información acerca de todos los juegos!</p>
+                            <a href="listajuegos.php" class="boton stretched-link"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- <div class="col-md-4 mt-4">
+                <div class="col-md-4 mt-4">
+                    <div class="card h-100">
+                        <div class="card-body d-flex flex-column text-center">
+                            <img src="img/yinyangorb.png" class="card-img-top mx-auto mt-6">
+                            <h2>Lista de personajes</h2>
+                            <p class="subtitulo">¡Información acerca de todos los personajes!</p>
+                            <a href="listapersonajes.php" class="boton stretched-link"></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-4 mt-4">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/017.png" class="card-img-top mx-auto mt-6">
@@ -166,11 +175,45 @@
                     </div>
                 </div>
             </div> -->
-        </div>
-
-
-
+            </div>
     </main>
+
+    <?php
+    $urlModo = 'modos/diario/modoClasico.php';
+    $modalId = 'modalClasicoDiario';
+    include 'modales/modalDificultad.php';
+
+    $urlModo = 'modos/diario/modoPortadas.php';
+    $modalId = 'modalVideoJuegosDiario';
+    include 'modales/modalDificultad.php';
+
+    $urlModo = 'modos/diario/modoSiluetas.php';
+    $modalId = 'modalSiluetasDiario';
+    include 'modales/modalDificultad.php';
+
+    $urlModo = 'modos/diario/modoTemas.php';
+    $modalId = 'modalTemasDiario';
+    include 'modales/modalDificultad.php';
+
+
+    $urlModo = 'modos/infinito/modoClasico.php';
+    $modalId = 'modalClasicoInfinito';
+    include 'modales/modalDificultad.php';
+
+    $urlModo = 'modos/infinito/modoPortadas.php';
+    $modalId = 'modalVideoJuegosInfinito';
+    include 'modales/modalDificultad.php';
+
+    $urlModo = 'modos/infinito/modoSiluetas.php';
+    $modalId = 'modalSiluetasInfinito';
+    include 'modales/modalDificultad.php';
+
+    $urlModo = 'modos/infinito/modoTemas.php';
+    $modalId = 'modalTemasInfinito';
+    include 'modales/modalDificultad.php';
+    ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>
