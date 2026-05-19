@@ -26,9 +26,9 @@
 
         <!-- las cajitas/tarjetas con los modos disponibles -->
 
-        <div class="row mt-5">
+        <div class="row mt-4 text-center">
             <div class="col">
-                <h2 class="text-center mb-4">Modos Diarios</h2>
+                <h2>Modos Diarios</h2>
                 <p class="subtitulo">¡Un nuevo reto cada día!</p>
             </div>
         </div>
@@ -82,9 +82,10 @@
                 </div>
             </div>
 
-            <div class="row mt-5">
+            <div class="row mt-4 text-center">
                 <div class="col">
-                    <h2 class="text-center mb-4">Modos Infinitos</h2>
+                    <h2>Modos Infinitos</h2>
+                    <p class="subtitulo">¡Juega las veces que quieras!</p>
                 </div>
             </div>
 
@@ -96,7 +97,7 @@
                             <h2>Modo Clásico</h2>
                             <p class="subtitulo">Adivina el personaje en base a pistas</p>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalClasicoInfinito"
-                            class="boton stretched-link"></a>
+                                class="boton stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -108,7 +109,7 @@
                             <h2>Modo Videojuegos</h2>
                             <p class="subtitulo">Adivina el videojuego</p>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalVideoJuegosInfinito"
-                            class="boton stretched-link"></a>
+                                class="boton stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -120,7 +121,7 @@
                             <h2>Modo Siluetas</h2>
                             <p class="subtitulo">Adivina el personaje de la silueta</p>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalSiluetasInfinito"
-                            class="boton stretched-link"></a>
+                                class="boton stretched-link"></a>
                         </div>
                     </div>
                 </div>
@@ -132,12 +133,12 @@
                             <h2>Modo Temas</h2>
                             <p class="subtitulo">Adivina el personaje por su tema</p>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#modalTemasInfinito"
-                            class="boton stretched-link"></a>
+                                class="boton stretched-link"></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="row mt-5">
+                <div class="row mt-4 text-center">
                     <div class="col">
                         <h2 class="text-center mb-4">Información</h2>
                     </div>
