@@ -32,6 +32,11 @@ function getPersonajeAleatorioXDebut($conexion, $desde, $hasta)
     return $conexion->query("SELECT * FROM personajes WHERE debut BETWEEN $desde AND $hasta ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
 }
 
+function getPersonajeConTemaAleatorioXDebut($conexion, $desde, $hasta)
+{
+    return $conexion->query("SELECT * FROM personajes WHERE debut BETWEEN $desde AND $hasta AND audio IS NOT NULL ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+}
+
 function getPersonajeConTemaAleatorio($conexion)
 {
     return $conexion->query("SELECT * FROM personajes WHERE audio IS NOT NULL ORDER BY RANDOM() LIMIT 1")->fetch(PDO::FETCH_ASSOC);

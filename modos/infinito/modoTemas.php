@@ -20,7 +20,7 @@ $personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
 // guardamos en la sesión el personaje a adivinar para que no se resetee
 if (!isset($_SESSION['audioAdivinar'])) {
-    $audioAdivinar = getPersonajeAleatorioXDebut($conn, $desde, $hasta);
+    $audioAdivinar = getPersonajeConTemaAleatorioXDebut($conn, $desde, $hasta);
     $_SESSION['audioAdivinar'] = $audioAdivinar;
     $_SESSION['intentosAudio'] = [];
     $_SESSION['vidasAudio'] = $vidas;
