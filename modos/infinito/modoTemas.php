@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-$vidas = 6;
+require_once '../../config/dificultad.php';
 
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentosAudio']);
     unset($_SESSION['audioAdivinar']);
     unset($_SESSION['audioOffset']);
     $_SESSION['vidasAudio'] = $vidas;
-    header('Location: modoTemas.php');
+    header('Location: modoTemas.php?diff=' . $dificultad);
     exit();
 }
 
@@ -16,12 +16,11 @@ require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
 
-// cargamos todos los personajes de la base de datos
-$personajes = getPersonajes($conn);
+$personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
 // guardamos en la sesión el personaje a adivinar para que no se resetee
 if (!isset($_SESSION['audioAdivinar'])) {
-    $audioAdivinar = getPersonajeConTemaAleatorio($conn);
+    $audioAdivinar = getPersonajeAleatorioXDebut($conn, $desde, $hasta);
     $_SESSION['audioAdivinar'] = $audioAdivinar;
     $_SESSION['intentosAudio'] = [];
     $_SESSION['vidasAudio'] = $vidas;
@@ -101,6 +100,7 @@ if (!isset($_SESSION['audioOffset']))
         <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
 
         <h1 class="text-center mb-4">Adivina el personaje del tema</h1>
+        <?php botonesDificultad($dificultad);?>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
             <?php
