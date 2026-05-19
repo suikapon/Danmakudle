@@ -100,7 +100,7 @@ if (!isset($_SESSION['audioOffset']))
         <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
 
         <h1 class="text-center mb-4">Adivina el personaje del tema</h1>
-        <?php botonesDificultad($dificultad);?>
+        <?php botonesDificultad($dificultad); ?>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
             <?php
@@ -114,6 +114,11 @@ if (!isset($_SESSION['audioOffset']))
             <button onclick="reproducir()" class="btn btn-danmaku">Reproducir</button>
             <button onclick="parar()" class="btn btn-danmaku">Parar</button>
         </div>
+
+        <div class="audio">
+            <input type="range" id="vol" min="0" max="100" value="30" style="width:150px; vertical-align:middle;">
+        </div>
+
         </br>
         <?php if (!$gano && !$perdio): ?>
             <form method="POST">
@@ -189,10 +194,14 @@ if (!isset($_SESSION['audioOffset']))
     <script src="../../js/buscador.js"></script>
     <script>
         // ruta del audio del personaje a adivinar
-        const audioSrc='../../media/audio/<?= $audioAdivinar['audio']?>';
-        
+        const audioSrc = '../../media/audio/<?= $audioAdivinar['audio'] ?>';
+
         //motor de audio del navegador
         const audioCtx = new AudioContext();
+        // control de volumen
+        let gainNode = audioCtx.createGain();
+        gainNode.connect(audioCtx.destination);
+        gainNode.gain.value = 0.2;
         // el audio cargado y decodificado 
         let buffer = null;
         // la fuente de audio que está sonando ahora
@@ -207,48 +216,48 @@ if (!isset($_SESSION['audioOffset']))
         fetch(audioSrc)
             .then(res => res.arrayBuffer())
             .then(data => audioCtx.decodeAudioData(data))
-            .then(decoded =>
-            {
+            .then(decoded => {
                 // guardar el audio decodificado
                 buffer = decoded;
-                if (audioOffset===null)
-                {
+                if (audioOffset === null) {
                     // calcular el maximo segundo desde donde pueda empezar
                     // restando 5 para que quepan 5 segundos antes del final
-                    const maxStart = Math.max(0, buffer.duration-5);
+                    const maxStart = Math.max(0, buffer.duration - 5);
                     startOffset = Math.random() * maxStart;
-                    
+
                     //guardarlo en la sesión php para que persista
-                    fetch('../../guardarOffset.php?offset='+startOffset);
+                    fetch('../../guardarOffset.php?offset=' + startOffset);
                 } else
                     startOffset = audioOffset;
             });
 
-        function reproducir()
-        {
+        function reproducir() {
             // si no hay audio cargado no hacer nada
             if (!buffer) return;
 
             // si hay algo reproduciendose parar el anterior antes de empezar
             // (sino empiezan a sonar muchos a la vez)
-            if (source) {source.stop(); source = null;}
+            if (source) { source.stop(); source = null; }
 
             // crear una nueva fuente de audio a partir del buffer
             source = audioCtx.createBufferSource();
             source.buffer = buffer;
 
             // conectar la fuente a los altavoces
-            source.connect(audioCtx.destination);
+            source.connect(gainNode);
 
             // empieza a sonar ahora (el 0) desde el offset calculado durante 5 segundos
-            source.start(0,startOffset,5);
+            source.start(0, startOffset, 5);
         }
 
-        function parar()
-        {
+        function parar() {
             // si hay algo sonando detenerlo
-            if (source) {source.stop(); source = null;}
+            if (source) { source.stop(); source = null; }
         }
+
+        document.getElementById('vol').oninput = function () {
+            gainNode.gain.value = this.value / 100;
+        };
     </script>
 </body>
 
