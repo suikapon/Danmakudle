@@ -30,8 +30,8 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/reimu.png" class="card-img-top mx-auto mt-6">
-                        <h2>Adivina el personaje</h2>
-                        <p class="subtitulo">Adivina el nombre del personaje</p>
+                        <h2>Modo Clásico</h2>
+                        <p class="subtitulo">Adivina el personaje en base a pistas</p>
                         <a href="modos/infinito/modoClasico.php" class="boton stretched-link"></a>
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/eosd.png" class="card-img-top mx-auto mt-6">
-                        <h2>Adivina el videojuego</h2>
-                        <p class="subtitulo">Adivina el nombre del videojuego</p>
+                        <h2>Modo Videojuego</h2>
+                        <p class="subtitulo">Adivina el videojuego</p>
                         <a href="modos/infinito/modoPortadas.php" class="boton stretched-link"></a>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/silueta.png" class="card-img-top mx-auto mt-6">
-                        <h2>Adivina la silueta</h2>
+                        <h2>Modo Silueta</h2>
                         <p class="subtitulo">Adivina el personaje de la silueta</p>
                         <a href="modos/infinito/modoSiluetas.php" class="boton stretched-link"></a>
                     </div>
@@ -63,7 +63,7 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/temas.png" class="card-img-top mx-auto mt-6">
-                        <h2>Adivina el tema</h2>
+                        <h2>Modo Temas</h2>
                         <p class="subtitulo">Adivina el personaje por su tema</p>
                         <a href="modos/infinito/modoTemas.php" class="boton stretched-link"></a>
                     </div>
