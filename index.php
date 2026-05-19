@@ -128,6 +128,12 @@
                 </div>
             </div>
 
+            <div class="row mt-5">
+                <div class="col">
+                    <h2 class="text-center mb-4">Información</h2>
+                </div>
+            </div>
+
             <div class="col-md-4 mt-4">
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
