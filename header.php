@@ -44,16 +44,16 @@ $logeado = isset($_SESSION['id_usuario']);
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item text-danger" href="config/logout.php"><i
+                            <li><a class="dropdown-item text-danger" href="/config/logout.php"><i
                                         class="bi bi-box-arrow-left"></i> Cerrar sesión</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.php">Iniciar sesión</a>
+                        <a class="nav-link" href="/login.php">Iniciar sesión</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-sm btn-danmaku text-white" href="registro.php">Registrarse</a>
+                        <a class="btn btn-sm btn-danmaku text-white" href="/registro.php">Registrarse</a>
                     </li>
                 <?php endif; ?>
             </ul>
