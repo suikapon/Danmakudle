@@ -41,7 +41,7 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/eosd.png" class="card-img-top mx-auto mt-6">
-                        <h2>Modo Videojuego</h2>
+                        <h2>Modo Videojuegos</h2>
                         <p class="subtitulo">Adivina el videojuego</p>
                         <a href="modos/infinito/modoPortadas.php" class="boton stretched-link"></a>
                     </div>
@@ -52,7 +52,7 @@
                 <div class="card h-100">
                     <div class="card-body d-flex flex-column text-center">
                         <img src="img/silueta.png" class="card-img-top mx-auto mt-6">
-                        <h2>Modo Silueta</h2>
+                        <h2>Modo Siluetas</h2>
                         <p class="subtitulo">Adivina el personaje de la silueta</p>
                         <a href="modos/infinito/modoSiluetas.php" class="boton stretched-link"></a>
                     </div>
