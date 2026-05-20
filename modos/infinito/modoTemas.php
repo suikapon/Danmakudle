@@ -114,9 +114,9 @@ if (!isset($_SESSION['audioOffset']))
             <button onclick="reproducir()" class="btn btn-danmaku">Reproducir</button>
             <button onclick="parar()" class="btn btn-danmaku">Parar</button>
         </div>
-
+        
         <div class="audio">
-            <label>Volumen:</label>
+            <i class="bi bi-volume-up-fill fs-4 align-middle me-2"></i>
             <input type="range" id="vol" min="0" max="100" value="30" style="width:150px; vertical-align:middle;">
         </div>
 
