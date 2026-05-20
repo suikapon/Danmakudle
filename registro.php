@@ -25,6 +25,7 @@
                         <?php
                         if ($_GET['error'] === 'username') echo 'El username ya está en uso';
                         elseif ($_GET['error'] === 'correo') echo 'El correo ya está en uso';
+                        elseif ($_GET['error'] === 'contrasena') echo 'Las contraseñas no coinciden';
                         else echo 'Error al registrarse'; ?>
                     </div>
                 <?php endif; ?>
@@ -35,21 +36,21 @@
                 <form action="config/registro.php" method="POST" id="formRegistro" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label>Username</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="Tu username">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="Tu username" required="true">
                     </div>
                     <div class="mb-3">
                         <label>Correo electrónico</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required="true">
                     </div>
                     <div class="mb-3">
                         <label>Contraseña</label>
                         <input type="password" class="form-control" name="password" id="password"
-                            placeholder="Contraseña">
+                            placeholder="Contraseña" required="true">
                     </div>
                     <div class="mb-3">
                         <label>Confirmar contraseña</label>
                         <input type="password" class="form-control" name="password_confirmar" id="password_confirmar"
-                            placeholder="Repite la contraseña">
+                            placeholder="Repite la contraseña" required="true">
                     </div>
                     <div class="mb-3">
                         <label>Avatar <small>(opcional)</small></label>

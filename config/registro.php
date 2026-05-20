@@ -18,6 +18,11 @@ if (existeCorreo($conn, $email)) {
     exit;
 }
 
+if ($_POST['password'] !== $_POST['password_confirmar']) {
+    header('Location: ../registro.php?error=contrasena');
+    exit;
+}
+
 require_once '../vendor/autoload.php';
 
 use Cloudinary\Cloudinary;
