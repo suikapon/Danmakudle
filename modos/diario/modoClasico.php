@@ -3,14 +3,12 @@ session_start();
 
 $vidas = 6;
 
-// determinar el día actual, cambia a las 12
-$hora = (int) date('H');
-$hoy = $hora < 12 ? date('Y-m-d', strtotime('-1 day')) : date('Y-m-d');
-$proximoReinicio = $hora < 12 ? strtotime('today 12:00') : strtotime('tomorrow 12:00');
-
 require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
+
+$hoy = hoyDiario();
+$proximoReinicio = proximoReinicio();
 
 // cargamos todos los personajes
 $personajes = getPersonajes($conn);
@@ -240,24 +238,9 @@ $perdio = $vidasRestantes <= 0 && !$gano;
         const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
     <script src="../../js/buscador.js"></script>
+    <script src="../../js/contador.js"></script>
     <script>
-        // php mete aquí el timestamp del próximo reinicio (algo como 1748000000)
-        // multiplicamos por 1000 porque javascript trabaja en milisegundos y php en segundos
-        // cuenta atrás hasta el próximo personaje
-        const reinicio = <?= $proximoReinicio ?> * 1000;
-
-        function actualizarContador()
-        {
-            // diferencia entre el reinicio y ahora en ms
-            const diff = reinicio-Date.now();
-            const h = Math.floor(diff / 3600000);
-            const m = Math.floor((diff % 3600000) / 60000);
-            const s = Math.floor((diff % 60000) / 1000);
-            document.getElementById('contador').textContent = h + 'h ' + m + 'm ' + s + 's';
-        }
-        // actualizar el contador cada segundo
-        setInterval(actualizarContador, 1000);
-        actualizarContador();
+        iniciarContador(<?=$proximoReinicio?>*1000);
     </script>
 </body>
 

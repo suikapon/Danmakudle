@@ -50,4 +50,13 @@ function revelarPersonaje($secreto)
     ';
 }
 
-?>
+// devuelve la fecha del día actual del diario
+function hoyDiario()
+{
+    return date('Y-m-d');
+}
+// devuelve el timestamp de cuándo se actualiza el próximo personaje (medianoche)
+function proximoReinicio()
+{
+    return strtotime('tomorrow 00:00');
+}
