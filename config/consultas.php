@@ -139,37 +139,37 @@ function getRanking($conexion, $orden)
 }
 
 // obtener el personaje o juego del día para un modo
-function getElementoDiario($conexion, $hoy, $modo)
+function getElementoDiario($conexion, $hoy, $modo, $dificultad)
 {
-    $stmt = $conexion->prepare("SELECT * FROM elemento_diario WHERE fecha = ? AND modo = ?");
-    $stmt->execute([$hoy, $modo]);
+    $stmt = $conexion->prepare("SELECT * FROM elemento_diario WHERE fecha = ? AND modo = ? AND dificultad = ?");
+    $stmt->execute([$hoy, $modo, $dificultad]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
 // guardar el elemento del día para un modo
-function insertarElementoDiario($conexion, $hoy, $modo, $id_elemento)
+function insertarElementoDiario($conexion, $hoy, $modo, $id_elemento, $dificultad)
 {
-    $stmt = $conexion->prepare("INSERT INTO elemento_diario (fecha, modo, id_elemento) VALUES (?, ?, ?)");
-    return $stmt->execute([$hoy, $modo, $id_elemento]);
+    $stmt = $conexion->prepare("INSERT INTO elemento_diario (fecha, modo, id_elemento, dificultad) VALUES (?, ?, ?, ?)");
+    return $stmt->execute([$hoy, $modo, $id_elemento, $dificultad]);
 }
 
 // registrar un intento del usuario
-function insertarIntentoDiario($conexion, $hoy, $id_usuario, $id_elemento, $modo)
+function insertarIntentoDiario($conexion, $hoy, $id_usuario, $id_elemento, $modo, $dificultad)
 {
-    $stmt = $conexion->prepare("INSERT INTO intentos_diario (fecha, id_usuario, id_elemento, modo) VALUES (?, ?, ?, ?)");
-    return $stmt->execute([$hoy, $id_usuario, $id_elemento, $modo]);
+    $stmt = $conexion->prepare("INSERT INTO intentos_diario (fecha, id_usuario, id_elemento, modo, dificultad) VALUES (?, ?, ?, ?, ?)");
+    return $stmt->execute([$hoy, $id_usuario, $id_elemento, $modo, $dificultad]);
 }
 
 // obtener los intentos del usuario para hoy en un modo
-function getIntentosDiario($conexion, $hoy, $id_usuario, $modo)
+function getIntentosDiario($conexion, $hoy, $id_usuario, $modo, $dificultad)
 {
     $stmt = $conexion->prepare("
         SELECT p.* FROM intentos_diario i
         JOIN personajes p ON i.id_elemento = p.id_personaje
-        WHERE i.fecha = ? AND i.id_usuario = ? AND i.modo = ?
+        WHERE i.fecha = ? AND i.id_usuario = ? AND i.modo = ? AND i.dificultad = ?
         ORDER BY i.id ASC
     ");
-    $stmt->execute([$hoy, $id_usuario, $modo]);
+    $stmt->execute([$hoy, $id_usuario, $modo, $dificultad]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 

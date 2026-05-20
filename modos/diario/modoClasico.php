@@ -6,20 +6,22 @@ $vidas = 6;
 require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
+require_once '../../config/dificultad.php';
 
 $hoy = hoyDiario();
 $proximoReinicio = proximoReinicio();
 
 // cargamos todos los personajes
-$personajes = getPersonajes($conn);
+$personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
 // buscar el personaje del día
-$diario = getElementoDiario($conn, $hoy, 'clasico');
+$diario = getElementoDiario($conn, $hoy, 'clasico', $dificultad);
+
 
 if (!$diario) {
     // si no hay personaje para hoy se genera uno aleatorio y se guarda
-    $pjAdivinar = getPersonajeAleatorio($conn);
-    insertarElementoDiario($conn, $hoy, 'clasico', $pjAdivinar['id_personaje']);
+    $pjAdivinar = getPersonajeAleatorioXDebut($conn, $desde, $hasta);
+    insertarElementoDiario($conn, $hoy, 'clasico', $pjAdivinar['id_personaje'], $dificultad);
 } else {
     $pjAdivinar = getPersonajeXID($conn, $diario['id_elemento']);
 }
@@ -34,7 +36,7 @@ foreach ($personajes as $p) {
 $logeado = isset($_SESSION['id_usuario']);
 
 if ($logeado) {
-    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico');
+    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico', $dificultad);
 } else {
     if (!isset($_SESSION['intentosDiario'])) $_SESSION['intentosDiario'] = [];
     $intentos = $_SESSION['intentosDiario'];
@@ -56,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
             if ($p['nombre'] == $_POST['personaje_elegido']) {
                 if ($logeado) {
                     // guardar el intento
-                    insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $p['id_personaje'], 'clasico');
+                    insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $p['id_personaje'], 'clasico',$dificultad);
                 } else {
                     $_SESSION['intentosDiario'][] = $p;
                 }
@@ -67,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 
     // recargar intentos tras insertar
     if ($logeado) {
-        $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico');
+        $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico',$dificultad);
     } else {
         $intentos = $_SESSION['intentosDiario'];
     }
