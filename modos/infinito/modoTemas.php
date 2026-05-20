@@ -116,6 +116,7 @@ if (!isset($_SESSION['audioOffset']))
         </div>
 
         <div class="audio">
+            <label>Volumen:</label>
             <input type="range" id="vol" min="0" max="100" value="30" style="width:150px; vertical-align:middle;">
         </div>
 
