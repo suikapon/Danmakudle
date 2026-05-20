@@ -1,42 +1,30 @@
 <?php
 session_start();
-require_once '../../config/dificultad.php';
 //session_destroy();
 
-// variable para tener control de cuantas vidas se quieren
-// elegir al principio de una partida en vez de poner el número
-
-if (isset($_GET['reset'])) {
-    unset($_SESSION['intentosPortada']);
-    unset($_SESSION['juegoAdivinar']);
-    $_SESSION['vidasJuegos'] = $vidas;
-    header('Location: modoPortadas.php?diff=' . $dificultad);
-    exit();
-}
+require_once '../../config/dificultad.php';
+$vidas = 6;
 
 require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
 
+$hoy = hoyDiario();
+$proximoReinicio = proximoReinicio();
+
 // cargamos todos los juegos de la base de datos
 $juegos = getJuegosXDebut($conn, $desde, $hasta);
 
-// guardamos en la sesión el juego a adivinar para que no se resetee
-if (!isset($_SESSION['juegoAdivinar'])) {
+// buscar el juego del día
+$diario = getElementoDiario($conn, $hoy, 'portadas', $dificultad);
+
+if (!$diario) {
+    // si no hay juego para hoy se genera uno aleatorio y se guarda
     $juegoAdivinar = getJuegoAleatorioXDebut($conn, $desde, $hasta);
-    $_SESSION['juegoAdivinar'] = $juegoAdivinar;
-    $_SESSION['intentosPortada'] = [];
-    $_SESSION['vidasJuegos'] = $vidas;
+    insertarElementoDiario($conn, $hoy, 'portadas', $juegoAdivinar['id'], $dificultad);
+} else {
+    $juegoAdivinar = getJuegoXID($conn, $diario['id_elemento']);
 }
-
-if (!isset($_SESSION['intentosPortada'])) {
-    $_SESSION['intentosPortada'] = [];
-}
-if (!isset($_SESSION['vidasJuegos'])) {
-    $_SESSION['vidasJuegos'] = $vidas;
-}
-
-$juegoAdivinar = $_SESSION['juegoAdivinar'];
 
 // preparar nombres y la imagen de cada juego para pasárselo al javascript
 $datos = [];
@@ -44,11 +32,21 @@ foreach ($juegos as $j) {
     $datos[] = ['nombre' => $j['nombre'], 'imagen' => $j['imagen'], 'id' => $j['id']];
 }
 
+// cargar intentos del usuario para hoy
+$logeado = isset($_SESSION['id_usuario']);
+
+if ($logeado) {
+    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
+} else {
+    if (!isset($_SESSION['intentosDiarioPortadas'])) $_SESSION['intentosDiarioPortadas'] = [];
+    $intentos = $_SESSION['intentosDiarioPortadas'];
+}
+
 // procesar el intento enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
     // comprobar si ya ha sido intentado el juego
     $juegoYaIntentado = false;
-    foreach ($_SESSION['intentosPortada'] as $i) {
+    foreach ($intentos as $i) {
         if ($i['nombre'] == $_POST['juego_elegido']) {
             $juegoYaIntentado = true;
             break;
@@ -58,24 +56,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
     if (!$juegoYaIntentado) {
         foreach ($juegos as $j) {
             if ($j['nombre'] == $_POST['juego_elegido']) {
-                $_SESSION['intentosPortada'][] = $j;
-
-                // restar una vida en fallo
-                if ($j['id'] != $juegoAdivinar['id'])
-                    $_SESSION['vidasJuegos']--;
+                if ($logeado) {
+                    // guardar el intento
+                    insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $j['id'], 'portadas', $dificultad);
+                } else {
+                    $_SESSION['intentosDiarioPortadas'][] = $j;
+                }
                 break;
             }
         }
     }
-}
-// recuperar los intentos de la sesión para recorrerlos
-$intentosPortada = $_SESSION['intentosPortada'];
 
-$gano = !empty($intentosPortada) && end($intentosPortada)['id'] == $juegoAdivinar['id'];
-$perdio = $_SESSION['vidasJuegos'] <= 0 && !$gano;
+    // recargar intentos tras insertar
+    if ($logeado) {
+        $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
+    } else {
+        $intentos = $_SESSION['intentosDiarioPortadas'];
+    }
+}
+
+// calcular vidas a partir de intentos fallidos
+// intentosfallidos da los intentos donde el juego no coincide para contarlos y restar las vidas
+$intentosFallidos = array_filter($intentos, fn($i) => $i['id'] != $juegoAdivinar['id']);
+$vidasRestantes = $vidas - count($intentosFallidos);
+
+$gano = !empty($intentos) && end($intentos)['id'] == $juegoAdivinar['id'];
+$perdio = $vidasRestantes <= 0 && !$gano;
 
 //nivel de blur según vidas restantes a menos vidas más se ve la imagen
-$blur = $_SESSION['vidasJuegos'] * 5;
+$blur = $vidasRestantes * 5;
 ?>
 
 <!DOCTYPE html>
@@ -95,14 +104,17 @@ $blur = $_SESSION['vidasJuegos'] * 5;
     <?php include '../../header.php'; ?>
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
-        <!--botones para reiniciar intentos y el juego-->
-        <a class="text-center mb-4" href="?diff=<?= $dificultad ?>&reset=todo">cambiar juego</a>
 
         <h1 class="text-center mb-4">Adivina el juego por la portada</h1>
+        <p class="subtitulo">Se actualiza cada día a las 00:00</p>
+
+        <!-- cuenta atrás para el próximo juego -->
+        <p class="subtitulo">Próximo juego en: <span id="contador"></span></p>
+
         <?php botonesDificultad($dificultad);?>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
-            <?php for ($i = 0; $i < $_SESSION['vidasJuegos']; $i++): ?>
+            <?php for ($i = 0; $i < $vidasRestantes; $i++): ?>
                 <img src="../../img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
@@ -138,7 +150,7 @@ $blur = $_SESSION['vidasJuegos'] * 5;
             </thead>
             <tbody>
                 <!--array invertido porque es más cómodo que el último intento salga arriba del todo-->
-                <?php foreach (array_reverse($intentosPortada) as $i):
+                <?php foreach (array_reverse($intentos) as $i):
                     // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
                     $estadoNombre = estadoSimple($i, $juegoAdivinar, 'id');
 
@@ -182,6 +194,10 @@ $blur = $_SESSION['vidasJuegos'] * 5;
         const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
     <script src="../../js/buscadorJuegos.js"></script>
+    <script src="../../js/contador.js"></script>
+    <script>
+        iniciarContador(<?= $proximoReinicio ?> * 1000);
+    </script>
 </body>
 
 </html>

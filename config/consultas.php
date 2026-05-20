@@ -64,6 +64,12 @@ function getJuegosXDebut($conexion, $desde, $hasta)
 {
     return $conexion->query("SELECT * FROM juegos WHERE id BETWEEN $desde AND $hasta")->fetchAll(PDO::FETCH_ASSOC);
 }
+function getJuegoXID($conexion, $id)
+{
+    $stmt = $conexion->prepare("SELECT * FROM juegos WHERE id = ?");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
 
 function getJuegoAleatorioXDebut($conexion, $desde, $hasta)
 {
@@ -166,6 +172,18 @@ function getIntentosDiario($conexion, $hoy, $id_usuario, $modo, $dificultad)
     $stmt = $conexion->prepare("
         SELECT p.* FROM intentos_diario i
         JOIN personajes p ON i.id_elemento = p.id_personaje
+        WHERE i.fecha = ? AND i.id_usuario = ? AND i.modo = ? AND i.dificultad = ?
+        ORDER BY i.id ASC
+    ");
+    $stmt->execute([$hoy, $id_usuario, $modo, $dificultad]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+// lo mismo pero con los juegos
+function getIntentosDiarioJuegos($conexion, $hoy, $id_usuario, $modo, $dificultad)
+{
+    $stmt = $conexion->prepare("
+        SELECT j.* FROM intentos_diario i
+        JOIN juegos j ON i.id_elemento = j.id
         WHERE i.fecha = ? AND i.id_usuario = ? AND i.modo = ? AND i.dificultad = ?
         ORDER BY i.id ASC
     ");
