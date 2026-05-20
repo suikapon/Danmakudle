@@ -126,9 +126,9 @@ function actualizarEstadisticas($conexion, $id_usuario, $gano)
     return $stmt->execute([$partidas_jugadas, $partidas_ganadas, $racha_actual, $racha_max, $puntos, $id_usuario]);
 }
 
-function getRanking($conn, $orden)
+function getRanking($conexion, $orden)
 {
-    $stmt = $conn->prepare("
+    $stmt = $conexion->prepare("
         SELECT u.username, u.avatar, e.puntos, e.racha_actual, e.partidas_jugadas, e.partidas_ganadas, e.racha_max
         FROM estadisticas_usuario e
         JOIN usuarios u ON e.id_usuario = u.id_usuario
@@ -137,4 +137,40 @@ function getRanking($conn, $orden)
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// obtener el personaje o juego del día para un modo
+function getElementoDiario($conexion, $hoy, $modo)
+{
+    $stmt = $conexion->prepare("SELECT * FROM elemento_diario WHERE fecha = ? AND modo = ?");
+    $stmt->execute([$hoy, $modo]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
+// guardar el elemento del día para un modo
+function insertarElementoDiario($conexion, $hoy, $modo, $id_elemento)
+{
+    $stmt = $conexion->prepare("INSERT INTO elemento_diario (fecha, modo, id_elemento) VALUES (?, ?, ?)");
+    return $stmt->execute([$hoy, $modo, $id_elemento]);
+}
+
+// registrar un intento del usuario
+function insertarIntentoDiario($conexion, $hoy, $id_usuario, $id_elemento, $modo)
+{
+    $stmt = $conexion->prepare("INSERT INTO intentos_diario (fecha, id_usuario, id_elemento, modo) VALUES (?, ?, ?, ?)");
+    return $stmt->execute([$hoy, $id_usuario, $id_elemento, $modo]);
+}
+
+// obtener los intentos del usuario para hoy en un modo
+function getIntentosDiario($conexion, $hoy, $id_usuario, $modo)
+{
+    $stmt = $conexion->prepare("
+        SELECT p.* FROM intentos_diario i
+        JOIN personajes p ON i.id_elemento = p.id_personaje
+        WHERE i.fecha = ? AND i.id_usuario = ? AND i.modo = ?
+        ORDER BY i.id ASC
+    ");
+    $stmt->execute([$hoy, $id_usuario, $modo]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>

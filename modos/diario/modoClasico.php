@@ -14,16 +14,14 @@ $proximoReinicio = proximoReinicio();
 $personajes = getPersonajes($conn);
 
 // buscar el personaje del día
-$stmt = $conn->prepare("SELECT * FROM personaje_diario WHERE fecha = ?");
-$stmt->execute([$hoy]);
-$diario = $stmt->fetch(PDO::FETCH_ASSOC);
+$diario = getElementoDiario($conn, $hoy, 'clasico');
 
 if (!$diario) {
+    // si no hay personaje para hoy se genera uno aleatorio y se guarda
     $pjAdivinar = getPersonajeAleatorio($conn);
-    $stmt = $conn->prepare("INSERT INTO personaje_diario (fecha, id_personaje) VALUES (?, ?)");
-    $stmt->execute([$hoy, $pjAdivinar['id_personaje']]);
+    insertarElementoDiario($conn, $hoy, 'clasico', $pjAdivinar['id_personaje']);
 } else {
-    $pjAdivinar = getPersonajeXID($conn, $diario['id_personaje']);
+    $pjAdivinar = getPersonajeXID($conn, $diario['id_elemento']);
 }
 
 // preparar nombres y la imagen de cada personaje para pasárselo al javascript
@@ -36,14 +34,7 @@ foreach ($personajes as $p) {
 $logeado = isset($_SESSION['id_usuario']);
 
 if ($logeado) {
-    $stmt = $conn->prepare("
-        SELECT p.* FROM intentos_diario i
-        JOIN personajes p ON i.id_personaje = p.id_personaje
-        WHERE i.fecha = ? AND i.id_usuario = ?
-        ORDER BY i.id ASC
-    ");
-    $stmt->execute([$hoy, $_SESSION['id_usuario']]);
-    $intentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico');
 } else {
     if (!isset($_SESSION['intentosDiario'])) $_SESSION['intentosDiario'] = [];
     $intentos = $_SESSION['intentosDiario'];
@@ -64,8 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
         foreach ($personajes as $p) {
             if ($p['nombre'] == $_POST['personaje_elegido']) {
                 if ($logeado) {
-                    $stmt = $conn->prepare("INSERT INTO intentos_diario (fecha, id_usuario, id_personaje) VALUES (?, ?, ?)");
-                    $stmt->execute([$hoy, $_SESSION['id_usuario'], $p['id_personaje']]);
+                    // guardar el intento
+                    insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $p['id_personaje'], 'clasico');
                 } else {
                     $_SESSION['intentosDiario'][] = $p;
                 }
@@ -76,14 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
 
     // recargar intentos tras insertar
     if ($logeado) {
-        $stmt = $conn->prepare("
-            SELECT p.* FROM intentos_diario i
-            JOIN personajes p ON i.id_personaje = p.id_personaje
-            WHERE i.fecha = ? AND i.id_usuario = ?
-            ORDER BY i.id ASC
-        ");
-        $stmt->execute([$hoy, $_SESSION['id_usuario']]);
-        $intentos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico');
     } else {
         $intentos = $_SESSION['intentosDiario'];
     }
