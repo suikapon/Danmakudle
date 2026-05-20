@@ -5,38 +5,25 @@ session_start();
 require_once '../../config/dificultad.php';
 $vidas = 6;
 
-// reiniciar los intentos y el personaje para pruebas por ahora
-if (isset($_GET['reset'])) {
-    unset($_SESSION['intentosSil']);
-    unset($_SESSION['silAdivinar']);
-    $_SESSION['vidasSil'] = $vidas;
-    header('Location: modoSiluetas.php?diff=' . $dificultad);
-    exit();
-}
-
 require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
 
+$hoy = hoyDiario();
+$proximoReinicio = proximoReinicio();
+
 $personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
-// guardamos en la sesión el personaje a adivinar para que no se resetee
-if (!isset($_SESSION['silAdivinar'])) {
+// buscar el personaje del día
+$diario = getElementoDiario($conn, $hoy, 'siluetas', $dificultad);
+
+if (!$diario) {
+    // si no hay personaje para hoy se genera uno aleatorio y se guarda
     $silAdivinar = getPersonajeAleatorioXDebut($conn, $desde, $hasta);
-    $_SESSION['silAdivinar'] = $silAdivinar;
-    $_SESSION['intentosSil'] = [];
-    // las vidas
-    $_SESSION['vidasSil'] = $vidas;
+    insertarElementoDiario($conn, $hoy, 'siluetas', $silAdivinar['id_personaje'], $dificultad);
+} else {
+    $silAdivinar = getPersonajeXID($conn, $diario['id_elemento']);
 }
-
-if (!isset($_SESSION['intentosSil'])) {
-    $_SESSION['intentosSil'] = [];
-}
-if (!isset($_SESSION['vidasSil'])) {
-    $_SESSION['vidasSil'] = $vidas;
-}
-
-$silAdivinar = $_SESSION['silAdivinar'];
 
 // preparar nombres y la imagen de cada personaje para pasárselo al javascript
 $datos = [];
@@ -44,11 +31,21 @@ foreach ($personajes as $p) {
     $datos[] = ['nombre' => $p['nombre'], 'imagen' => $p['imagen']];
 }
 
+// cargar intentos del usuario para hoy
+$logeado = isset($_SESSION['id_usuario']);
+
+if ($logeado) {
+    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'siluetas', $dificultad);
+} else {
+    if (!isset($_SESSION['intentosDiarioSiluetas'])) $_SESSION['intentosDiarioSiluetas'] = [];
+    $intentos = $_SESSION['intentosDiarioSiluetas'];
+}
+
 // procesar el intento enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido'])) {
     // comprobar si ya ha sido intentado el personaje
     $pjYaIntentado = false;
-    foreach ($_SESSION['intentosSil'] as $i) {
+    foreach ($intentos as $i) {
         if ($i['nombre'] == $_POST['personaje_elegido']) {
             $pjYaIntentado = true;
             break;
@@ -58,21 +55,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
     if (!$pjYaIntentado) {
         foreach ($personajes as $p) {
             if ($p['nombre'] == $_POST['personaje_elegido']) {
-                $_SESSION['intentosSil'][] = $p;
-
-                // restar una vida en fallo
-                if ($p['id_personaje'] != $silAdivinar['id_personaje'])
-                    $_SESSION['vidasSil']--;
+                if ($logeado) {
+                    // guardar el intento
+                    insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $p['id_personaje'], 'siluetas', $dificultad);
+                } else {
+                    $_SESSION['intentosDiarioSiluetas'][] = $p;
+                }
                 break;
             }
         }
     }
-}
-// recuperar los intentos de la sesión para recorrerlos
-$intentosSil = $_SESSION['intentosSil'];
 
-$gano = !empty($intentosSil) && end($intentosSil)['id_personaje'] == $silAdivinar['id_personaje'];
-$perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
+    // recargar intentos tras insertar
+    if ($logeado) {
+        $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'siluetas', $dificultad);
+    } else {
+        $intentos = $_SESSION['intentosDiarioSiluetas'];
+    }
+}
+
+// calcular vidas a partir de intentos fallidos
+// intentosfallidos da los intentos donde el personaje no coincide para contarlos y restar las vidas
+$intentosFallidos = array_filter($intentos, fn($i) => $i['id_personaje'] != $silAdivinar['id_personaje']);
+$vidasRestantes = $vidas - count($intentosFallidos);
+
+$gano = !empty($intentos) && end($intentos)['id_personaje'] == $silAdivinar['id_personaje'];
+$perdio = $vidasRestantes <= 0 && !$gano;
 
 ?>
 
@@ -92,16 +100,16 @@ $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
 <body class="d-flex flex-column min-vh-100">
     <?php include '../../header.php'; ?>
 
-    <main class="container d-flex flex-column align-items-center flex-grow-1">
-        <!--botones para reiniciar intentos y el personaje-->
-        <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
-
+    <main class="container d-flex flex-column align-items-center flex-grow-1">        
         <h1 class="text-center mb-4">Adivina el personaje de la silueta</h1>
+        <p class="subtitulo">Se actualiza cada día a las 00:00</p>
+        <!-- cuenta atrás para el próximo personaje -->
+        <p class="subtitulo">Próximo personaje en: <span id="contador"></span></p>
         <?php botonesDificultad($dificultad);?>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
             <?php
-            for ($i = 0; $i < $_SESSION['vidasSil']; $i++): ?>
+            for ($i = 0; $i < $vidasRestantes; $i++): ?>
                 <img src="../../img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
@@ -121,7 +129,7 @@ $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
                 <button type="submit">Adivinar</button>
             </form>
         <?php endif; ?>
-        
+
         <?php if ($perdio):
             revelarPersonaje($silAdivinar);
         endif;
@@ -136,7 +144,7 @@ $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach (array_reverse($intentosSil) as $i):
+                    <?php foreach (array_reverse($intentos) as $i):
                         // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
                         $idIntento = $i['id_personaje'];
                         $idSecreto = $silAdivinar['id_personaje'];
@@ -169,6 +177,10 @@ $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
         const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
     <script src="../../js/buscador.js"></script>
+    <script src="../../js/contador.js"></script>
+    <script>
+        iniciarContador(<?= $proximoReinicio ?> * 1000);
+    </script>
 </body>
 
 </html>
