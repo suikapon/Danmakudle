@@ -1,39 +1,29 @@
 <?php
 session_start();
 
-require_once '../../config/dificultad.php';
-
-if (isset($_GET['reset'])) {
-    unset($_SESSION['intentosAudio']);
-    unset($_SESSION['audioAdivinar']);
-    unset($_SESSION['audioOffset']);
-    $_SESSION['vidasAudio'] = $vidas;
-    header('Location: modoTemas.php?diff=' . $dificultad);
-    exit();
-}
+$vidas = 6;
 
 require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
+require_once '../../config/dificultad.php';
 
+$hoy = hoyDiario();
+$proximoReinicio = proximoReinicio();
+
+// cargamos los personajes con tema de la base de datos dependiendo de la dificultad
 $personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
-// guardamos en la sesión el personaje a adivinar para que no se resetee
-if (!isset($_SESSION['audioAdivinar'])) {
+// buscar el personaje del día
+$diario = getElementoDiario($conn, $hoy, 'temas', $dificultad);
+
+if (!$diario) {
+    // si no hay personaje para hoy se genera uno aleatorio y se guarda
     $audioAdivinar = getPersonajeConTemaAleatorioXDebut($conn, $desde, $hasta);
-    $_SESSION['audioAdivinar'] = $audioAdivinar;
-    $_SESSION['intentosAudio'] = [];
-    $_SESSION['vidasAudio'] = $vidas;
+    insertarElementoDiario($conn, $hoy, 'temas', $audioAdivinar['id_personaje'], $dificultad);
+} else {
+    $audioAdivinar = getPersonajeXID($conn, $diario['id_elemento']);
 }
-
-if (!isset($_SESSION['intentosAudio'])) {
-    $_SESSION['intentosAudio'] = [];
-}
-if (!isset($_SESSION['vidasAudio'])) {
-    $_SESSION['vidasAudio'] = $vidas;
-}
-
-$audioAdivinar = $_SESSION['audioAdivinar'];
 
 // preparar nombres y la imagen de cada personaje para pasárselo al javascript
 $datos = [];
@@ -41,42 +31,63 @@ foreach ($personajes as $p) {
     $datos[] = ['nombre' => $p['nombre'], 'imagen' => $p['imagen']];
 }
 
+// cargar intentos del usuario para hoy
+$logeado = isset($_SESSION['id_usuario']);
+
+if ($logeado) {
+    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'temas', $dificultad);
+} else {
+    if (!isset($_SESSION['intentosDiarioTemas'])) $_SESSION['intentosDiarioTemas'] = [];
+    $intentos = $_SESSION['intentosDiarioTemas'];
+}
+
 // procesar el intento enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido'])) {
     // comprobar si ya ha sido intentado el personaje
     $pjYaIntentado = false;
-    foreach ($_SESSION['intentosAudio'] as $i) {
+    foreach ($intentos as $i) {
         if ($i['nombre'] == $_POST['personaje_elegido']) {
             $pjYaIntentado = true;
             break;
         }
     }
-
     // agregarlo a los intentos si no está ya intentado
     if (!$pjYaIntentado) {
         foreach ($personajes as $p) {
             if ($p['nombre'] == $_POST['personaje_elegido']) {
-                $_SESSION['intentosAudio'][] = $p;
-
-                // restar una vida en fallo
-                if ($p['id_personaje'] != $audioAdivinar['id_personaje'])
-                    $_SESSION['vidasAudio']--;
+                if ($logeado) {
+                    // guardar el intento
+                    insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $p['id_personaje'], 'temas', $dificultad);
+                } else {
+                    $_SESSION['intentosDiarioTemas'][] = $p;
+                }
                 break;
             }
         }
     }
+
+    // recargar intentos tras insertar
+    if ($logeado) {
+        $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'temas', $dificultad);
+    } else {
+        $intentos = $_SESSION['intentosDiarioTemas'];
+    }
 }
-// recuperar los intentos de la sesión para recorrerlos
-$intentosAudio = $_SESSION['intentosAudio'];
 
-$gano = !empty($intentosAudio) && end($intentosAudio)['id_personaje'] == $audioAdivinar['id_personaje'];
-$perdio = $_SESSION['vidasAudio'] <= 0 && !$gano;
+// calcular vidas a partir de intentos fallidos
+// intentosfallidos da los intentos donde el personaje no coincide para contarlos y restar las vidas
+$intentosFallidos = array_filter($intentos, fn($i) => $i['id_personaje'] != $audioAdivinar['id_personaje']);
+$vidasRestantes = $vidas - count($intentosFallidos);
 
-// rutas audios
+$gano = !empty($intentos) && end($intentos)['id_personaje'] == $audioAdivinar['id_personaje'];
+$perdio = $vidasRestantes <= 0 && !$gano;
 
-// guardar el offset para que no cambie al recargar
-if (!isset($_SESSION['audioOffset']))
-    $_SESSION['audioOffset'] = null; // el javascript da un offset la primera vez
+// si no hay offset o es de otro día generar uno nuevo
+if (!isset($_SESSION['audioOffsetDiario']) || $_SESSION['audioOffsetFecha']!==$hoy)
+{
+    $_SESSION['audioOffsetDiario'] = null;
+    $_SESSION['audioOffsetFecha'] = $hoy;
+}
 ?>
 
 <!DOCTYPE html>
@@ -96,15 +107,14 @@ if (!isset($_SESSION['audioOffset']))
     <?php include '../../header.php'; ?>
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
-        <!--botones para reiniciar intentos y el personaje-->
-        <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
-
         <h1 class="text-center mb-4">Adivina el personaje del tema</h1>
+        <p class="subtitulo">Se actualiza cada día a las 00:00</p>
+        <!-- cuenta atrás para el próximo personaje -->
+        <p class="subtitulo">Próximo personaje en: <span id="contador"></span></p>
         <?php botonesDificultad($dificultad); ?>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">
             <span>Vidas:</span>
-            <?php
-            for ($i = 0; $i < $_SESSION['vidasAudio']; $i++): ?>
+            <?php for ($i = 0; $i < $vidasRestantes; $i++): ?>
                 <img src="../../img/stars/vida.png" width="20" height="20">
             <?php endfor; ?>
         </div>
@@ -149,7 +159,7 @@ if (!isset($_SESSION['audioOffset']))
                 </tr>
             </thead>
             <tbody>
-                <?php foreach (array_reverse($intentosAudio) as $i):
+                <?php foreach (array_reverse($intentos) as $i):
                     // almacenar el color de cada campo como un estado para que se vea en las comparaciones en el juego usando las clases !!
                     $idIntento = $i['id_personaje'];
                     $idSecreto = $audioAdivinar['id_personaje'];
@@ -186,13 +196,15 @@ if (!isset($_SESSION['audioOffset']))
         </table>
     </main>
 
-
-
     <!-- pasarle los datos al archivo javascript -->
     <script>
         const datos = <?= json_encode($datos, JSON_UNESCAPED_UNICODE) ?>;
     </script>
     <script src="../../js/buscador.js"></script>
+    <script src="../../js/contador.js"></script>
+    <script>
+        iniciarContador(<?= $proximoReinicio ?> * 1000);
+    </script>
     <script>
         // ruta del audio del personaje a adivinar
         const audioSrc = '../../media/audio/<?= $audioAdivinar['audio'] ?>';
@@ -211,7 +223,7 @@ if (!isset($_SESSION['audioOffset']))
         let startOffset = null;
 
         // offset guardado en sesión por php, si no hay por ser la primera vez que carga hacerlo nulo
-        const audioOffset = <?= $_SESSION['audioOffset'] ?? 'null' ?>;
+        const audioOffset = <?= $_SESSION['audioOffsetDiario'] ?? 'null' ?>;
 
         // cargar el archivo de audio
         fetch(audioSrc)
@@ -227,7 +239,7 @@ if (!isset($_SESSION['audioOffset']))
                     startOffset = Math.random() * maxStart;
 
                     //guardarlo en la sesión php para que persista
-                    fetch('../../guardarOffset.php?offset=' + startOffset);
+                    fetch(fetch('../../guardarOffset.php?offset=' +startOffset+ '&key=audioOffsetDiario');
                 } else
                     startOffset = audioOffset;
             });
