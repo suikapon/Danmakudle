@@ -83,6 +83,19 @@ function existeUsername($conexion, $username, $idExcluir = null)
     return $stmt->fetchColumn() ? true : false;
 }
 
+function existeCorreo($conexion, $correo, $idExcluir = null)
+{
+    if ($idExcluir) {
+        $stmt = $conexion->prepare("SELECT id_usuario FROM usuarios WHERE email = ? AND id_usuario != ?");
+        $stmt->execute([$correo, $idExcluir]);
+    } else {
+        $stmt = $conexion->prepare("SELECT id_usuario FROM usuarios WHERE email = ?");
+        $stmt->execute([$correo]);
+    }
+
+    return $stmt->fetchColumn() ? true : false;
+}
+
 function insertarUsuario($conexion, $username, $email, $password, $rol, $avatar)
 {
     $stmt = $conexion->prepare("INSERT INTO usuarios (username, email, password, rol, avatar) VALUES (?, ?, ?, ?, ?)");

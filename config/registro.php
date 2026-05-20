@@ -13,6 +13,11 @@ if (existeUsername($conn, $username)) {
     exit;
 }
 
+if (existeCorreo($conn, $email)) {
+    header('Location: ../registro.php?error=correo');
+    exit;
+}
+
 require_once '../vendor/autoload.php';
 
 use Cloudinary\Cloudinary;

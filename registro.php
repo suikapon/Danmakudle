@@ -22,7 +22,10 @@
             <div class="card-log-body">
                 <?php if (isset($_GET['error'])): ?>
                     <div class="alert alert-danger">
-                        <?php echo $_GET['error'] === 'username' ? 'El username ya está en uso' : 'Error al registrarse'; ?>
+                        <?php
+                        if ($_GET['error'] === 'username') echo 'El username ya está en uso';
+                        elseif ($_GET['error'] === 'correo') echo 'El correo ya está en uso';
+                        else echo 'Error al registrarse'; ?>
                     </div>
                 <?php endif; ?>
                 <?php if (isset($_GET['ok'])): ?>
