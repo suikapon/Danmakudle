@@ -69,6 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
             }
         }
     }
+
+    // redirigir para evitar reenvío del formulario
+    header("Location: modoClasico.php?diff=" . $dificultad);
+    exit();
 }
 // recuperar los intentos de la sesión para recorrerlos
 $intentos = $_SESSION['intentos'];

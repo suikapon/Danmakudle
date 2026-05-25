@@ -67,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
             }
         }
     }
+
+    // redirigir para evitar reenvío del formulario
+    header("Location: modoPortadas.php?diff=" . $dificultad);
+    exit();
 }
 // recuperar los intentos de la sesión para recorrerlos
 $intentosPortada = $_SESSION['intentosPortada'];

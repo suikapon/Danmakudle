@@ -65,6 +65,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
             }
         }
     }
+
+    // redirigir para evitar reenvío del formulario
+    header("Location: modoTemas.php?diff=" . $dificultad);
+    exit();
 }
 // recuperar los intentos de la sesión para recorrerlos
 $intentosAudio = $_SESSION['intentosAudio'];

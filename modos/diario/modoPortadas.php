@@ -73,6 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
     } else {
         $intentos = $_SESSION['intentosDiarioPortadas'];
     }
+
+    // redirigir para evitar reenvío del formulario
+    header("Location: modoPortadas.php?diff=" . $dificultad);
+    exit();
 }
 
 // calcular vidas a partir de intentos fallidos

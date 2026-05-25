@@ -72,6 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
     } else {
         $intentos = $_SESSION['intentosDiarioTemas'];
     }
+
+    // redirigir para evitar reenvío del formulario
+    header("Location: modoTemas.php?diff=" . $dificultad);
+    exit();
 }
 
 // calcular vidas a partir de intentos fallidos

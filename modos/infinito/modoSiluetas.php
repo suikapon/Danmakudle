@@ -67,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
             }
         }
     }
+
+    // redirigir para evitar reenvío del formulario
+    header("Location: modoSiluetas.php?diff=" . $dificultad);
+    exit();
 }
 // recuperar los intentos de la sesión para recorrerlos
 $intentosSil = $_SESSION['intentosSil'];
