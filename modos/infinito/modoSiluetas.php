@@ -9,6 +9,7 @@ $vidas = 6;
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentosSil']);
     unset($_SESSION['silAdivinar']);
+    unset($_SESSION['partidaContadaSil']);
     $_SESSION['vidasSil'] = $vidas;
     header('Location: modoSiluetas.php?diff=' . $dificultad);
     exit();
@@ -78,6 +79,13 @@ $intentosSil = $_SESSION['intentosSil'];
 $gano = !empty($intentosSil) && end($intentosSil)['id_personaje'] == $silAdivinar['id_personaje'];
 $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
 
+if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['partidaContadaSil'])) {
+    $intentosFallidos = $vidas - $_SESSION['vidasSil'];
+    $puntos = calcularPuntos('infinito', $dificultad, $intentosFallidos, $vidas);
+    actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano, $puntos, false);
+    // para que no se vuelva a sumar la misma partida
+    $_SESSION['partidaContadaSil'] = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -98,7 +106,7 @@ $perdio = $_SESSION['vidasSil'] <= 0 && !$gano;
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
         <!--botones para reiniciar intentos y el personaje-->
-        <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
+        <a class="text-center mb-4" href="?diff=<?= $dificultad ?>&reset=todo">cambiar personaje</a>
 
         <h1 class="text-center mb-4">Adivina el personaje de la silueta</h1>
         <?php botonesDificultad($dificultad);?>
