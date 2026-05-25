@@ -67,7 +67,7 @@ function calcularPuntos($modo, $dificultad, $intentosFallidos, $vidasTotales)
     $base = match($modo)
     {
         'diario' => 100,
-        'infinito' => 25,
+        'infinito' => 20,
         default => 1
     };
     // multiplicador por dificultad
