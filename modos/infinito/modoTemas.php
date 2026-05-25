@@ -6,6 +6,7 @@ require_once '../../config/dificultad.php';
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentosAudio']);
     unset($_SESSION['audioAdivinar']);
+    unset($_SESSION['partidaContadaAudio']);
     unset($_SESSION['audioOffset']);
     $_SESSION['vidasAudio'] = $vidas;
     header('Location: modoTemas.php?diff=' . $dificultad);
@@ -81,6 +82,15 @@ $perdio = $_SESSION['vidasAudio'] <= 0 && !$gano;
 // guardar el offset para que no cambie al recargar
 if (!isset($_SESSION['audioOffset']))
     $_SESSION['audioOffset'] = null; // el javascript da un offset la primera vez
+
+if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['partidaContadaAudio'])) {
+    $intentosFallidos = $vidas - $_SESSION['vidasAudio'];
+    $puntos = calcularPuntos('infinito', $dificultad, $intentosFallidos, $vidas);
+    actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano, $puntos, false);
+    // para que no se vuelva a sumar la misma partida
+    $_SESSION['partidaContadaAudio'] = true;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +111,7 @@ if (!isset($_SESSION['audioOffset']))
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
         <!--botones para reiniciar intentos y el personaje-->
-        <a class="text-center mb-4" href="?reset=todo">cambiar personaje</a>
+        <a class="text-center mb-4" href="?diff=<?= $dificultad ?>&reset=todo">cambiar personaje</a>
 
         <h1 class="text-center mb-4">Adivina el personaje del tema</h1>
         <?php botonesDificultad($dificultad); ?>
