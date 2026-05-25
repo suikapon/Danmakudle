@@ -36,7 +36,7 @@ foreach ($juegos as $j) {
 $logeado = isset($_SESSION['id_usuario']);
 
 if ($logeado) {
-    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
+    $intentos = getIntentosDiarioJuegos($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
 } else {
     if (!isset($_SESSION['intentosDiarioPortadas'])) $_SESSION['intentosDiarioPortadas'] = [];
     $intentos = $_SESSION['intentosDiarioPortadas'];
@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
     // redirigir para evitar reenvío del formulario
     header("Location: modoPortadas.php?diff=" . $dificultad);
     exit();
+
 }
 
 // calcular vidas a partir de intentos fallidos
@@ -89,6 +90,17 @@ $perdio = $vidasRestantes <= 0 && !$gano;
 
 //nivel de blur según vidas restantes a menos vidas más se ve la imagen
 $blur = $vidasRestantes * 5;
+
+if (($gano || $perdio) && $logeado)
+{
+    if (!partidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad))
+    {
+        $puntos = calcularPuntos('diario', $dificultad, count($intentosFallidos), $vidas);
+        $contarRacha = false; // no cuenta racha en algo que no sea el clásico diario
+        actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano, $puntos, $contarRacha);
+        marcarPartidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
+    }
+}
 ?>
 
 <!DOCTYPE html>

@@ -86,6 +86,16 @@ $vidasRestantes = $vidas - count($intentosFallidos);
 $gano = !empty($intentos) && end($intentos)['id_personaje'] == $silAdivinar['id_personaje'];
 $perdio = $vidasRestantes <= 0 && !$gano;
 
+if (($gano || $perdio) && $logeado)
+{
+    if (!partidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'siluetas', $dificultad))
+    {
+        $puntos = calcularPuntos('diario', $dificultad, count($intentosFallidos), $vidas);
+        $contarRacha = false; // no cuenta racha en algo que no sea el clásico diario
+        actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano, $puntos, $contarRacha);
+        marcarPartidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'siluetas', $dificultad);
+    }
+}
 ?>
 
 <!DOCTYPE html>

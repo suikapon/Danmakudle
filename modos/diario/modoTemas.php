@@ -88,6 +88,17 @@ $perdio = $vidasRestantes <= 0 && !$gano;
 
 // leer el offset guardado en bd si existe
 $audioOffset = $diario ? $diario['audio_offset'] : null;
+
+if (($gano || $perdio) && $logeado)
+{
+    if (!partidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'temas', $dificultad))
+    {
+        $puntos = calcularPuntos('diario', $dificultad, count($intentosFallidos), $vidas);
+        $contarRacha = false; // no cuenta racha en algo que no sea el clásico diario
+        actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano, $puntos, $contarRacha);
+        marcarPartidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'temas', $dificultad);
+    }
+}
 ?>
 
 <!DOCTYPE html>

@@ -88,7 +88,7 @@ $vidasRestantes = $vidas-count($intentosFallidos);
 $gano = !empty($intentos) && end($intentos)['id_personaje'] == $pjAdivinar['id_personaje'];
 $perdio = $vidasRestantes <= 0 && !$gano;
 
-if (($gano || $perdio) && isset($_SESSION['id_usuario']))
+if (($gano || $perdio) && $logeado)
 {
     if (!partidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'clasico', $dificultad))
     {
