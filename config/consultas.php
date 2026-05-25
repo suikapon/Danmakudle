@@ -200,4 +200,19 @@ function getIntentosDiarioJuegos($conexion, $hoy, $id_usuario, $modo, $dificulta
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// comprobar si la partida diaria ya fue contada
+function partidaDiariaContada($conexion, $hoy, $id_usuario, $modo, $dificultad)
+{
+    $stmt = $conexion->prepare("SELECT contada FROM intentos_diario WHERE fecha = ? AND id_usuario = ? AND modo = ? AND dificultad = ? AND contada = true LIMIT 1");
+    $stmt->execute([$hoy, $id_usuario, $modo, $dificultad]);
+    return $stmt->fetch() ? true : false;
+}
+
+// marcar la partida diaria como contada
+function marcarPartidaDiariaContada($conexion, $hoy, $id_usuario, $modo, $dificultad)
+{
+    $stmt = $conexion->prepare("UPDATE intentos_diario SET contada = true WHERE fecha = ? AND id_usuario = ? AND modo = ? AND dificultad = ?");
+    return $stmt->execute([$hoy, $id_usuario, $modo, $dificultad]);
+}
+
 ?>

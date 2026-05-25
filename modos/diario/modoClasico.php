@@ -77,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
     } else {
         $intentos = $_SESSION['intentosDiario'];
     }
+
 }
 
 // calcular vidas a partir de intentos fallidos
@@ -87,6 +88,16 @@ $vidasRestantes = $vidas-count($intentosFallidos);
 $gano = !empty($intentos) && end($intentos)['id_personaje'] == $pjAdivinar['id_personaje'];
 $perdio = $vidasRestantes <= 0 && !$gano;
 
+if (($gano || $perdio) && isset($_SESSION['id_usuario']))
+{
+    if (!partidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'clasico', $dificultad))
+    {
+        $puntos = calcularPuntos('diario', $dificultad, count($intentosFallidos), $vidas);
+        $contarRacha = $dificultad=='normal'; // solo se suma la racha si es el modo normal en el clásico diario
+        actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano, $puntos, $contarRacha);
+        marcarPartidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'clasico', $dificultad);
+    }
+}
 ?>
 
 <!DOCTYPE html>
