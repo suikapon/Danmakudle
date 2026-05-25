@@ -9,6 +9,7 @@ require_once '../../config/dificultad.php';
 if (isset($_GET['reset'])) {
     unset($_SESSION['intentosPortada']);
     unset($_SESSION['juegoAdivinar']);
+    unset($_SESSION['partidaContadaPortadas']);
     $_SESSION['vidasJuegos'] = $vidas;
     header('Location: modoPortadas.php?diff=' . $dificultad);
     exit();
@@ -80,6 +81,14 @@ $perdio = $_SESSION['vidasJuegos'] <= 0 && !$gano;
 
 //nivel de blur según vidas restantes a menos vidas más se ve la imagen
 $blur = $_SESSION['vidasJuegos'] * 5;
+
+if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['partidaContadaPortadas'])) {
+    $intentosFallidos = $vidas - $_SESSION['vidasJuegos'];
+    $puntos = calcularPuntos('infinito', $dificultad, $intentosFallidos, $vidas);
+    actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano, $puntos, false);
+    // para que no se vuelva a sumar la misma partida
+    $_SESSION['partidaContadaPortadas'] = true;
+}
 ?>
 
 <!DOCTYPE html>
