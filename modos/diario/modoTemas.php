@@ -86,12 +86,8 @@ $vidasRestantes = $vidas - count($intentosFallidos);
 $gano = !empty($intentos) && end($intentos)['id_personaje'] == $audioAdivinar['id_personaje'];
 $perdio = $vidasRestantes <= 0 && !$gano;
 
-// si no hay offset o es de otro día generar uno nuevo
-if (!isset($_SESSION['audioOffsetDiario']) || $_SESSION['audioOffsetFecha']!==$hoy)
-{
-    $_SESSION['audioOffsetDiario'] = null;
-    $_SESSION['audioOffsetFecha'] = $hoy;
-}
+// leer el offset guardado en bd si existe
+$audioOffset = $diario ? $diario['audio_offset'] : null;
 ?>
 
 <!DOCTYPE html>
@@ -226,8 +222,8 @@ if (!isset($_SESSION['audioOffsetDiario']) || $_SESSION['audioOffsetFecha']!==$h
         // el segundo por el que empieza el audio
         let startOffset = null;
 
-        // offset guardado en sesión por php, si no hay por ser la primera vez que carga hacerlo nulo
-        const audioOffset = <?= $_SESSION['audioOffsetDiario'] ?? 'null' ?>;
+        // offset guardado en bd si no hay por ser la primera vez que carga hacerlo nulo
+        const audioOffset = <?= $audioOffset ?? 'null' ?>;
 
         // cargar el archivo de audio
         fetch(audioSrc)
@@ -243,7 +239,7 @@ if (!isset($_SESSION['audioOffsetDiario']) || $_SESSION['audioOffsetFecha']!==$h
                     startOffset = Math.random() * maxStart;
 
                     //guardarlo en la sesión php para que persista
-                    fetch(fetch('../../guardarOffset.php?offset=' +startOffset+ '&key=audioOffsetDiario');
+                    fetch('../../guardarOffsetDiario.php?offset=' + startOffset + '&diff=<?= $dificultad ?>');
                 } else
                     startOffset = audioOffset;
             });
