@@ -60,3 +60,27 @@ function proximoReinicio()
 {
     return strtotime('tomorrow 00:00');
 }
+
+function calcularPuntos($modo, $dificultad, $intentosFallidos, $vidasTotales)
+{
+    // puntos base por modo seleccionado
+    $base = match($modo)
+    {
+        'diario' => 100,
+        'infinito' => 25,
+        default => 1
+    };
+    // multiplicador por dificultad
+    $mult = match($dificultad)
+    {
+        'facil' => 1,
+        'normal' => 1.5,
+        'dificil' => 2,
+        default => 1
+    };
+
+    // restar proporcionalmente por cada fallo
+    $penalizacion = ($intentosFallidos/$vidasTotales)*$base;
+    $resultado = (int)(($base-$penalizacion)*$mult);
+    return $resultado;
+}

@@ -81,7 +81,9 @@ $gano = !empty($intentos) && end($intentos)['id_personaje'] == $pjAdivinar['id_p
 $perdio = $_SESSION['vidasPersonajes'] <= 0 && !$gano;
 
 if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['partidaContada'])) {
-    actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano);
+    $intentosFallidos = $vidas - $_SESSION['vidasPersonajes'];
+    $puntos = calcularPuntos('infinito', $dificultad, $intentosFallidos, $vidas);
+    actualizarEstadisticas($conn, $_SESSION['id_usuario'], $gano, $puntos, false);
     // para que no se vuelva a sumar la misma partida
     $_SESSION['partidaContada'] = true;
 }
