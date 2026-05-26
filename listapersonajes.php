@@ -24,24 +24,31 @@ $personajes = getPersonajes($conn);
 <body class="d-flex flex-column min-vh-100">
     <?php include 'header.php';?>
 
-    <h1>DANMAKUDLE</h1>
+    <main class="container flex-grow-1">
+        <div class="row mt-4 text-center">
+            <div class="col">
+                <h1>Lista de personajes</h1>
+                <p class="subtitulo">Todos los personajes de Danmakudle</p>
+            </div>
+        </div>
 
-    <h2>Personajes prueba conexión con la BD</h2>
-    <ul>
-       <?php foreach($personajes as $p): ?>
-            <li>
-                <br>
-                <img src="img/pj/<?=$p['imagen']?>" width=150 height=150><br>
-                id: <?=$p['id_personaje']?><br>
-                nombre: <?= $p['nombre'] ?><br>
-                debut: <?= $p['debut'] ?><br>
-                stage: <?= $p['stage'] ?><br>
-                ubicación: <?= $p['ubicacion'] ?><br>
-                especie: <?= $p['especie'] ?><br>
-                especie normalizada: <?= $p['especie_normalizada'] ?><br>
-                jugable: <?= $p['jugable'] ?><br>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+        <div class="row g-4">
+            <?php foreach($personajes as $p): ?>
+            <div class="col-md-3 col-sm-6 mt-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column text-center">
+                        <img src="img/pj/<?= $p['imagen'] ?>" class="card-img-top mx-auto" width=100 height=100 style="object-fit: contain;">
+                        <h2 class="mt-2"><?= $p['nombre'] ?></h2>
+                        <p class="subtitulo mb-1 text-start">Debut: <?= $p['debut'] ?></p>
+                        <p class="subtitulo mb-1 text-start">Stage: <?= $p['stage'] ?></p>
+                        <p class="subtitulo mb-1 text-start">Especie: <?= $p['especie'] ?></p>
+                        <p class="subtitulo mb-1 text-start">Ubicación: <?= $p['ubicacion'] ?></p>
+                        <p class="subtitulo mb-0 text-start">Jugable: <?= $p['jugable'] ? 'Sí' : 'No' ?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </main>
 </body>
 </html>

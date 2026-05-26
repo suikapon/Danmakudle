@@ -23,21 +23,30 @@ $juegos = getJuegos($conn);
 <body class="d-flex flex-column min-vh-100">
     <?php include 'header.php'; ?>
 
-    <h1>DANMAKUDLE</h1>
+    <main class="container flex-grow-1">
+        <div class="row mt-4 text-center">
+            <div class="col">
+                <h1>Lista de juegos</h1>
+                <p class="subtitulo">Todos los juegos de Danmakudle</p>
+            </div>
+        </div>
 
-    <h2>Juegos prueba conexión con la BD</h2>
-    <ul>
-        <?php foreach($juegos as $j): ?>
-            <li>
-                <br>
-                <img src="img/juegos/<?= $j['imagen'] ?>" width=150 height=150><br>
-                id: <?= $j['id'] ?><br>
-                nombre: <?= $j['nombre'] ?><br>
-                año: <?= $j['año'] ?><br>
-                tipo: <?= $j['tipo'] ?><br>
-                plataforma: <?= $j['plataforma'] ?><br>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+        <div class="row g-4">
+            <?php foreach($juegos as $j): ?>
+            <div class="col-md-3 col-sm-6 mt-4">
+                <div class="card h-100">
+                    <div class="card-body d-flex flex-column text-center">
+                        <img src="img/juegos/<?= $j['imagen'] ?>" class="card-img-top mx-auto" width=100 height=100 style="object-fit: contain;">
+                        <h2 class="mt-2">Touhou <?= $j['id'] ?></h2>
+                        <h3 class="subtitulo"><?= $j['nombre'] ?></h3>
+                        <p class="subtitulo mb-1 text-start">Año: <?= $j['año'] ?></p>
+                        <p class="subtitulo mb-1 text-start">Tipo: <?= $j['tipo'] ?></p>
+                        <p class="subtitulo mb-0 text-start">Plataforma: <?= $j['plataforma'] ?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </main>
 </body>
 </html>
