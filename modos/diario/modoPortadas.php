@@ -38,6 +38,12 @@ $logeado = isset($_SESSION['id_usuario']);
 if ($logeado) {
     $intentos = getIntentosDiarioJuegos($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
 } else {
+    // si el personaje del día cambió limpiar intentos del invitado
+    $idElementoHoy = $diario ? $diario['id_elemento'] : null;
+    if (!isset($_SESSION['elementoDiarioPortadas']) || $_SESSION['elementoDiarioPortadas'] != $idElementoHoy) {
+        unset($_SESSION['intentosDiarioPortadas']);
+        $_SESSION['elementoDiarioPortadas'] = $idElementoHoy;
+    }
     if (!isset($_SESSION['intentosDiarioPortadas'])) $_SESSION['intentosDiarioPortadas'] = [];
     $intentos = $_SESSION['intentosDiarioPortadas'];
 }
@@ -69,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
 
     // recargar intentos tras insertar
     if ($logeado) {
-        $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
+        $intentos = getIntentosDiarioJuegos($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
     } else {
         $intentos = $_SESSION['intentosDiarioPortadas'];
     }
