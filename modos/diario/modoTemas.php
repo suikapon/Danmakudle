@@ -255,7 +255,7 @@ if (($gano || $perdio) && $logeado)
                     const maxStart = Math.max(0, buffer.duration - 5);
                     startOffset = Math.random() * maxStart;
 
-                    //guardarlo en la sesión php para que persista
+                    //guardarlo en la bd php para que persista
                     fetch('../../guardarOffsetDiario.php?offset=' + startOffset + '&diff=<?= $dificultad ?>');
                 } else
                     startOffset = audioOffset;
