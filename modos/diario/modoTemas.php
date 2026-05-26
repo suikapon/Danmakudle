@@ -37,6 +37,12 @@ $logeado = isset($_SESSION['id_usuario']);
 if ($logeado) {
     $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'temas', $dificultad);
 } else {
+    // si el personaje del día cambió limpiar intentos del invitado
+    $idElementoHoy = $diario ? $diario['id_elemento'] : null;
+    if (!isset($_SESSION['elementoDiarioTemas']) || $_SESSION['elementoDiarioTemas'] != $idElementoHoy) {
+        unset($_SESSION['intentosDiarioTemas']);
+        $_SESSION['elementoDiarioTemas'] = $idElementoHoy;
+    }
     if (!isset($_SESSION['intentosDiarioTemas'])) $_SESSION['intentosDiarioTemas'] = [];
     $intentos = $_SESSION['intentosDiarioTemas'];
 }
