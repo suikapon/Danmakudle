@@ -5,6 +5,10 @@ function getPersonajes($conexion)
     return $conexion->query("SELECT * FROM personajes")->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getPersonajesAlfabeticamente($conexion)
+{
+    return $conexion->query("SELECT * FROM personajes ORDER BY nombre ASC")->fetchAll(PDO::FETCH_ASSOC);
+}
 function getPersonajesXDebut($conexion, $desde, $hasta)
 {
     return $conexion->query("SELECT * FROM personajes WHERE debut BETWEEN $desde AND $hasta")->fetchAll(PDO::FETCH_ASSOC);
