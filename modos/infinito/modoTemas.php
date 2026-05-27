@@ -111,8 +111,7 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
         <!--botones para reiniciar intentos y el personaje-->
-        <a class="text-center mb-4" href="?diff=<?= $dificultad ?>&reset=todo">cambiar personaje</a>
-
+        <a href="?diff=<?= $dificultad ?>&reset=todo" class="btn btn-danmaku my-3">Cambiar personaje</a>
         <h1 class="text-center mb-4">Adivina el personaje del tema</h1>
         <?php botonesDificultad($dificultad); ?>
         <div id="texto-vidas" class="d-flex justify-content-center mb-4">

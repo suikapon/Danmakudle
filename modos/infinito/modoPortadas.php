@@ -109,7 +109,7 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
 
     <main class="container d-flex flex-column align-items-center flex-grow-1">
         <!--botones para reiniciar intentos y el juego-->
-        <a class="text-center mb-4" href="?diff=<?= $dificultad ?>&reset=todo">cambiar juego</a>
+        <a href="?diff=<?= $dificultad ?>&reset=todo" class="btn btn-danmaku my-3">Cambiar juego</a>
 
         <h1 class="text-center mb-4">Adivina el juego por la portada</h1>
         <?php botonesDificultad($dificultad);?>
