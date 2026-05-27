@@ -36,7 +36,7 @@ foreach ($personajes as $p) {
 $logeado = isset($_SESSION['id_usuario']);
 
 if ($logeado) {
-    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
+    $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico', $dificultad);
 } else {
     // si el personaje del día cambió limpiar intentos del invitado
     $idElementoHoy = $diario ? $diario['id_elemento'] : null;
