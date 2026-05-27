@@ -140,9 +140,9 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
                 <button type="submit">Adivinar</button>
             </form>
         <?php endif; ?>
-        
+
         <?php if ($gano && $logueado): 
-            $fallos = $vidas - $_SESSION['vidasPersonajes'];
+            $fallos = $vidas - $_SESSION['vidasJuegos'];
             $puntos = calcularPuntos('infinito', $dificultad, $fallos, $vidas);
             revelarPuntos($puntos);
         endif; ?>
