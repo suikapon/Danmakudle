@@ -167,7 +167,7 @@ if (($gano || $perdio) && $logueado)
         endif; ?>
         <?php if ($gano && $logueado): 
             $fallos = $vidas - $_SESSION['vidasPersonajes'];
-            $puntos = calcularPuntos('dirario', $dificultad, $fallos, $vidas);
+            $puntos = calcularPuntos('diario', $dificultad, $fallos, $vidas);
             revelarPuntos($puntos);
         endif; ?>
 
