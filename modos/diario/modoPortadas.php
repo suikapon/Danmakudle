@@ -33,9 +33,9 @@ foreach ($juegos as $j) {
 }
 
 // cargar intentos del usuario para hoy
-$logeado = isset($_SESSION['id_usuario']);
+$logueado = isset($_SESSION['id_usuario']);
 
-if ($logeado) {
+if ($logueado) {
     $intentos = getIntentosDiarioJuegos($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
 } else {
     // si el juego del día cambió limpiar intentos del invitado
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
     if (!$juegoYaIntentado) {
         foreach ($juegos as $j) {
             if ($j['nombre'] == $_POST['juego_elegido']) {
-                if ($logeado) {
+                if ($logueado) {
                     // guardar el intento
                     insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $j['id'], 'portadas', $dificultad);
                 } else {
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['juego_elegido'])) {
     }
 
     // recargar intentos tras insertar
-    if ($logeado) {
+    if ($logueado) {
         $intentos = getIntentosDiarioJuegos($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad);
     } else {
         $intentos = $_SESSION['intentosDiarioPortadas'];
@@ -97,7 +97,7 @@ $perdio = $vidasRestantes <= 0 && !$gano;
 //nivel de blur según vidas restantes a menos vidas más se ve la imagen
 $blur = $vidasRestantes * 5;
 
-if (($gano || $perdio) && $logeado)
+if (($gano || $perdio) && $logueado)
 {
     if (!partidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'portadas', $dificultad))
     {

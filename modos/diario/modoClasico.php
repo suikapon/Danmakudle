@@ -33,9 +33,9 @@ foreach ($personajes as $p) {
 }
 
 // cargar intentos del usuario para hoy
-$logeado = isset($_SESSION['id_usuario']);
+$logueado = isset($_SESSION['id_usuario']);
 
-if ($logeado) {
+if ($logueado) {
     $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico', $dificultad);
 } else {
     // si el personaje del día cambió limpiar intentos del invitado
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
     if (!$pjYaIntentado) {
         foreach ($personajes as $p) {
             if ($p['nombre'] == $_POST['personaje_elegido']) {
-                if ($logeado) {
+                if ($logueado) {
                     // guardar el intento
                     insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $p['id_personaje'], 'clasico',$dificultad);
                 } else {
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
     }
 
     // recargar intentos tras insertar
-    if ($logeado) {
+    if ($logueado) {
         $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'clasico',$dificultad);
     } else {
         $intentos = $_SESSION['intentosDiario'];
@@ -94,7 +94,7 @@ $vidasRestantes = $vidas-count($intentosFallidos);
 $gano = !empty($intentos) && end($intentos)['id_personaje'] == $pjAdivinar['id_personaje'];
 $perdio = $vidasRestantes <= 0 && !$gano;
 
-if (($gano || $perdio) && $logeado)
+if (($gano || $perdio) && $logueado)
 {
     if (!partidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'clasico', $dificultad))
     {
@@ -156,6 +156,11 @@ if (($gano || $perdio) && $logeado)
             revelarPersonaje($pjAdivinar);
         endif;
         ?>
+        <?php if ($gano && isset($_SESSION['id_usuario'])): 
+            $fallos = $vidas - $_SESSION['vidasPersonajes'];
+            $puntos = calcularPuntos('diario', $dificultad, $fallos, $vidas);
+            revelarPuntos($puntos);
+        endif; ?>
 
         <table class="tabla-intentos">
             <thead>

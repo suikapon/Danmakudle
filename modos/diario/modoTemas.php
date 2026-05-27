@@ -32,9 +32,9 @@ foreach ($personajes as $p) {
 }
 
 // cargar intentos del usuario para hoy
-$logeado = isset($_SESSION['id_usuario']);
+$logueado = isset($_SESSION['id_usuario']);
 
-if ($logeado) {
+if ($logueado) {
     $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'temas', $dificultad);
 } else {
     // si el personaje del día cambió limpiar intentos del invitado
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
     if (!$pjYaIntentado) {
         foreach ($personajes as $p) {
             if ($p['nombre'] == $_POST['personaje_elegido']) {
-                if ($logeado) {
+                if ($logueado) {
                     // guardar el intento
                     insertarIntentoDiario($conn, $hoy, $_SESSION['id_usuario'], $p['id_personaje'], 'temas', $dificultad);
                 } else {
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !empty($_POST['personaje_elegido']))
     }
 
     // recargar intentos tras insertar
-    if ($logeado) {
+    if ($logueado) {
         $intentos = getIntentosDiario($conn, $hoy, $_SESSION['id_usuario'], 'temas', $dificultad);
     } else {
         $intentos = $_SESSION['intentosDiarioTemas'];
@@ -95,7 +95,7 @@ $perdio = $vidasRestantes <= 0 && !$gano;
 // leer el offset guardado en bd si existe
 $audioOffset = $diario ? $diario['audio_offset'] : null;
 
-if (($gano || $perdio) && $logeado)
+if (($gano || $perdio) && $logueado)
 {
     if (!partidaDiariaContada($conn, $hoy, $_SESSION['id_usuario'], 'temas', $dificultad))
     {

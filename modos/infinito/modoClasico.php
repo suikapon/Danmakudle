@@ -138,6 +138,11 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
             revelarPersonaje($pjAdivinar);
         endif;
         ?>
+        <?php if ($gano && isset($_SESSION['id_usuario'])): 
+            $fallos = $vidas - $_SESSION['vidasPersonajes'];
+            $puntos = calcularPuntos('infinito', $dificultad, $fallos, $vidas);
+            revelarPuntos($puntos);
+        endif; ?>
 
         <table class="tabla-intentos">
             <thead>

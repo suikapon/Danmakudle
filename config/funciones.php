@@ -49,6 +49,16 @@ function revelarPersonaje($secreto)
     </div>
     ';
 }
+function revelarPuntos($puntos)
+{
+    echo '
+    <div class="card mt-3 p-3 w-100" style="pointer-events: none;">
+        <div class="d-flex align-items-center justify-content-center gap-3">
+            <span class="fs-5 text-white h2">+' . $puntos . ' puntos</span>
+        </div>
+    </div>
+    ';
+}
 
 // devuelve la fecha del día actual del diario
 function hoyDiario()
