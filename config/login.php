@@ -13,7 +13,8 @@ if (!$row) {
     header("Location: ../login.php?error=1");
     exit;
 }
-
+session_start();
+session_destroy();
 session_start();
 $_SESSION['email'] = $email;
 $_SESSION['rol'] = $row['rol'];
