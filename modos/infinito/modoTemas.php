@@ -17,6 +17,8 @@ require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
 
+$logueado = isset($_SESSION['id_usuario']);
+
 $personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
 // guardamos en la sesión el personaje a adivinar para que no se resetee
@@ -152,6 +154,11 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
             revelarPersonaje($audioAdivinar);
         endif;
         ?>
+        <?php if ($gano && $logueado): 
+            $fallos = $vidas - $_SESSION['vidasPersonajes'];
+            $puntos = calcularPuntos('infinito', $dificultad, $fallos, $vidas);
+            revelarPuntos($puntos);
+        endif; ?>
 
         <table class="tabla-intentos">
             <thead>

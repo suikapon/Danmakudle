@@ -159,7 +159,12 @@ if (($gano || $perdio) && $logueado)
                 <button type="submit">Adivinar</button>
             </form>
         <?php endif; ?>
-
+        
+        <?php if ($gano && $logueado): 
+            $fallos = $vidas - $_SESSION['vidasPersonajes'];
+            $puntos = calcularPuntos('diario', $dificultad, $fallos, $vidas);
+            revelarPuntos($puntos);
+        endif; ?>
         <table class="tabla-intentos">
             <thead>
                 <tr>

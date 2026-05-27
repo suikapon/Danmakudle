@@ -19,6 +19,8 @@ require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
 
+$logueado = isset($_SESSION['id_usuario']);
+
 // cargamos los personajes de la base de datos dependiendo de la dificultad
 $personajes = getPersonajesXDebut($conn, $desde, $hasta);
 
@@ -136,9 +138,8 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
 
         <?php if ($perdio):
             revelarPersonaje($pjAdivinar);
-        endif;
-        ?>
-        <?php if ($gano && isset($_SESSION['id_usuario'])): 
+        endif; ?>
+        <?php if ($gano && $logueado): 
             $fallos = $vidas - $_SESSION['vidasPersonajes'];
             $puntos = calcularPuntos('infinito', $dificultad, $fallos, $vidas);
             revelarPuntos($puntos);

@@ -164,8 +164,12 @@ if (($gano || $perdio) && $logueado)
 
         <?php if ($perdio):
             revelarPersonaje($audioAdivinar);
-        endif;
-        ?>
+        endif; ?>
+        <?php if ($gano && $logueado): 
+            $fallos = $vidas - $_SESSION['vidasPersonajes'];
+            $puntos = calcularPuntos('dirario', $dificultad, $fallos, $vidas);
+            revelarPuntos($puntos);
+        endif; ?>
 
         <table class="tabla-intentos">
             <thead>

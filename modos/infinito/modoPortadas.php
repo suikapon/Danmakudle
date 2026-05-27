@@ -19,6 +19,8 @@ require_once '../../config/config.php';
 require_once '../../config/consultas.php';
 require_once '../../config/funciones.php';
 
+$logueado = isset($_SESSION['id_usuario']);
+
 // cargamos todos los juegos de la base de datos
 $juegos = getJuegosXDebut($conn, $desde, $hasta);
 
@@ -138,7 +140,12 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
                 <button type="submit">Adivinar</button>
             </form>
         <?php endif; ?>
-
+        
+        <?php if ($gano && $logueado): 
+            $fallos = $vidas - $_SESSION['vidasPersonajes'];
+            $puntos = calcularPuntos('infinito', $dificultad, $fallos, $vidas);
+            revelarPuntos($puntos);
+        endif; ?>
         <table class="tabla-intentos">
             <thead>
                 <tr>

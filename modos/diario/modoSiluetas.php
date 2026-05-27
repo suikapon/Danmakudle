@@ -154,6 +154,11 @@ if (($gano || $perdio) && $logueado)
             revelarPersonaje($silAdivinar);
         endif;
         ?>
+        <?php if ($gano && $logueado): 
+            $fallos = $vidas - $_SESSION['vidasPersonajes'];
+            $puntos = calcularPuntos('diario', $dificultad, $fallos, $vidas);
+            revelarPuntos($puntos);
+        endif; ?>
 
         <div class="table-responsive w-100" style="max-width: 500px;">
             <table class="tabla-intentos">
