@@ -1,8 +1,8 @@
 <?php
-$servername = "dpg-d7jsv5pj2pic73clrgbg-a.frankfurt-postgres.render.com";
-$username = "danmakudle_5w7q_user";
-$password = "jDkoMkOnHXF0ju66VTTaBPF85f9frDyH";
-$dbname = "danmakudle_5w7q";
+$servername = "dpg-d8has937uimc73cq3drg-a.frankfurt-postgres.render.com";
+$username = "danmakudle_2gcv_user";
+$password = "AtbuvfVkXoenHFJ8MCA4tgY5QeulXzMy";
+$dbname = "danmakudle_2gcv";
 
 try {
     $conn = new PDO("pgsql:host=$servername;dbname=$dbname", $username, $password);
