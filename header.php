@@ -40,10 +40,6 @@ $logeado = isset($_SESSION['id_usuario']);
                             <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
-                            <li><a class="dropdown-item" href="/perfil.php"><i class="bi bi-person"></i> Mi Perfil</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
                             <li><a class="dropdown-item text-danger" href="/config/logout.php"><i
                                         class="bi bi-box-arrow-left"></i> Cerrar sesión</a></li>
                         </ul>
