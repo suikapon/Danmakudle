@@ -163,7 +163,7 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
                     $estadoNombre = estadoSimple($i, $juegoAdivinar, 'id');
 
                     // año
-                    $resultadoAño = compararValor((int) $i['año'], (int) $juegoAdivinar['año']);
+                    $resultadoAño = compararValor((int) $i['ano'], (int) $juegoAdivinar['ano']);
                     $estadoAño = ($resultadoAño == 'verde') ? 'verde' : 'rojo';
 
                     // tipo
@@ -182,7 +182,7 @@ if (($gano || $perdio) && isset($_SESSION['id_usuario']) && !isset($_SESSION['pa
                             <?= $i['nombre'] ?>
                         </td>
                         <td class="<?= $estadoAño ?>">
-                            <?= $i['año'] ?>
+                            <?= $i['ano'] ?>
                             <?= $resultadoAño !== 'verde' ? $resultadoAño : '' ?>
                         </td>
                         <td class="<?= $estadoTipo ?>">
